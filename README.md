@@ -1,1 +1,2 @@
 # shakkiPeliJoulu
+kapteenin loki kirja.
