@@ -1,0 +1,11 @@
+[ShakkiPeli]++-[ShakkiLauta]
+[ShakkiPeli]++- [GUI]
+[ShakkiLauta]++-[ShakkiNappula]
+[ShakkiLauta]++-[Saannot]
+[ShakkiNappula]<perii-[Kuningas]
+[ShakkiNappula]<perii-[Kuningatar]
+[ShakkiNappula]<perii-[Lähetti]
+[ShakkiNappula]<perii-[Ratsu]
+[ShakkiNappula]<perii-[Torni]
+[ShakkiNappula]<perii-[Moukka]
+
