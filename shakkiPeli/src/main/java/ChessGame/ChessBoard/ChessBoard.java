@@ -6,6 +6,7 @@
 package ChessGame.ChessBoard;
 
 import ChessGame.ChessPieces.ChessPiece;
+import java.util.HashMap;
 
 /**
  *
@@ -14,9 +15,19 @@ import ChessGame.ChessPieces.ChessPiece;
 public class ChessBoard {
 
     private ChessPiece[][] board;
+    private HashMap<ChessPiece, ChessPiece> chessPieces;
 
     public ChessBoard() {
         this.board = new ChessPiece[8][8];
+        this.chessPieces = new HashMap<ChessPiece, ChessPiece>();
+    }
+    
+    public void setChessPieces(HashMap<ChessPiece, ChessPiece> pieces) {
+        this.chessPieces = pieces;
+    }
+    
+    public HashMap<ChessPiece, ChessPiece> getChessPieces() {
+        return chessPieces;
     }
 
     public ChessPiece[][] getChessBoard() {
@@ -37,8 +48,12 @@ public class ChessBoard {
     public boolean movePieceOnBoard(int x, int y, int toX, int toY) {
         if (allowedCoordinates(x, y)) {
             ChessPiece piece = board[x][y];
-            board[x][y] = null;
-            return placePieceOnBoard(piece, toX, toY);
+            boolean result = placePieceOnBoard(piece, toX, toY);
+            if (result) {
+                piece.move(toX, toY);
+                board[x][y] = null;
+            }
+            return result;
         }
         return false;
     }
