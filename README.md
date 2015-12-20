@@ -1,2 +1,3 @@
-# shakkiPeliJoulu
-kapteenin loki kirja.
+# ChessGame 
+
+School project https://github.com/javaLabra/Joululabra-2015
