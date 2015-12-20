@@ -13,15 +13,11 @@ public class ChessPiece {
     private final Color color;
     private boolean moved;
     private final PieceType type;
-    private int x;
-    private int y;
     
-    public ChessPiece(Color color, PieceType type, int x, int y) {
+    public ChessPiece(Color color, PieceType type) {
         this.color = color;       
         this.type = type;
         this.moved = false;
-        this.x = x;
-        this.y = y;
     }
     
     public Color getColor() {
@@ -39,24 +35,11 @@ public class ChessPiece {
         return type;
     }
     
-    public void move(int x, int y) {
+    public void move() {
         moved = true;
-        this.x = x;
-        this.y = y;
     }
     
     public boolean hasMoved() {
         return moved;
-    }
-    
-    public int getColumn() {
-        return x;
-    }
-    
-    public int getRow() {
-        return y;
-    }
-    
-    
-    
+    }    
 }

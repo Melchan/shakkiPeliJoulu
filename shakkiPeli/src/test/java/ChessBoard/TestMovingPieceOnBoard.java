@@ -18,14 +18,12 @@ import org.junit.Test;
 public class TestMovingPieceOnBoard {
     ChessBoard board;
     ChessPiece pawn;
-    ChessPiece rook;
     ChessPiece[][] b;
     
     @Before
     public void setUp() {
         board = new ChessBoard();
         pawn = new ChessPiece(WHITE, PAWN);
-        rook = new ChessPiece(WHITE, PAWN);
         b = board.getChessBoard();
     }
     

@@ -25,13 +25,11 @@ import java.util.HashMap;
 public class ChessBoardInitializer {
 
     private ChessBoard board;
-    private HashMap<ChessPiece, ChessPiece> chessPieces;
     private final Color[] colors = {BLACK, WHITE};
     private final PieceType[] types = {ROOK, KNIGHT, BISHOP};
 
     public ChessBoardInitializer(ChessBoard board) {
         this.board = board;
-        this.chessPieces = new HashMap<ChessPiece, ChessPiece>();
         placeAllPieces();
     }
     
@@ -42,8 +40,8 @@ public class ChessBoardInitializer {
             placePawns(colors[i]);
             int y = giveRow(colors[i]);
             placeKingAndQueen(colors[i], y);
-            for (int n = 0; n < types.length; n++) {
-                placeLieutenants(colors[i],types[i] ,y, n);
+            for (int n = 0; n < 3; n++) {
+                placeLieutenants(colors[i],types[n] ,y, n);
             }
         }
     }
@@ -64,20 +62,19 @@ public class ChessBoardInitializer {
     }
 
     private void placeKingAndQueen(Color color, int y) {
-        int x = 4;
+        int x = 3;
         if (color == BLACK) {
             placePiece(color, KING, x, y);
             placePiece(color, QUEEN, x + 1, y);
         }
-        placePiece(color, QUEEN, x, y);
         placePiece(color, KING, x + 1, y);
+        placePiece(color, QUEEN, x, y);
         
     }
 
     private void placePiece(Color color, PieceType type, int x, int y) {
-        ChessPiece piece = new ChessPiece(color, type, x, y);
+        ChessPiece piece = new ChessPiece(color, type);
         board.placePieceOnBoard(piece, x, y);
-        chessPieces.put(piece, piece);
     }
     
     private int giveRow(Color color) {

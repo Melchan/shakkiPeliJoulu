@@ -50,7 +50,7 @@ public class ChessBoard {
             ChessPiece piece = board[x][y];
             boolean result = placePieceOnBoard(piece, toX, toY);
             if (result) {
-                piece.move(toX, toY);
+                piece.move();
                 board[x][y] = null;
             }
             return result;
