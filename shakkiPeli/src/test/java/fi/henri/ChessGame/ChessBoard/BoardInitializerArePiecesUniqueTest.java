@@ -5,8 +5,6 @@
  */
 package fi.henri.ChessGame.ChessBoard;
 
-import fi.henriChessGame.ChessBoard.ChessBoard;
-import fi.henriChessGame.ChessBoard.ChessBoardInitializer;
 import fi.henri.ChessGame.ChessPieces.ChessPiece;
 import java.util.HashSet;
 import static junit.framework.Assert.assertEquals;

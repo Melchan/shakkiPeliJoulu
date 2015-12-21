@@ -5,8 +5,8 @@
  */
 package fi.henri.ChessGame;
 
-import fi.henriChessGame.ChessBoard.ChessBoard;
-import fi.henriChessGame.ChessBoard.ChessBoardInitializer;
+import fi.henri.ChessGame.ChessBoard.ChessBoard;
+import fi.henri.ChessGame.ChessBoard.ChessBoardInitializer;
 
 /**
  *

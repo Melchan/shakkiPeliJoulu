@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package fi.henri.ChessGame.ChessBoard;
-import fi.henriChessGame.ChessBoard.ChessBoard;
 import fi.henri.ChessGame.ChessPieces.ChessPiece;
 import static fi.henri.ChessGame.ChessPieces.Color.WHITE;
 import static fi.henri.ChessGame.ChessPieces.PieceType.PAWN;

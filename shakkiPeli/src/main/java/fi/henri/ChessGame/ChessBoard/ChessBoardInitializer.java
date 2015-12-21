@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fi.henriChessGame.ChessBoard;
+package fi.henri.ChessGame.ChessBoard;
 
 import fi.henri.ChessGame.ChessPieces.ChessPiece;
 import fi.henri.ChessGame.ChessPieces.Color;
