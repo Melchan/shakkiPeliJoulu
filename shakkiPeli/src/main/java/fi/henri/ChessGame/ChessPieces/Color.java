@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ChessGame;
+package fi.henri.ChessGame.ChessPieces;
 
 /**
  *
- * @author Melchan 
+ * @author Melchan
  */
-public class Main {
-    public static void main(String[] args) {
-        Game game = new Game();
-        game.run();
-    }
+public enum Color {
+    BLACK, WHITE
 }

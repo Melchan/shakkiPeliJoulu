@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ChessGame.ChessBoard;
+package fi.henriChessGame.ChessBoard;
 
-import ChessGame.ChessPieces.ChessPiece;
-import java.util.HashMap;
+import fi.henri.ChessGame.ChessPieces.ChessPiece;
 
 /**
  *
@@ -15,26 +14,16 @@ import java.util.HashMap;
 public class ChessBoard {
 
     private ChessPiece[][] board;
-    private HashMap<ChessPiece, ChessPiece> chessPieces;
 
     public ChessBoard() {
         this.board = new ChessPiece[8][8];
-        this.chessPieces = new HashMap<ChessPiece, ChessPiece>();
-    }
-    
-    public void setChessPieces(HashMap<ChessPiece, ChessPiece> pieces) {
-        this.chessPieces = pieces;
-    }
-    
-    public HashMap<ChessPiece, ChessPiece> getChessPieces() {
-        return chessPieces;
     }
 
     public ChessPiece[][] getChessBoard() {
         return board;
     }
 
-    public boolean placePieceOnBoard(ChessPiece piece, int x, int y) {
+    public boolean AttemptToPlacePieceOnBoard(ChessPiece piece, int x, int y) {
         if (allowedCoordinates(x, y)) {
             if (piece == null) {
                 return false;
@@ -48,7 +37,7 @@ public class ChessBoard {
     public boolean movePieceOnBoard(int x, int y, int toX, int toY) {
         if (allowedCoordinates(x, y)) {
             ChessPiece piece = board[x][y];
-            boolean result = placePieceOnBoard(piece, toX, toY);
+            boolean result = AttemptToPlacePieceOnBoard(piece, toX, toY);
             if (result) {
                 piece.move();
                 board[x][y] = null;

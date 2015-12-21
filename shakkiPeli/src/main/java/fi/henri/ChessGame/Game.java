@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ChessGame;
+package fi.henri.ChessGame;
 
-import ChessGame.ChessBoard.ChessBoard;
-import ChessGame.ChessBoard.ChessBoardInitializer;
+import fi.henriChessGame.ChessBoard.ChessBoard;
+import fi.henriChessGame.ChessBoard.ChessBoardInitializer;
 
 /**
  *

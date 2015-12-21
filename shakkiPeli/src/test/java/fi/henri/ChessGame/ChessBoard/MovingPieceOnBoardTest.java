@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ChessBoard;
-import ChessGame.ChessBoard.ChessBoard;
-import ChessGame.ChessPieces.ChessPiece;
-import static ChessGame.ChessPieces.Color.WHITE;
-import static ChessGame.ChessPieces.PieceType.PAWN;
+package fi.henri.ChessGame.ChessBoard;
+import fi.henriChessGame.ChessBoard.ChessBoard;
+import fi.henri.ChessGame.ChessPieces.ChessPiece;
+import static fi.henri.ChessGame.ChessPieces.Color.WHITE;
+import static fi.henri.ChessGame.ChessPieces.PieceType.PAWN;
 import static junit.framework.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +15,7 @@ import org.junit.Test;
  *
  * @author Melchan
  */
-public class TestMovingPieceOnBoard {
+public class MovingPieceOnBoardTest {
     ChessBoard board;
     ChessPiece pawn;
     ChessPiece[][] b;
@@ -29,16 +29,23 @@ public class TestMovingPieceOnBoard {
     
     @Test
     public void whenMovingNoDuplicates() {
-        board.placePieceOnBoard(pawn, 2, 2);
+        board.AttemptToPlacePieceOnBoard(pawn, 2, 2);
         board.movePieceOnBoard(2, 2, 5, 5);
         assertEquals(null, b[2][2]);
     }
     
     @Test
     public void whenMovingPieceMoves() {
-        board.placePieceOnBoard(pawn, 2, 2);
+        board.AttemptToPlacePieceOnBoard(pawn, 2, 2);
         board.movePieceOnBoard(2, 2, 5, 5);
         assertEquals(pawn, b[5][5]);
+    }
+    
+    @Test
+    public void pieceChangesToMovedWhenMoved() {
+        board.AttemptToPlacePieceOnBoard(pawn, 2, 2);
+        board.movePieceOnBoard(2, 2, 5, 5);
+        assertEquals(true, pawn.hasMoved());
     }
     
     @Test

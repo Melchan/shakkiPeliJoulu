@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ChessBoard;
+package fi.henri.ChessGame.ChessBoard;
 
-import ChessGame.ChessBoard.ChessBoard;
-import ChessGame.ChessBoard.ChessBoardInitializer;
-import ChessGame.ChessPieces.ChessPiece;
+import fi.henriChessGame.ChessBoard.ChessBoard;
+import fi.henriChessGame.ChessBoard.ChessBoardInitializer;
+import fi.henri.ChessGame.ChessPieces.ChessPiece;
 import java.util.HashSet;
 import static junit.framework.Assert.assertEquals;
 import org.junit.Before;
@@ -17,7 +17,7 @@ import org.junit.Test;
  *
  * @author Melchan
  */
-public class TestBoardInitializerArePiecesUnique {
+public class BoardInitializerArePiecesUniqueTest {
     private ChessBoard board;
     private ChessPiece[][] b;
     private HashSet<ChessPiece> pieces;

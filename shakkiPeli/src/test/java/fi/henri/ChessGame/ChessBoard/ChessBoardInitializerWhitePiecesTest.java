@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ChessBoard;
+package fi.henri.ChessGame.ChessBoard;
 
-import ChessGame.ChessBoard.ChessBoard;
-import ChessGame.ChessBoard.ChessBoardInitializer;
-import ChessGame.ChessPieces.ChessPiece;
-import static ChessGame.ChessPieces.Color.WHITE;
-import static ChessGame.ChessPieces.PieceType.BISHOP;
-import static ChessGame.ChessPieces.PieceType.KING;
-import static ChessGame.ChessPieces.PieceType.KNIGHT;
-import static ChessGame.ChessPieces.PieceType.PAWN;
-import static ChessGame.ChessPieces.PieceType.QUEEN;
-import static ChessGame.ChessPieces.PieceType.ROOK;
+import fi.henriChessGame.ChessBoard.ChessBoard;
+import fi.henriChessGame.ChessBoard.ChessBoardInitializer;
+import fi.henri.ChessGame.ChessPieces.ChessPiece;
+import static fi.henri.ChessGame.ChessPieces.Color.WHITE;
+import static fi.henri.ChessGame.ChessPieces.PieceType.BISHOP;
+import static fi.henri.ChessGame.ChessPieces.PieceType.KING;
+import static fi.henri.ChessGame.ChessPieces.PieceType.KNIGHT;
+import static fi.henri.ChessGame.ChessPieces.PieceType.PAWN;
+import static fi.henri.ChessGame.ChessPieces.PieceType.QUEEN;
+import static fi.henri.ChessGame.ChessPieces.PieceType.ROOK;
 import static junit.framework.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,7 +23,7 @@ import org.junit.Test;
  *
  * @author Melchan
  */
-public class TestChessBoardInitializerWhitePieces {
+public class ChessBoardInitializerWhitePiecesTest {
     private ChessBoard board;
     private ChessPiece[][] b;
     

@@ -3,20 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ChessGame.ChessBoard;
+package fi.henriChessGame.ChessBoard;
 
-import ChessGame.ChessPieces.ChessPiece;
-import ChessGame.ChessPieces.Color;
-import static ChessGame.ChessPieces.Color.BLACK;
-import static ChessGame.ChessPieces.Color.WHITE;
-import ChessGame.ChessPieces.PieceType;
-import static ChessGame.ChessPieces.PieceType.BISHOP;
-import static ChessGame.ChessPieces.PieceType.KING;
-import static ChessGame.ChessPieces.PieceType.KNIGHT;
-import static ChessGame.ChessPieces.PieceType.PAWN;
-import static ChessGame.ChessPieces.PieceType.QUEEN;
-import static ChessGame.ChessPieces.PieceType.ROOK;
-import java.util.HashMap;
+import fi.henri.ChessGame.ChessPieces.ChessPiece;
+import fi.henri.ChessGame.ChessPieces.Color;
+import static fi.henri.ChessGame.ChessPieces.Color.*;
+import fi.henri.ChessGame.ChessPieces.PieceType;
+import static fi.henri.ChessGame.ChessPieces.PieceType.*;
 
 /**
  *
@@ -32,16 +25,14 @@ public class ChessBoardInitializer {
         this.board = board;
         placeAllPieces();
     }
-    
-    //Every piece type could have their own method, but it would be copy-paste.
-    
+
     private void placeAllPieces() {
         for (int i = 0; i < colors.length; i++) {
             placePawns(colors[i]);
             int y = giveRow(colors[i]);
             placeKingAndQueen(colors[i], y);
             for (int n = 0; n < 3; n++) {
-                placeLieutenants(colors[i],types[n] ,y, n);
+                placeLieutenants(colors[i], types[n], y, n);
             }
         }
     }
@@ -58,7 +49,7 @@ public class ChessBoardInitializer {
 
     private void placeLieutenants(Color color, PieceType type, int y, int modifier) {
         placePiece(color, type, 0 + modifier, y);
-        placePiece(color, type, 7 - modifier, y);      
+        placePiece(color, type, 7 - modifier, y);
     }
 
     private void placeKingAndQueen(Color color, int y) {
@@ -66,17 +57,17 @@ public class ChessBoardInitializer {
         if (color == BLACK) {
             placePiece(color, KING, x, y);
             placePiece(color, QUEEN, x + 1, y);
+        } else {
+            placePiece(color, KING, x + 1, y);
+            placePiece(color, QUEEN, x, y);
         }
-        placePiece(color, KING, x + 1, y);
-        placePiece(color, QUEEN, x, y);
-        
     }
 
     private void placePiece(Color color, PieceType type, int x, int y) {
         ChessPiece piece = new ChessPiece(color, type);
-        board.placePieceOnBoard(piece, x, y);
+        board.AttemptToPlacePieceOnBoard(piece, x, y);
     }
-    
+
     private int giveRow(Color color) {
         if (color == BLACK) {
             return 7;

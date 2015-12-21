@@ -3,12 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ChessPieces;
+package fi.henriChessGame.ChessPieces;
 
-import ChessGame.ChessPieces.ChessPiece;
-import static ChessGame.ChessPieces.Color.BLACK;
-import static ChessGame.ChessPieces.Color.WHITE;
-import static ChessGame.ChessPieces.PieceType.PAWN;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+import fi.henri.ChessGame.ChessPieces.ChessPiece;
+import static fi.henri.ChessGame.ChessPieces.Color.BLACK;
+import static fi.henri.ChessGame.ChessPieces.Color.WHITE;
+import static fi.henri.ChessGame.ChessPieces.PieceType.PAWN;
 import static junit.framework.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +23,7 @@ import org.junit.Test;
  *
  * @author Melchan
  */
-public class TestChessPiece {
+public class ChessPieceTest {
     ChessPiece one;
     ChessPiece two;
     
@@ -37,7 +43,7 @@ public class TestChessPiece {
     public void differentColorComparison() {
         two = new ChessPiece(BLACK, PAWN);
         
-        assertEquals(false, one.equals(two));
+        assertEquals(false, one.sameColor(two));
     }
     
     @Test

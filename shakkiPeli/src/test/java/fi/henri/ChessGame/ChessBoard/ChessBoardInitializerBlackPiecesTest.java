@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ChessBoard;
+package fi.henri.ChessGame.ChessBoard;
 
-import ChessGame.ChessBoard.ChessBoard;
-import ChessGame.ChessBoard.ChessBoardInitializer;
-import ChessGame.ChessPieces.ChessPiece;
-import static ChessGame.ChessPieces.Color.BLACK;
-import static ChessGame.ChessPieces.PieceType.BISHOP;
-import static ChessGame.ChessPieces.PieceType.KING;
-import static ChessGame.ChessPieces.PieceType.KNIGHT;
-import static ChessGame.ChessPieces.PieceType.PAWN;
-import static ChessGame.ChessPieces.PieceType.QUEEN;
-import static ChessGame.ChessPieces.PieceType.ROOK;
+import fi.henriChessGame.ChessBoard.ChessBoard;
+import fi.henriChessGame.ChessBoard.ChessBoardInitializer;
+import fi.henri.ChessGame.ChessPieces.ChessPiece;
+import static fi.henri.ChessGame.ChessPieces.Color.BLACK;
+import static fi.henri.ChessGame.ChessPieces.PieceType.BISHOP;
+import static fi.henri.ChessGame.ChessPieces.PieceType.KING;
+import static fi.henri.ChessGame.ChessPieces.PieceType.KNIGHT;
+import static fi.henri.ChessGame.ChessPieces.PieceType.PAWN;
+import static fi.henri.ChessGame.ChessPieces.PieceType.QUEEN;
+import static fi.henri.ChessGame.ChessPieces.PieceType.ROOK;
 import static junit.framework.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,7 +23,7 @@ import org.junit.Test;
  *
  * @author Melchan
  */
-public class TestChessBoardInitializerBlackPieces {
+public class ChessBoardInitializerBlackPiecesTest {
     private ChessBoard board;
     private ChessPiece[][] b;
     
@@ -83,14 +83,14 @@ public class TestChessBoardInitializerBlackPieces {
     
     @Test
     public void QueensInPlace() {
-        assertEquals(QUEEN, b[3][7].getPieceType());
-        assertEquals(BLACK, b[3][7].getColor());
+        assertEquals(QUEEN, b[4][7].getPieceType());
+        assertEquals(BLACK, b[4][7].getColor());
     }
     
     @Test 
     public void KingsInPlace() {
-        assertEquals(KING, b[4][7].getPieceType());
-        assertEquals(BLACK, b[4][7].getColor());
+        assertEquals(KING, b[3][7].getPieceType());
+        assertEquals(BLACK, b[3][7].getColor());
     }
 }
 
