@@ -14,7 +14,7 @@ import org.junit.Test;
  *
  * @author Melchan
  */
-public class MovingPieceOnBoardTest {
+public class AttemtToMovingPieceOnBoardTest {
     ChessBoard board;
     ChessPiece pawn;
     ChessPiece[][] b;
@@ -29,33 +29,33 @@ public class MovingPieceOnBoardTest {
     @Test
     public void whenMovingNoDuplicates() {
         board.AttemptToPlacePieceOnBoard(pawn, 2, 2);
-        board.movePieceOnBoard(2, 2, 5, 5);
+        board.attemptToMovePieceOnBoard(2, 2, 5, 5);
         assertEquals(null, b[2][2]);
     }
     
     @Test
     public void whenMovingPieceMoves() {
         board.AttemptToPlacePieceOnBoard(pawn, 2, 2);
-        board.movePieceOnBoard(2, 2, 5, 5);
+        board.attemptToMovePieceOnBoard(2, 2, 5, 5);
         assertEquals(pawn, b[5][5]);
     }
     
     @Test
     public void pieceChangesToMovedWhenMoved() {
         board.AttemptToPlacePieceOnBoard(pawn, 2, 2);
-        board.movePieceOnBoard(2, 2, 5, 5);
+        board.attemptToMovePieceOnBoard(2, 2, 5, 5);
         assertEquals(true, pawn.hasMoved());
     }
     
     @Test
     public void cannotMovePieceFromOutsideBoardBooleanTest() {
-        assertEquals(false, board.movePieceOnBoard(-1, -1, 2, 2));
-        assertEquals(false, board.movePieceOnBoard(8, 8, 2, 2));
+        assertEquals(false, board.attemptToMovePieceOnBoard(-1, -1, 2, 2));
+        assertEquals(false, board.attemptToMovePieceOnBoard(8, 8, 2, 2));
     }
     
     @Test
     public void cannotMovePieceOutsideBoardBooleanTest() {
-        assertEquals(false, board.movePieceOnBoard(2, 2, -1, -1));
-        assertEquals(false, board.movePieceOnBoard(2, 2, 8, 8));
+        assertEquals(false, board.attemptToMovePieceOnBoard(2, 2, -1, -1));
+        assertEquals(false, board.attemptToMovePieceOnBoard(2, 2, 8, 8));
     }
 }

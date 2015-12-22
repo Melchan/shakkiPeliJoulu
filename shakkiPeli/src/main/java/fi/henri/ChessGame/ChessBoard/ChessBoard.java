@@ -34,7 +34,7 @@ public class ChessBoard {
         return false;
     }
 
-    public boolean movePieceOnBoard(int x, int y, int toX, int toY) {
+    public boolean attemptToMovePieceOnBoard(int x, int y, int toX, int toY) {
         if (allowedCoordinates(x, y)) {
             ChessPiece piece = board[x][y];
             boolean result = AttemptToPlacePieceOnBoard(piece, toX, toY);
@@ -47,7 +47,7 @@ public class ChessBoard {
         return false;
     }
 
-    private boolean allowedCoordinates(int x, int y) {
+    public boolean allowedCoordinates(int x, int y) {
         if (x > -1 && y > -1 && x < 8 && y < 8) {
             return true;
         }
