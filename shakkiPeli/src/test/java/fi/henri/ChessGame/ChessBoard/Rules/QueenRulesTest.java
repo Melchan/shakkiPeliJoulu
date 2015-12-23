@@ -41,7 +41,7 @@ public class QueenRulesTest {
     }
     
     @Test
-    public void canHandeBadMovement() {
+    public void canHandleBadMovement() {
         assertEquals(false, queenR.isMoveLegal(pawn, -4, 20, -2, 9));
         assertEquals(false, queenR.isMoveLegal(pawn, 0, 0, 2, 1));
     }
