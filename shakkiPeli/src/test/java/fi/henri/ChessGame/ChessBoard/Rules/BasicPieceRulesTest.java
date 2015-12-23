@@ -9,7 +9,8 @@ import fi.henri.ChessGame.ChessBoard.ChessBoard;
 import fi.henri.ChessGame.ChessPieces.ChessPiece;
 import static fi.henri.ChessGame.ChessPieces.Color.*;
 import static fi.henri.ChessGame.ChessPieces.PieceType.*;
-import fi.henri.ChessGame.Rules.Pieces.PathCheck;
+import fi.henri.ChessGame.Rules.Pieces.BasicPieceRules;
+import fi.henri.ChessGame.Rules.Pieces.RookRules;
 import static junit.framework.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,18 +19,18 @@ import org.junit.Test;
  *
  * @author manhenri
  */
-public class PathCheckTest {
+public class BasicPieceRulesTest {
     private ChessBoard board;
     private ChessPiece pawn;
     private ChessPiece rook;
-    private PathCheck check;
+    private BasicPieceRules check;
     
     @Before
     public void setUp() {
         this.board = new ChessBoard();
         this.pawn = new ChessPiece(WHITE, PAWN);
         this.rook = new ChessPiece(BLACK, ROOK);
-        this.check = new PathCheck(board);
+        this.check = new RookRules(board);
     } 
     
     @Test
@@ -105,12 +106,38 @@ public class PathCheckTest {
     
     @Test
     public void itIsEnemy() {
-        ChessPiece soldier = new ChessPiece(BLACK, PAWN);
-        assertEquals(true, check.isThePieceEnemy(soldier, pawn));
+        assertEquals(true, check.isThePieceEnemy(pawn, rook));
     }
     
     @Test
     public void testWithBadValues() {
         assertEquals(false, check.isThePathClear(-2, 14, -100, 2));
+    }
+    
+    @Test
+    public void isItEnemyNull() {
+        assertEquals(true, check.isThePieceEnemy(pawn, null));
+    }
+    
+    @Test
+    public void isAllowedSlopeWhenOneChangeIsZero() {
+        assertEquals(true, check.isAllowedSlope(2, 0, 2, 7));
+        assertEquals(true, check.isAllowedSlope(0, 4, 7, 4));
+    }
+    
+    @Test
+    public void isAllowedSlopeDiaconalMovement() {
+        assertEquals(true, check.isAllowedSlope(0, 0, 7, 7));
+        assertEquals(true, check.isAllowedSlope(7, 7, 0, 0));
+        assertEquals(true, check.isAllowedSlope(2, 4, 7, 4));
+        assertEquals(true, check.isAllowedSlope(7, 4, 0, 4));
+    }
+    
+    @Test
+    public void isAllowedSlopeWhenSlopeIsWrong() {
+        assertEquals(false, check.isAllowedSlope(0, 4, 1, 6));
+        assertEquals(false, check.isAllowedSlope(4, 0, 6, 1));
+        assertEquals(false, check.isAllowedSlope(1, 4, 7, 7));
+        assertEquals(false, check.isAllowedSlope(7, 7, 2, 0));
     }
 }

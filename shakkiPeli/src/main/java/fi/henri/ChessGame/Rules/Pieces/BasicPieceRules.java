@@ -7,22 +7,23 @@ package fi.henri.ChessGame.Rules.Pieces;
 
 import fi.henri.ChessGame.ChessBoard.ChessBoard;
 import fi.henri.ChessGame.ChessPieces.ChessPiece;
-import fi.henri.ChessGame.ChessPieces.Color;
 
 /**
  *
  * @author Melchan
  */
-public class PathCheck {
+public abstract class BasicPieceRules {
 
     private ChessBoard chessBoard;
     private ChessPiece[][] board;
 
-    public PathCheck(ChessBoard board) {
-        
+    public BasicPieceRules(ChessBoard board) {
+
         this.chessBoard = board;
         this.board = board.getChessBoard();
     }
+
+    abstract public boolean isMoveLegal(ChessPiece p, int a, int b, int toA, int toB);
 
     public boolean isThePathClear(int a, int b, int toA, int toB) {
         int xChange = change(a, toA);
@@ -38,17 +39,42 @@ public class PathCheck {
             }
             x += xChange;
             y += yChange;
-        }   
+        }
         return true;
     }
 
     public boolean isThePieceEnemy(ChessPiece actor, ChessPiece target) {
-        if (actor.getColor() == target.getColor()) {
+        if (target == null) {
+            return true;
+        } else if (actor.getColor() == target.getColor()) {
             return false;
         }
         return true;
     }
-    
+
+    public int change(int a, int toA) {
+        if (toA - a > 0) {
+            return 1;
+        } else if (toA - a < 0) {
+            return -1;
+        } else {
+            return 0;
+        }
+    }
+
+    public boolean isAllowedSlope(int a, int b, int toA, int toB) {
+        if (change(a, toA) == 0 || change(b, toB) == 0) {
+            return true;
+        } else if ((a - toA) / (b - toB) == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public ChessPiece[][] getBoard() {
+        return board;
+    }
 
     private boolean squareOccupied(int x, int y) {
         if (board[x][y] != null) {
@@ -62,16 +88,5 @@ public class PathCheck {
             return false;
         }
         return true;
-    }
-
-    private int change(int a, int toA) {
-        if (toA - a > 0) {
-            return 1;
-        } else if (toA - a < 0) {
-            return -1;
-        } else {
-            return 0;
-        }
-        
     }
 }
