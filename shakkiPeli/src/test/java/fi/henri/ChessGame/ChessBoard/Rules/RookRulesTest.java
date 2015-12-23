@@ -73,9 +73,8 @@ public class RookRulesTest {
     }
     
     @Test
-    public void rookCantMoveifOwnPieceOnTheWay() {
+    public void rookCantMoveifEnemyPieceOnTheWay() {
         board.attemptToPlacePieceOnBoard(bishop, 4, 4);
         assertEquals(false, rookR.isMoveLegal(pawn, 0, 4, 7, 4));
-    }
-    
+    } 
 }

@@ -17,7 +17,7 @@ import org.junit.Test;
 
 /**
  *
- * @author manhenri
+ * @author Melchan
  */
 public class BasicPieceRulesTest {
     private ChessBoard board;

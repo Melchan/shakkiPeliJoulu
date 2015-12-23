@@ -14,12 +14,12 @@ import fi.henri.ChessGame.ChessPieces.ChessPiece;
  */
 public abstract class BasicPieceRules {
 
-    private ChessBoard chessBoard;
+    private ChessBoard cB;
     private ChessPiece[][] board;
 
     public BasicPieceRules(ChessBoard board) {
 
-        this.chessBoard = board;
+        this.cB = board;
         this.board = board.getChessBoard();
     }
 
@@ -31,7 +31,7 @@ public abstract class BasicPieceRules {
         int x = a + xChange;
         int y = b + yChange;
         while (notEndPoint(toA, toB, x, y)) {
-            if (!chessBoard.allowedCoordinates(x, y)) {
+            if (!cB.allowedCoordinates(x, y)) {
                 return false;
             }
             if (squareOccupied(x, y)) {
@@ -63,9 +63,11 @@ public abstract class BasicPieceRules {
     }
 
     public boolean isAllowedSlope(int a, int b, int toA, int toB) {
-        if (change(a, toA) == 0 || change(b, toB) == 0) {
+        if (!cB.allowedCoordinates(a, b) || !cB.allowedCoordinates(toA, toB)) {
+            return false;
+        } else if (change(a, toA) == 0 || change(b, toB) == 0) {
             return true;
-        } else if ((a - toA) / (b - toB) == 1) {
+        } else if ((a - toA) / (b - toB) == 1 || (a - toA) / (b - toB) == -1) {
             return true;
         } else {
             return false;
