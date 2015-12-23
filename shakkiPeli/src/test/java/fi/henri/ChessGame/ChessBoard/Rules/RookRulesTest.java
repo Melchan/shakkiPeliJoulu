@@ -56,25 +56,25 @@ public class RookRulesTest {
     
     @Test
     public void rookCantEatOwnPiece() {
-        board.AttemptToPlacePieceOnBoard(queen, 2, 4);
+        board.attemptToPlacePieceOnBoard(queen, 2, 4);
         assertEquals(false, rookR.isMoveLegal(pawn, 4, 4, 2, 4));
     }
     
     @Test
     public void rookCanEatEnemyPiece() {
-        board.AttemptToPlacePieceOnBoard(bishop, 2, 4);
+        board.attemptToPlacePieceOnBoard(bishop, 2, 4);
         assertEquals(true, rookR.isMoveLegal(pawn, 4, 4, 2, 4));
     }
     
     @Test
     public void rookCantMoveIfOwnPieceOnTheWay() {
-        board.AttemptToPlacePieceOnBoard(queen, 4, 4);
+        board.attemptToPlacePieceOnBoard(queen, 4, 4);
         assertEquals(false, rookR.isMoveLegal(pawn, 4, 0, 4, 7));
     }
     
     @Test
     public void rookCantMoveifOwnPieceOnTheWay() {
-        board.AttemptToPlacePieceOnBoard(bishop, 4, 4);
+        board.attemptToPlacePieceOnBoard(bishop, 4, 4);
         assertEquals(false, rookR.isMoveLegal(pawn, 0, 4, 7, 4));
     }
     

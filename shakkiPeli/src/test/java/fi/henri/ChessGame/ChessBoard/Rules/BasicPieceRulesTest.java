@@ -35,14 +35,14 @@ public class BasicPieceRulesTest {
     
     @Test
     public void pathClearStartingSquareIsNotCounted() {
-        board.AttemptToPlacePieceOnBoard(pawn, 2, 4);
+        board.attemptToPlacePieceOnBoard(pawn, 2, 4);
         assertEquals(true, check.isThePathClear(2, 4, 2, 6));
     }
     
     @Test
     public void pathObstructedStartingSquareIsNotCounted() {
-        board.AttemptToPlacePieceOnBoard(pawn, 2, 4);
-        board.AttemptToPlacePieceOnBoard(rook, 2, 5);
+        board.attemptToPlacePieceOnBoard(pawn, 2, 4);
+        board.attemptToPlacePieceOnBoard(rook, 2, 5);
         assertEquals(false, check.isThePathClear(2, 4, 2, 6));
     }
     
@@ -72,28 +72,28 @@ public class BasicPieceRulesTest {
     
     @Test
     public void pathBlockedHorizontal() {
-        board.AttemptToPlacePieceOnBoard(pawn, 4, 4);
+        board.attemptToPlacePieceOnBoard(pawn, 4, 4);
         assertEquals(false, check.isThePathClear(0, 4, 7, 4));
         assertEquals(false, check.isThePathClear(7, 4, 0, 4));
     }
     
     @Test
     public void pathBlockedVertical() {
-        board.AttemptToPlacePieceOnBoard(pawn, 4, 4);
+        board.attemptToPlacePieceOnBoard(pawn, 4, 4);
         assertEquals(false, check.isThePathClear(4, 0, 4, 7));
         assertEquals(false, check.isThePathClear(4, 7, 4, 0));
     }
     
     @Test
     public void pathBlockedDiaconalRising() {
-        board.AttemptToPlacePieceOnBoard(pawn, 4, 4);
+        board.attemptToPlacePieceOnBoard(pawn, 4, 4);
         assertEquals(false, check.isThePathClear(0, 0, 7, 7));
         assertEquals(false, check.isThePathClear(7, 7, 0, 0));
     }
     
     @Test
     public void pathBlockedDiaconalDecreasing() {
-        board.AttemptToPlacePieceOnBoard(pawn, 3, 4);
+        board.attemptToPlacePieceOnBoard(pawn, 3, 4);
         assertEquals(false, check.isThePathClear(0, 7, 7, 0));
         assertEquals(false, check.isThePathClear(7, 0, 0, 7));
     }

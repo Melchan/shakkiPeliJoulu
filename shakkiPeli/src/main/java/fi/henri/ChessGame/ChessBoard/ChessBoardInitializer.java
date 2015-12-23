@@ -65,7 +65,7 @@ public class ChessBoardInitializer {
 
     private void placePiece(Color color, PieceType type, int x, int y) {
         ChessPiece piece = new ChessPiece(color, type);
-        board.AttemptToPlacePieceOnBoard(piece, x, y);
+        board.attemptToPlacePieceOnBoard(piece, x, y);
     }
 
     private int giveRow(Color color) {

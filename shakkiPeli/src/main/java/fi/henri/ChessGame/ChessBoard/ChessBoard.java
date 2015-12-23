@@ -23,7 +23,7 @@ public class ChessBoard {
         return board;
     }
 
-    public boolean AttemptToPlacePieceOnBoard(ChessPiece piece, int x, int y) {
+    public boolean attemptToPlacePieceOnBoard(ChessPiece piece, int x, int y) {
         if (allowedCoordinates(x, y)) {
             if (piece == null) {
                 return false;
@@ -37,7 +37,7 @@ public class ChessBoard {
     public boolean attemptToMovePieceOnBoard(int x, int y, int toX, int toY) {
         if (allowedCoordinates(x, y)) {
             ChessPiece piece = board[x][y];
-            boolean result = AttemptToPlacePieceOnBoard(piece, toX, toY);
+            boolean result = attemptToPlacePieceOnBoard(piece, toX, toY);
             if (result) {
                 piece.move();
                 board[x][y] = null;
