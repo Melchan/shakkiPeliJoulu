@@ -9,4 +9,5 @@ Päivämäärä | Aika | Kuvaus
 2015-12-22 | 8h | BasicPieceRules luokan tekeminen ja testit.
 2015-12-23 | 4h | RookRules ja testit.
 2015-12-23 | 2h | BishopRules ja testit.
-**Yhteensä** | 26.5h | 
+2015-12-23 | 4h | QueenRules ja Knight + testit.
+**Yhteensä** | 30.5h | 
