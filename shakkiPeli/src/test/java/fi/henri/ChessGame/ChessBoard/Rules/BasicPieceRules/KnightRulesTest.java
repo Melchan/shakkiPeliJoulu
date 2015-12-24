@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fi.henri.ChessGame.ChessBoard.Rules;
+package fi.henri.ChessGame.ChessBoard.Rules.BasicPieceRules;
 
 import fi.henri.ChessGame.ChessBoard.ChessBoard;
 import fi.henri.ChessGame.ChessPieces.ChessPiece;
@@ -58,12 +58,13 @@ public class KnightRulesTest {
     
     @Test
     public void tryingToMoveIllegalPlaces() {
-        assertEquals(false, knightR.isMoveLegal(pawn, 4, 4, 0, 0));
+        assertEquals(false, knightR.isMoveLegal(pawn, 2, 2, 0, 0));
         assertEquals(false, knightR.isMoveLegal(pawn, 0, 0, 4, 2));
         assertEquals(false, knightR.isMoveLegal(pawn, 0, 0, -2, -1));
         assertEquals(false, knightR.isMoveLegal(pawn, 8, 8, 6, 7));
         assertEquals(false, knightR.isMoveLegal(pawn, 0, 0, 4, 0));
         assertEquals(false, knightR.isMoveLegal(pawn, 0, 4, 2, 0));
+        assertEquals(false, knightR.isMoveLegal(pawn, 2, 2, 0, 0));
     }
     
     @Test

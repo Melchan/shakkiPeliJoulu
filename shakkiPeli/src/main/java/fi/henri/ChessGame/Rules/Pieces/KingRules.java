@@ -10,13 +10,13 @@ import fi.henri.ChessGame.ChessPieces.ChessPiece;
 
 /**
  *
- * @author melchan
+ * @author manhenri
  */
-public class KnightRules extends BasicPieceRules {
+public class KingRules extends BasicPieceRules {
 
     ChessBoard board;
 
-    public KnightRules(ChessBoard board) {
+    public KingRules(ChessBoard board) {
         super(board);
         this.board = board;
     }
@@ -25,7 +25,7 @@ public class KnightRules extends BasicPieceRules {
     public boolean isMoveLegal(ChessPiece p, int a, int b, int toA, int toB) {
         if (board.allowedCoordinates(a, b)) {
             if (board.allowedCoordinates(toA, toB)) {
-                if (allowedKnightMovement(a, b, toA, toB)) {
+                if (isAllowedKingMovement(a, b, toA, toB)) {
                     ChessPiece target = board.getChessBoard()[toA][toB];
                     if (super.isThePieceEnemy(p, target)) {
                         return true;
@@ -36,13 +36,14 @@ public class KnightRules extends BasicPieceRules {
         return false;
     }
 
-    private boolean allowedKnightMovement(int a, int b, int toA, int toB) {
-if (Math.abs(a - toA) == 2 && Math.abs(b - toB) == 1) {
-            return true;
-        } else if (Math.abs(b - toB) == 2 && Math.abs(a - toA) == 1) {
-            return true;
-        } else {
-            return false;
+    private boolean isAllowedKingMovement(int a, int b, int toA, int toB) {
+        int xChange = Math.abs(a - toA);
+        int yChange = Math.abs(b - toB);
+        if (xChange < 2) {
+            if (yChange < 2) {
+                return true;
+            }
         }
+        return false;
     }
 }
