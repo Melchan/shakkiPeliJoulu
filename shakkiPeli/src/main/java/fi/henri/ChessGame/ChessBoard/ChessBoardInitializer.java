@@ -54,13 +54,9 @@ public class ChessBoardInitializer {
 
     private void placeKingAndQueen(Color color, int y) {
         int x = 3;
-        if (color == BLACK) {
-            placePiece(color, KING, x, y);
-            placePiece(color, QUEEN, x + 1, y);
-        } else {
-            placePiece(color, KING, x + 1, y);
-            placePiece(color, QUEEN, x, y);
-        }
+        placePiece(color, KING, x + 1, y);
+        placePiece(color, QUEEN, x, y);
+
     }
 
     private void placePiece(Color color, PieceType type, int x, int y) {

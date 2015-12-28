@@ -81,14 +81,14 @@ public class ChessBoardInitializerBlackPiecesTest {
     
     @Test
     public void QueensInPlace() {
-        assertEquals(QUEEN, b[4][7].getPieceType());
-        assertEquals(BLACK, b[4][7].getColor());
+        assertEquals(QUEEN, b[3][7].getPieceType());
+        assertEquals(BLACK, b[3][7].getColor());
     }
     
     @Test 
     public void KingsInPlace() {
-        assertEquals(KING, b[3][7].getPieceType());
-        assertEquals(BLACK, b[3][7].getColor());
+        assertEquals(KING, b[4][7].getPieceType());
+        assertEquals(BLACK, b[4][7].getColor());
     }
 }
 

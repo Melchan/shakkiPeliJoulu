@@ -58,4 +58,11 @@ public class AttemtToMovingPieceOnBoardTest {
         assertEquals(false, board.attemptToMovePieceOnBoard(2, 2, -1, -1));
         assertEquals(false, board.attemptToMovePieceOnBoard(2, 2, 8, 8));
     }
+    
+    @Test
+    public void previousBoardPositionIsRecorded() {
+        board.attemptToPlacePieceOnBoard(pawn, 2, 2);
+        board.attemptToMovePieceOnBoard(2, 2, 5, 5);
+        assertEquals(pawn, board.getPreviousChessBoard()[2][2]);
+    }
 }

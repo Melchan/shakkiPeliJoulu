@@ -10,4 +10,5 @@ Päivämäärä | Aika | Kuvaus
 2015-12-23 | 4h | RookRules ja testit.
 2015-12-23 | 2h | BishopRules ja testit.
 2015-12-23 | 4h | QueenRules ja Knight + testit.
-**Yhteensä** | 30.5h | 
+2015-12-14 | 3h | King and Pawn basic moves and tests.
+**Yhteensä** | 33.5h | 
