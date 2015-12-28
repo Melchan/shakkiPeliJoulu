@@ -35,7 +35,7 @@ public class PawnRules extends BasicPieceRules {
         return false;
     }
 
-    private boolean allowedMovement(ChessPiece p, int a, int b,int toA,int toB){
+    private boolean allowedMovement(ChessPiece p, int a, int b, int toA, int toB) {
         int xChange = Math.abs(a - toA);
         int yChange = b - toB;
 
@@ -48,11 +48,11 @@ public class PawnRules extends BasicPieceRules {
         }
     }
 
-    private boolean blackMovement(ChessPiece p, int xC,int yC,int toA, int toB){
+    private boolean blackMovement(ChessPiece p, int xC, int yC, int toA, int toB) {
         ChessPiece t = board.getChessBoard()[toA][toB];
         if (p.getColor() == BLACK) {
             if (yC == 1) {
-                return isMoveAllowedForPawn(p, xC, toA, toB);
+                return isMoveAllowedForPawn(p, xC, yC, toA, toB);
             } else if (yC == 2 && p.hasMoved() == false) {
                 if (board.getChessBoard()[toA][toB + 1] == null) {
                     return isForwardMovementAllowed(xC, t);
@@ -62,11 +62,11 @@ public class PawnRules extends BasicPieceRules {
         return false;
     }
 
-    private boolean whiteMovement(ChessPiece p, int xC, int yC,int toA,int toB){
+    private boolean whiteMovement(ChessPiece p, int xC, int yC, int toA, int toB) {
         ChessPiece t = board.getChessBoard()[toA][toB];
         if (p.getColor() == WHITE) {
             if (yC == -1) {
-                return isMoveAllowedForPawn(p, xC, toA, toB);
+                return isMoveAllowedForPawn(p, xC,yC, toA, toB);
             } else if (yC == -2 && p.hasMoved() == false) {
                 if (board.getChessBoard()[toA][toB - 1] == null) {
                     return isForwardMovementAllowed(xC, t);
@@ -83,30 +83,37 @@ public class PawnRules extends BasicPieceRules {
         return false;
     }
 
-    private boolean isMoveAllowedForPawn(ChessPiece p, int xC,int toA, int toB){
+    private boolean isMoveAllowedForPawn(ChessPiece p, int xC, int yC, int toA, int toB) {
         ChessPiece t = board.getChessBoard()[toA][toB];
         if (xC == 1 && super.isThePieceEnemy(p, t) && t != null) {
             return true;
-        } else if (xC == 1 && enPassant(p, toA, toB)) {
+        } else if (xC == 1 && enPassant(p, yC, toA, toB)) {
             return true;
         } else {
             return isForwardMovementAllowed(xC, t);
         }
     }
 
-    private boolean enPassant(ChessPiece p, int toA, int toB) {
+    private boolean enPassant(ChessPiece p, int yC, int toA, int toB) {
         ChessPiece[][] boardNow = board.getChessBoard();
         ChessPiece[][] boardBefore = board.getPreviousChessBoard();
-        ChessPiece whiteEnemy = boardNow[toA][toB + 1];
-        ChessPiece blackEnemy = boardNow[toA][toB - 1];
-
-        if (blackEnemy == boardBefore[toA][toB + 1]) {
-            if (whiteEnemy != null && whiteEnemy.getPieceType() == PAWN) {
-                return super.isThePieceEnemy(p, whiteEnemy);
-            }
-        } else if (whiteEnemy == boardBefore[toA][toB - 1]) {
-            if (blackEnemy != null && blackEnemy.getPieceType() == PAWN) {
-                return super.isThePieceEnemy(p, blackEnemy);
+        if (toB > 1 && toB < 6) {
+            ChessPiece upperEnemy = boardNow[toA][toB + 1];
+            ChessPiece lowerEnemy = boardNow[toA][toB - 1];
+            if (lowerEnemy != null && lowerEnemy == boardBefore[toA][toB + 1]) {
+                if (yC == -1 && lowerEnemy.getPieceType() == PAWN) {
+                    if (super.isThePieceEnemy(p, lowerEnemy)) {
+                        boardNow[toA][toB - 1] = null;
+                        return true;
+                    }
+                }
+            } else if (upperEnemy != null && upperEnemy == boardBefore[toA][toB - 1]) {
+                if (yC == 1 && upperEnemy.getPieceType() == PAWN) {
+                    if (super.isThePieceEnemy(p, upperEnemy)) {
+                        boardNow[toA][toB + 1] = null;
+                        return true;
+                    }
+                }
             }
         }
         return false;

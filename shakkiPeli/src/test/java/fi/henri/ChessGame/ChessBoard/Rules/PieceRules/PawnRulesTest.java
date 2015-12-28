@@ -169,42 +169,89 @@ public class PawnRulesTest {
     }
 
     @Test
-    public void canEnPassantWithWhite() {
-        board.attemptToPlacePieceOnBoard(bPawn, 4, 6);
+    public void canEnPassantWithWhiteToRight() {
         board.attemptToPlacePieceOnBoard(bPawn, 6, 6);
-        board.attemptToMovePieceOnBoard(4, 6, 4, 4);
         board.attemptToMovePieceOnBoard(6, 6, 6, 4);
         assertEquals(true, pawnR.isMoveLegal(queen, 5, 4, 6, 5));
+    }
+
+    @Test
+    public void canEnPassantWithWhiteToLeft() {
+        board.attemptToPlacePieceOnBoard(bPawn, 4, 6);
+        board.attemptToMovePieceOnBoard(4, 6, 4, 4);
         assertEquals(true, pawnR.isMoveLegal(queen, 5, 4, 4, 5));
     }
 
     @Test
-    public void canEnPassantWithBlack() {
-        board.attemptToPlacePieceOnBoard(wPawn, 4, 1);
+    public void canEnPassantWithBlackToRight() {
         board.attemptToPlacePieceOnBoard(wPawn, 6, 1);
-        board.attemptToMovePieceOnBoard(4, 1, 4, 3);
         board.attemptToMovePieceOnBoard(6, 1, 6, 3);
         assertEquals(true, pawnR.isMoveLegal(rook, 5, 3, 6, 2));
+    }
+
+    @Test
+    public void canEnPassantWithBlackToLeft() {
+        board.attemptToPlacePieceOnBoard(wPawn, 4, 1);
+        board.attemptToMovePieceOnBoard(4, 1, 4, 3);
         assertEquals(true, pawnR.isMoveLegal(rook, 5, 3, 4, 2));
     }
 
     @Test
-    public void cantEnPassantOtherThanPawn() {
+    public void cantEnPassantOtherThanPawnWhite() {
         board.attemptToPlacePieceOnBoard(rook, 6, 6);
-        board.attemptToPlacePieceOnBoard(queen, 6, 1);
         board.attemptToMovePieceOnBoard(6, 6, 6, 4);
-        board.attemptToMovePieceOnBoard(6, 1, 6, 3);
         assertEquals(false, pawnR.isMoveLegal(queen, 5, 4, 6, 5));
+
+    }
+
+    @Test
+    public void cantEnPassantOtherThanPawnBlack() {
+        board.attemptToPlacePieceOnBoard(queen, 6, 1);
+        board.attemptToMovePieceOnBoard(6, 1, 6, 3);
         assertEquals(false, pawnR.isMoveLegal(rook, 5, 3, 4, 2));
     }
 
     @Test
-    public void cantEnPassantWhenEnemyDidntMoveTwoSpaces() {
-        board.attemptToPlacePieceOnBoard(bPawn, 6, 5);
+    public void cantEnPassantWithBlackWhenEnemyDidntMoveTwoSpaces() {
         board.attemptToPlacePieceOnBoard(wPawn, 6, 2);
-        board.attemptToMovePieceOnBoard(6, 5, 6, 4);
         board.attemptToMovePieceOnBoard(6, 2, 6, 3);
+        assertEquals(false, pawnR.isMoveLegal(rook, 5, 3, 6, 2));
+    }
+
+    @Test
+    public void cantEnPassantWithWhiteWhenEnemyDidntMoveTwoSpaces() {
+        board.attemptToPlacePieceOnBoard(bPawn, 6, 5);
+        board.attemptToMovePieceOnBoard(6, 5, 6, 4);
         assertEquals(false, pawnR.isMoveLegal(queen, 5, 4, 6, 5));
-        assertEquals(false, pawnR.isMoveLegal(rook, 5, 3, 4, 2));
+    }
+    
+    @Test
+    public void afterEnPassantPieceIsEatenBlack() {
+        board.attemptToPlacePieceOnBoard(wPawn, 6, 1);
+        board.attemptToMovePieceOnBoard(6, 1, 6, 3);
+        pawnR.isMoveLegal(rook, 5, 3, 6, 2);
+        assertEquals(null, board.getChessBoard()[6][3]);
+    }
+    
+    @Test
+    public void afterEnPassantPieceIsEatenWhite() {
+        board.attemptToPlacePieceOnBoard(bPawn, 6, 6);
+        board.attemptToMovePieceOnBoard(6, 6, 6, 4);
+        pawnR.isMoveLegal(queen, 5, 4, 6, 5);
+        assertEquals(null, board.getChessBoard()[6][4]);
+    }
+    
+    @Test
+    public void cantTryEnPassantNearLowerEdgeBlack() {
+        board.attemptToPlacePieceOnBoard(wPawn, 4, 0);
+        board.attemptToMovePieceOnBoard(4, 0, 4, 2);
+        assertEquals(false, pawnR.isMoveLegal(rook, 5, 2, 4, 1));
+    }
+    
+    @Test
+    public void cantTryEnPassantNearUpperEdgeWhite() {
+        board.attemptToPlacePieceOnBoard(bPawn, 6, 7);
+        board.attemptToMovePieceOnBoard(6, 7, 6, 5);
+        assertEquals(false, pawnR.isMoveLegal(queen, 5, 5, 6, 6));
     }
 }
