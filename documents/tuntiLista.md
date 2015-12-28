@@ -1,5 +1,7 @@
 #**Tuntikirjanpito**
 
+tää varmaan heittää aika paljon...
+
 Päivämäärä | Aika | Kuvaus
 ---------- | ---- | ------
 2015-12-17 | 3h | Toteutin ensimmäisen deadlinen vaatimukset.
@@ -12,4 +14,5 @@ Päivämäärä | Aika | Kuvaus
 2015-12-23 | 4h | QueenRules ja Knight + testit.
 2015-12-24 | 3h | King and Pawn basic moves and tests.
 2015-12-28 | 6h | pawn rapidMovement & En Passant + tests.
-**Yhteensä** | 39.5h | 
+2015-12-28 | 1h | Castling + tests added.
+**Yhteensä** | 40.5h | 

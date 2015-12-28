@@ -10,7 +10,7 @@ import fi.henri.ChessGame.ChessPieces.ChessPiece;
 
 /**
  *
- * @author manhenri
+ * @author melchan
  */
 public class KingRules extends BasicPieceRules {
 
@@ -30,6 +30,8 @@ public class KingRules extends BasicPieceRules {
                     if (super.isThePieceEnemy(p, target)) {
                         return true;
                     }
+                } else if (b - toB == 0 && castling(p, a, b, toA)) {
+                    return true;
                 }
             }
         }
@@ -42,6 +44,24 @@ public class KingRules extends BasicPieceRules {
         if (xChange < 2) {
             if (yChange < 2) {
                 return true;
+            }
+        } 
+        return false;
+    }
+    
+    private boolean castling(ChessPiece p, int a, int b, int toA) {
+        ChessPiece[][] cB= board.getChessBoard();
+        if (p.hasMoved() == false && super.isThePathClear(a, b, toA, b)) {
+            if (toA == 6) {
+                if (cB[7][b] != null && cB[7][b].hasMoved() == false) {
+                    board.attemptToMovePieceOnBoard(7, b, 5, b);
+                    return true;
+                }
+            } else if (toA == 2) {
+                if (cB[0][b] != null && cB[0][b].hasMoved() == false) {
+                    board.attemptToMovePieceOnBoard(0, b, 3, b);
+                    return true;
+                }
             }
         }
         return false;

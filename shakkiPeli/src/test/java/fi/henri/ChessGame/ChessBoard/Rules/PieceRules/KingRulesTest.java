@@ -50,7 +50,7 @@ public class KingRulesTest {
         assertEquals(true, kingR.isMoveLegal(pawn, 4, 4, 5, 3));
         assertEquals(true, kingR.isMoveLegal(pawn, 4, 4, 3, 5));
     }
-    
+
     @Test
     public void cantMoveTooMuch() {
         assertEquals(false, kingR.isMoveLegal(pawn, 4, 4, 2, 4));
@@ -62,18 +62,84 @@ public class KingRulesTest {
         assertEquals(false, kingR.isMoveLegal(pawn, 4, 4, 6, 2));
         assertEquals(false, kingR.isMoveLegal(pawn, 4, 4, 2, 6));
     }
-    
+
     @Test
     public void cantEatOwnPiece() {
         board.attemptToPlacePieceOnBoard(rook, 4, 4);
         assertEquals(false, kingR.isMoveLegal(pawn, 3, 3, 4, 4));
     }
-    
+
     @Test
     public void canEatEnemyPiece() {
         board.attemptToPlacePieceOnBoard(queen, 4, 4);
         assertEquals(true, kingR.isMoveLegal(pawn, 3, 3, 4, 4));
     }
+
+    @Test
+    public void castlingWhiteRight() {
+        board.attemptToPlacePieceOnBoard(pawn, 4, 0);
+        board.attemptToPlacePieceOnBoard(queen, 7, 0);
+        assertEquals(true, kingR.isMoveLegal(pawn, 4, 0, 6, 0));
+        assertEquals(queen, board.getChessBoard()[5][0]);
+    }
+
+    @Test
+    public void castlingWhiteLeft() {
+        board.attemptToPlacePieceOnBoard(pawn, 4, 0);
+        board.attemptToPlacePieceOnBoard(queen, 0, 0);
+        assertEquals(true, kingR.isMoveLegal(pawn, 4, 0, 2, 0));
+        assertEquals(queen, board.getChessBoard()[3][0]);
+    }
+
+    @Test
+    public void castlingBlackRight() {
+        board.attemptToPlacePieceOnBoard(pawn, 4, 7);
+        board.attemptToPlacePieceOnBoard(queen, 7, 7);
+        assertEquals(true, kingR.isMoveLegal(pawn, 4, 7, 6, 7));
+        assertEquals(queen, board.getChessBoard()[5][7]);
+    }
+
+    @Test
+    public void castlingBlackLeft() {
+        board.attemptToPlacePieceOnBoard(pawn, 4, 7);
+        board.attemptToPlacePieceOnBoard(queen, 0, 7);
+        assertEquals(true, kingR.isMoveLegal(pawn, 4, 7, 2, 7));
+        assertEquals(queen, board.getChessBoard()[3][7]);
+    }
+
+    @Test
+    public void castlingWhiteNotAllowedWhenBlocked() {
+        board.attemptToPlacePieceOnBoard(pawn, 4, 0);
+        board.attemptToPlacePieceOnBoard(rook, 3, 0);
+        board.attemptToPlacePieceOnBoard(queen, 0, 0);
+        assertEquals(false, kingR.isMoveLegal(pawn, 4, 0, 2, 0));
+        assertEquals(rook, board.getChessBoard()[3][0]);
+    }
+
+    @Test
+    public void castlingBlackNotAllowedWhenBlocked() {
+        board.attemptToPlacePieceOnBoard(pawn, 4, 7);
+        board.attemptToPlacePieceOnBoard(rook, 5, 7);
+        board.attemptToPlacePieceOnBoard(queen, 7, 7);
+        assertEquals(false, kingR.isMoveLegal(pawn, 4, 7, 6, 7));
+        assertEquals(rook, board.getChessBoard()[5][7]);
+    }
+
+    @Test
+    public void castlingNotAllowedWhenKingMoved() {
+        board.attemptToPlacePieceOnBoard(pawn, 4, 7);
+        pawn.move();
+        board.attemptToPlacePieceOnBoard(queen, 7, 7);
+        assertEquals(false, kingR.isMoveLegal(pawn, 4, 7, 6, 7));
+        assertEquals(null, board.getChessBoard()[5][7]);
+    }
     
-    
+    @Test
+    public void castlingNotAllowedWhenRookMoved() {
+        board.attemptToPlacePieceOnBoard(pawn, 4, 0);
+        board.attemptToPlacePieceOnBoard(queen, 0, 0);
+        queen.move();
+        assertEquals(false, kingR.isMoveLegal(pawn, 4, 0, 2, 0));
+        assertEquals(null, board.getChessBoard()[3][0]);
+    }
 }
