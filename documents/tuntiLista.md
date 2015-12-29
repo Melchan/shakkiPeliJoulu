@@ -15,4 +15,5 @@ Päivämäärä | Aika | Kuvaus
 2015-12-24 | 3h | King and Pawn basic moves and tests.
 2015-12-28 | 6h | pawn rapidMovement & En Passant + tests.
 2015-12-28 | 1h | Castling + tests added.
+2015-12-29 | 3h | vaihdoin nappuloiden käsittelijät siirtämään nappuloiden sääntöjen tietämisen lisäksi ja loin moveHandlerin + testejä.
 **Yhteensä** | 40.5h | 

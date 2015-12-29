@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fi.henri.ChessGame.ChessBoard.Rules.PieceRules;
+package fi.henri.ChessGame.ChessBoard.RulesAndMovementPieces;
 
 import fi.henri.ChessGame.ChessBoard.ChessBoard;
 import fi.henri.ChessGame.ChessPieces.ChessPiece;
 import static fi.henri.ChessGame.ChessPieces.Color.*;
 import static fi.henri.ChessGame.ChessPieces.PieceType.*;
-import fi.henri.ChessGame.Rules.PieceMovement.KnightRules;
+import fi.henri.ChessGame.RulesAndMovement.Pieces.KnightRules;
 import static junit.framework.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
@@ -78,5 +78,12 @@ public class KnightRulesTest {
         ChessPiece queen = new ChessPiece(BLACK, QUEEN);
         board.attemptToPlacePieceOnBoard(queen, 5, 2);
         assertEquals(true, knightR.isMoveLegal(pawn, 4, 4, 5, 2));
+    }
+    
+    @Test
+    public void moveHappens() {
+        board.attemptToPlacePieceOnBoard(pawn, 4, 4);
+        knightR.commitMoveIfLegal(pawn, 4, 4, 6, 5);
+        assertEquals(pawn, board.getChessBoard()[6][5]);
     }
 }

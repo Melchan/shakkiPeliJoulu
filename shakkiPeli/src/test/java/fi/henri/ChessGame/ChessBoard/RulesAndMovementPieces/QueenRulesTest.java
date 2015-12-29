@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fi.henri.ChessGame.ChessBoard.Rules.PieceRules;
+package fi.henri.ChessGame.ChessBoard.RulesAndMovementPieces;
 
 import fi.henri.ChessGame.ChessBoard.ChessBoard;
 import fi.henri.ChessGame.ChessPieces.ChessPiece;
 import static fi.henri.ChessGame.ChessPieces.Color.*;
 import static fi.henri.ChessGame.ChessPieces.PieceType.*;
-import fi.henri.ChessGame.Rules.PieceMovement.QueenRules;
+import fi.henri.ChessGame.RulesAndMovement.Pieces.QueenRules;
 import static junit.framework.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
@@ -44,5 +44,19 @@ public class QueenRulesTest {
     public void canHandleBadMovement() {
         assertEquals(false, queenR.isMoveLegal(pawn, -4, 20, -2, 9));
         assertEquals(false, queenR.isMoveLegal(pawn, 0, 0, 2, 1));
+    }
+    
+    @Test
+    public void moveHappensBishop() {
+        board.attemptToPlacePieceOnBoard(pawn, 0, 0);
+        queenR.commitMoveIfLegal(pawn, 0, 0, 7, 7);
+        assertEquals(pawn, board.getChessBoard()[7][7]);
+    }
+    
+    @Test
+    public void moveHappensRook() {
+        board.attemptToPlacePieceOnBoard(pawn, 0, 0);
+        queenR.commitMoveIfLegal(pawn, 0, 0, 0, 7);
+        assertEquals(pawn, board.getChessBoard()[0][7]);
     }
 }

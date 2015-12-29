@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fi.henri.ChessGame.Rules.PieceMovement;
+package fi.henri.ChessGame.RulesAndMovement.Pieces;
 
 import fi.henri.ChessGame.ChessBoard.ChessBoard;
 import fi.henri.ChessGame.ChessPieces.ChessPiece;
@@ -12,18 +12,26 @@ import fi.henri.ChessGame.ChessPieces.ChessPiece;
  *
  * @author Melchan
  */
-public abstract class BasicPieceRules {
+public abstract class PieceMovement {
 
     private ChessBoard cB;
     private ChessPiece[][] board;
 
-    public BasicPieceRules(ChessBoard board) {
+    public PieceMovement(ChessBoard board) {
 
         this.cB = board;
         this.board = board.getChessBoard();
     }
 
     abstract public boolean isMoveLegal(ChessPiece p, int a, int b, int toA, int toB);
+    
+    public boolean commitMoveIfLegal(ChessPiece p, int a, int b, int toA, int toB) {
+        if (isMoveLegal(p, a, b, toA, toB)) {
+            cB.attemptToMovePieceOnBoard(a, b, toA, toB);
+            return true;
+        }
+        return false;
+    }
 
     public boolean isThePathClear(int a, int b, int toA, int toB) {
         int xChange = change(a, toA);

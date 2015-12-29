@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fi.henri.ChessGame.Rules.PieceMovement;
+package fi.henri.ChessGame.RulesAndMovement.Pieces;
 
 import fi.henri.ChessGame.ChessBoard.ChessBoard;
 import fi.henri.ChessGame.ChessPieces.ChessPiece;
@@ -12,7 +12,7 @@ import fi.henri.ChessGame.ChessPieces.ChessPiece;
  *
  * @author Melchan
  */
-public class QueenRules extends BasicPieceRules{
+public class QueenRules extends PieceMovement{
     BishopRules bRules;
     RookRules rRules;
 

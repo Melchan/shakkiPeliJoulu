@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fi.henri.ChessGame.ChessBoard.Rules.PieceRules;
+package fi.henri.ChessGame.ChessBoard.RulesAndMovementPieces;
 
 import fi.henri.ChessGame.ChessBoard.ChessBoard;
 import fi.henri.ChessGame.ChessPieces.ChessPiece;
 import static fi.henri.ChessGame.ChessPieces.Color.*;
 import static fi.henri.ChessGame.ChessPieces.PieceType.*;
-import fi.henri.ChessGame.Rules.PieceMovement.BishopRules;
+import fi.henri.ChessGame.RulesAndMovement.Pieces.BishopRules;
 import static junit.framework.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
@@ -79,8 +79,23 @@ public class BishopRulesTest {
         assertEquals(false, bishopR.isMoveLegal(pawn, 0, 0, 7, 7));
     }
     
+    @Test
     public void bishopCanEatEnemyPiece() {
         board.attemptToPlacePieceOnBoard(rook, 7, 0);
         assertEquals(true, bishopR.isMoveLegal(pawn, 0, 7, 7, 0));
+    }
+    
+    @Test
+    public void moveHappens() {
+        board.attemptToPlacePieceOnBoard(pawn, 0, 0);
+        assertEquals(true, bishopR.commitMoveIfLegal(pawn, 0, 0, 7, 7));
+        assertEquals(pawn, board.getChessBoard()[7][7]);
+    }
+    
+    @Test
+    public void moveDoesntAlwaysHappen() {
+        board.attemptToPlacePieceOnBoard(pawn, 7, 0);
+        assertEquals(false, bishopR.commitMoveIfLegal(pawn, 7, 0, 7, 7));
+        assertEquals(null, board.getChessBoard()[7][7]);
     }
 }

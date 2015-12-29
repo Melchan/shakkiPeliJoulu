@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fi.henri.ChessGame.Rules.PieceMovement;
+package fi.henri.ChessGame.RulesAndMovement.Pieces;
 
 import fi.henri.ChessGame.ChessBoard.ChessBoard;
 import fi.henri.ChessGame.ChessPieces.ChessPiece;
@@ -14,9 +14,11 @@ import static fi.henri.ChessGame.ChessPieces.PieceType.PAWN;
  *
  * @author melchan
  */
-public class PawnRules extends BasicPieceRules {
+public class PawnRules extends PieceMovement {
 
     private ChessBoard board;
+    private boolean whiteEnPassant;
+    private boolean blackEnPassant;
 
     public PawnRules(ChessBoard board) {
         super(board);
@@ -31,6 +33,22 @@ public class PawnRules extends BasicPieceRules {
                     return true;
                 }
             }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean commitMoveIfLegal(ChessPiece p, int a, int b, int toA, int toB) {
+        whiteEnPassant = false;
+        blackEnPassant = false;
+        if (isMoveLegal(p, a, b, toA, toB)) {
+            board.attemptToMovePieceOnBoard(a, b, toA, toB);
+            if (whiteEnPassant) {
+                board.getChessBoard()[toA][toB - 1] = null;
+            } else if (blackEnPassant) {
+                board.getChessBoard()[toA][toB + 1] = null;
+            }
+            return true;
         }
         return false;
     }
@@ -66,7 +84,7 @@ public class PawnRules extends BasicPieceRules {
         ChessPiece t = board.getChessBoard()[toA][toB];
         if (p.getColor() == WHITE) {
             if (yC == -1) {
-                return isMoveAllowedForPawn(p, xC,yC, toA, toB);
+                return isMoveAllowedForPawn(p, xC, yC, toA, toB);
             } else if (yC == -2 && p.hasMoved() == false) {
                 if (board.getChessBoard()[toA][toB - 1] == null) {
                     return isForwardMovementAllowed(xC, t);
@@ -103,14 +121,14 @@ public class PawnRules extends BasicPieceRules {
             if (lowerEnemy != null && lowerEnemy == boardBefore[toA][toB + 1]) {
                 if (yC == -1 && lowerEnemy.getPieceType() == PAWN) {
                     if (super.isThePieceEnemy(p, lowerEnemy)) {
-                        boardNow[toA][toB - 1] = null;
+                        whiteEnPassant = true;
                         return true;
                     }
                 }
             } else if (upperEnemy != null && upperEnemy == boardBefore[toA][toB - 1]) {
                 if (yC == 1 && upperEnemy.getPieceType() == PAWN) {
                     if (super.isThePieceEnemy(p, upperEnemy)) {
-                        boardNow[toA][toB + 1] = null;
+                        blackEnPassant = true;
                         return true;
                     }
                 }

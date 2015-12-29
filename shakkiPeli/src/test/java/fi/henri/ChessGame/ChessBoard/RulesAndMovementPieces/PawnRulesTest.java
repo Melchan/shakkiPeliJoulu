@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fi.henri.ChessGame.ChessBoard.Rules.PieceRules;
+package fi.henri.ChessGame.ChessBoard.RulesAndMovementPieces;
 
 import fi.henri.ChessGame.ChessBoard.ChessBoard;
 import fi.henri.ChessGame.ChessPieces.ChessPiece;
 import static fi.henri.ChessGame.ChessPieces.Color.*;
 import static fi.henri.ChessGame.ChessPieces.PieceType.*;
-import fi.henri.ChessGame.Rules.PieceMovement.PawnRules;
+import fi.henri.ChessGame.RulesAndMovement.Pieces.PawnRules;
 import static junit.framework.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
@@ -224,34 +224,42 @@ public class PawnRulesTest {
         board.attemptToMovePieceOnBoard(6, 5, 6, 4);
         assertEquals(false, pawnR.isMoveLegal(queen, 5, 4, 6, 5));
     }
-    
+
     @Test
     public void afterEnPassantPieceIsEatenBlack() {
         board.attemptToPlacePieceOnBoard(wPawn, 6, 1);
         board.attemptToMovePieceOnBoard(6, 1, 6, 3);
-        pawnR.isMoveLegal(rook, 5, 3, 6, 2);
+        pawnR.commitMoveIfLegal(rook, 5, 3, 6, 2);
         assertEquals(null, board.getChessBoard()[6][3]);
     }
-    
+
     @Test
     public void afterEnPassantPieceIsEatenWhite() {
         board.attemptToPlacePieceOnBoard(bPawn, 6, 6);
         board.attemptToMovePieceOnBoard(6, 6, 6, 4);
-        pawnR.isMoveLegal(queen, 5, 4, 6, 5);
+        pawnR.commitMoveIfLegal(queen, 5, 4, 6, 5);
         assertEquals(null, board.getChessBoard()[6][4]);
     }
-    
+
     @Test
     public void cantTryEnPassantNearLowerEdgeBlack() {
         board.attemptToPlacePieceOnBoard(wPawn, 4, 0);
         board.attemptToMovePieceOnBoard(4, 0, 4, 2);
         assertEquals(false, pawnR.isMoveLegal(rook, 5, 2, 4, 1));
     }
-    
+
     @Test
     public void cantTryEnPassantNearUpperEdgeWhite() {
         board.attemptToPlacePieceOnBoard(bPawn, 6, 7);
         board.attemptToMovePieceOnBoard(6, 7, 6, 5);
         assertEquals(false, pawnR.isMoveLegal(queen, 5, 5, 6, 6));
+    }
+
+    @Test
+    public void movementHappens() {
+        board.attemptToPlacePieceOnBoard(queen, 3, 3);
+        assertEquals(true, pawnR.commitMoveIfLegal(queen, 3, 3, 3, 4));
+        board.attemptToPlacePieceOnBoard(queen, 4, 3);
+        assertEquals(false, pawnR.commitMoveIfLegal(queen, 4, 3, 4, 2));        
     }
 }

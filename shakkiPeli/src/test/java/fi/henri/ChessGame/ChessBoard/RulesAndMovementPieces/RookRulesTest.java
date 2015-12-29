@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fi.henri.ChessGame.ChessBoard.Rules.PieceRules;
+package fi.henri.ChessGame.ChessBoard.RulesAndMovementPieces;
 
 import fi.henri.ChessGame.ChessBoard.ChessBoard;
 import fi.henri.ChessGame.ChessPieces.ChessPiece;
 import static fi.henri.ChessGame.ChessPieces.Color.*;
 import static fi.henri.ChessGame.ChessPieces.PieceType.*;
-import fi.henri.ChessGame.Rules.PieceMovement.RookRules;
+import fi.henri.ChessGame.RulesAndMovement.Pieces.RookRules;
 import static junit.framework.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
@@ -77,4 +77,11 @@ public class RookRulesTest {
         board.attemptToPlacePieceOnBoard(bishop, 4, 4);
         assertEquals(false, rookR.isMoveLegal(pawn, 0, 4, 7, 4));
     } 
+    
+    @Test
+    public void moveHappens() {
+        board.attemptToPlacePieceOnBoard(pawn, 0, 0);
+        rookR.commitMoveIfLegal(pawn, 0, 0, 0, 7);
+        assertEquals(pawn, board.getChessBoard()[0][7]);
+    }
 }

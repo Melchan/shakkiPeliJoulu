@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fi.henri.ChessGame.ChessBoard.Rules.PieceRules;
+package fi.henri.ChessGame.ChessBoard.RulesAndMovementPieces;
 
 import fi.henri.ChessGame.ChessBoard.ChessBoard;
 import fi.henri.ChessGame.ChessPieces.ChessPiece;
 import static fi.henri.ChessGame.ChessPieces.Color.*;
 import static fi.henri.ChessGame.ChessPieces.PieceType.*;
-import fi.henri.ChessGame.Rules.PieceMovement.BasicPieceRules;
-import fi.henri.ChessGame.Rules.PieceMovement.RookRules;
+import fi.henri.ChessGame.RulesAndMovement.Pieces.PieceMovement;
+import fi.henri.ChessGame.RulesAndMovement.Pieces.RookRules;
 import static junit.framework.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,11 +19,11 @@ import org.junit.Test;
  *
  * @author Melchan
  */
-public class BasicPieceRulesTest {
+public class PieceMovementTest {
     private ChessBoard board;
     private ChessPiece pawn;
     private ChessPiece rook;
-    private BasicPieceRules check;
+    private PieceMovement check;
     
     @Before
     public void setUp() {

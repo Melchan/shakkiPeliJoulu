@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fi.henri.ChessGame.ChessBoard.Rules.PieceRules;
+package fi.henri.ChessGame.ChessBoard.RulesAndMovementPieces;
 
 import fi.henri.ChessGame.ChessBoard.ChessBoard;
 import fi.henri.ChessGame.ChessPieces.ChessPiece;
 import static fi.henri.ChessGame.ChessPieces.Color.*;
 import static fi.henri.ChessGame.ChessPieces.PieceType.*;
-import fi.henri.ChessGame.Rules.PieceMovement.KingRules;
+import fi.henri.ChessGame.RulesAndMovement.Pieces.KingRules;
 import static junit.framework.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
@@ -79,7 +79,7 @@ public class KingRulesTest {
     public void castlingWhiteRight() {
         board.attemptToPlacePieceOnBoard(pawn, 4, 0);
         board.attemptToPlacePieceOnBoard(queen, 7, 0);
-        assertEquals(true, kingR.isMoveLegal(pawn, 4, 0, 6, 0));
+        assertEquals(true, kingR.commitMoveIfLegal(pawn, 4, 0, 6, 0));
         assertEquals(queen, board.getChessBoard()[5][0]);
     }
 
@@ -87,7 +87,7 @@ public class KingRulesTest {
     public void castlingWhiteLeft() {
         board.attemptToPlacePieceOnBoard(pawn, 4, 0);
         board.attemptToPlacePieceOnBoard(queen, 0, 0);
-        assertEquals(true, kingR.isMoveLegal(pawn, 4, 0, 2, 0));
+        assertEquals(true, kingR.commitMoveIfLegal(pawn, 4, 0, 2, 0));
         assertEquals(queen, board.getChessBoard()[3][0]);
     }
 
@@ -95,7 +95,7 @@ public class KingRulesTest {
     public void castlingBlackRight() {
         board.attemptToPlacePieceOnBoard(pawn, 4, 7);
         board.attemptToPlacePieceOnBoard(queen, 7, 7);
-        assertEquals(true, kingR.isMoveLegal(pawn, 4, 7, 6, 7));
+        assertEquals(true, kingR.commitMoveIfLegal(pawn, 4, 7, 6, 7));
         assertEquals(queen, board.getChessBoard()[5][7]);
     }
 
@@ -103,7 +103,7 @@ public class KingRulesTest {
     public void castlingBlackLeft() {
         board.attemptToPlacePieceOnBoard(pawn, 4, 7);
         board.attemptToPlacePieceOnBoard(queen, 0, 7);
-        assertEquals(true, kingR.isMoveLegal(pawn, 4, 7, 2, 7));
+        assertEquals(true, kingR.commitMoveIfLegal(pawn, 4, 7, 2, 7));
         assertEquals(queen, board.getChessBoard()[3][7]);
     }
 
@@ -112,7 +112,7 @@ public class KingRulesTest {
         board.attemptToPlacePieceOnBoard(pawn, 4, 0);
         board.attemptToPlacePieceOnBoard(rook, 3, 0);
         board.attemptToPlacePieceOnBoard(queen, 0, 0);
-        assertEquals(false, kingR.isMoveLegal(pawn, 4, 0, 2, 0));
+        assertEquals(false, kingR.commitMoveIfLegal(pawn, 4, 0, 2, 0));
         assertEquals(rook, board.getChessBoard()[3][0]);
     }
 
@@ -121,7 +121,7 @@ public class KingRulesTest {
         board.attemptToPlacePieceOnBoard(pawn, 4, 7);
         board.attemptToPlacePieceOnBoard(rook, 5, 7);
         board.attemptToPlacePieceOnBoard(queen, 7, 7);
-        assertEquals(false, kingR.isMoveLegal(pawn, 4, 7, 6, 7));
+        assertEquals(false, kingR.commitMoveIfLegal(pawn, 4, 7, 6, 7));
         assertEquals(rook, board.getChessBoard()[5][7]);
     }
 
@@ -130,7 +130,7 @@ public class KingRulesTest {
         board.attemptToPlacePieceOnBoard(pawn, 4, 7);
         pawn.move();
         board.attemptToPlacePieceOnBoard(queen, 7, 7);
-        assertEquals(false, kingR.isMoveLegal(pawn, 4, 7, 6, 7));
+        assertEquals(false, kingR.commitMoveIfLegal(pawn, 4, 7, 6, 7));
         assertEquals(null, board.getChessBoard()[5][7]);
     }
     
@@ -139,7 +139,14 @@ public class KingRulesTest {
         board.attemptToPlacePieceOnBoard(pawn, 4, 0);
         board.attemptToPlacePieceOnBoard(queen, 0, 0);
         queen.move();
-        assertEquals(false, kingR.isMoveLegal(pawn, 4, 0, 2, 0));
+        assertEquals(false, kingR.commitMoveIfLegal(pawn, 4, 0, 2, 0));
         assertEquals(null, board.getChessBoard()[3][0]);
+    }
+    
+    @Test
+    public void moveHappens() {
+        board.attemptToPlacePieceOnBoard(pawn, 0, 0);
+        kingR.commitMoveIfLegal(pawn, 0, 0, 1, 1);
+        assertEquals(pawn, board.getChessBoard()[1][1]);
     }
 }
