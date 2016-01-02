@@ -3,15 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fi.henri.ChessGame.RulesAndMovement;
+package fi.henri.ChessGame.Logic;
 
+import fi.henri.ChessGame.Logic.Pieces.RookRules;
+import fi.henri.ChessGame.Logic.Pieces.KnightRules;
+import fi.henri.ChessGame.Logic.Pieces.QueenRules;
+import fi.henri.ChessGame.Logic.Pieces.KingRules;
+import fi.henri.ChessGame.Logic.Pieces.PawnRules;
+import fi.henri.ChessGame.Logic.Pieces.BishopRules;
+import fi.henri.ChessGame.Logic.Pieces.PieceMovement;
 import fi.henri.ChessGame.ChessBoard.ChessBoard;
 import fi.henri.ChessGame.ChessPieces.ChessPiece;
 import fi.henri.ChessGame.ChessPieces.Color;
 import static fi.henri.ChessGame.ChessPieces.Color.*;
 import fi.henri.ChessGame.ChessPieces.PieceType;
 import static fi.henri.ChessGame.ChessPieces.PieceType.*;
-import fi.henri.ChessGame.RulesAndMovement.Pieces.*;
 import java.util.HashMap;
 
 /**
