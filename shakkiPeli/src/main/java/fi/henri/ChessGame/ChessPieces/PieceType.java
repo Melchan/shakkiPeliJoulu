@@ -6,7 +6,7 @@
 package fi.henri.ChessGame.ChessPieces;
 
 /**
- *
+ * enum for all chessPiece types
  * @author Melchan
  */
 public enum PieceType {

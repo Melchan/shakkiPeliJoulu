@@ -6,40 +6,46 @@
 package fi.henri.ChessGame.ChessPieces;
 
 /**
- *
+ * basic chess piece and it's information
  * @author Melchan
  */
 public class ChessPiece {
+
     private final Color color;
     private boolean moved;
     private final PieceType type;
-    
+
     public ChessPiece(Color color, PieceType type) {
-        this.color = color;       
+        this.color = color;
         this.type = type;
         this.moved = false;
     }
-    
+
     public Color getColor() {
         return color;
     }
-    
+
+    /**
+     * method will tell if two pieces are same color
+     * @param piece which this piece is compared to.
+     * @return boolean.
+     */
     public boolean sameColor(ChessPiece piece) {
         if (piece.getColor() == color) {
             return true;
         }
         return false;
     }
-    
+
     public PieceType getPieceType() {
         return type;
     }
-    
+
     public void move() {
         moved = true;
     }
-    
+
     public boolean hasMoved() {
         return moved;
-    }    
+    }
 }

@@ -5,19 +5,15 @@
  */
 package fi.henri.ChessGame;
 
-import fi.henri.ChessGame.ChessBoard.ChessBoard;
-import fi.henri.ChessGame.ChessBoard.ChessBoardInitializer;
-
 /**
  *
  * @author Melchan
  */
 public class Game {
-    ChessBoard board;
+
     
     public Game() {
-        this.board = new ChessBoard();
-        new ChessBoardInitializer(board);
+        
     }
     
     public void run() {

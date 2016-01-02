@@ -9,7 +9,7 @@ import fi.henri.ChessGame.ChessBoard.ChessBoard;
 import fi.henri.ChessGame.ChessPieces.*;
 import static fi.henri.ChessGame.ChessPieces.Color.*;
 import static fi.henri.ChessGame.ChessPieces.PieceType.*;
-import fi.henri.ChessGame.RulesAndMovement.MoveHandler;
+import fi.henri.ChessGame.RulesAndMovement.LogicHandler;
 import static junit.framework.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +22,7 @@ public class MovementHandlerTest {
     
     private ChessBoard board;
     private ChessPiece[][] cB;
-    private MoveHandler handler;
+    private LogicHandler handler;
     private ChessPiece queen;
     private ChessPiece rook;
     
@@ -30,7 +30,7 @@ public class MovementHandlerTest {
     public void setUp() {
         this.board = new ChessBoard();
         this.cB = board.getChessBoard();
-        this.handler = new MoveHandler(board);
+        this.handler = new LogicHandler(board);
         this.queen = new ChessPiece(WHITE, QUEEN);
         this.rook = new ChessPiece(BLACK, ROOK);
         board.attemptToPlacePieceOnBoard(queen, 3, 0);

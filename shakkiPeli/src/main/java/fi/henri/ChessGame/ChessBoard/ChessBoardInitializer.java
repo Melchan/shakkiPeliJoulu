@@ -12,7 +12,7 @@ import fi.henri.ChessGame.ChessPieces.PieceType;
 import static fi.henri.ChessGame.ChessPieces.PieceType.*;
 
 /**
- *
+ * Initializes game board for starting position.
  * @author Melchan
  */
 public class ChessBoardInitializer {

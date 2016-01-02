@@ -8,6 +8,7 @@ package fi.henri.ChessGame.ChessBoard;
 import fi.henri.ChessGame.ChessPieces.ChessPiece;
 
 /**
+ * Houses chessboard and couple of helping methods.
  *
  * @author Melchan
  */
@@ -24,11 +25,19 @@ public class ChessBoard {
     public ChessPiece[][] getChessBoard() {
         return board;
     }
-    
+
     public ChessPiece[][] getPreviousChessBoard() {
         return boardBefore;
     }
-    
+
+    /**
+     * method places piece on board if coordinates are on board.
+     *
+     * @param piece chess piece to be placed on board.
+     * @param x x-axis for piece.
+     * @param y y-axis for piece.
+     * @return boolean.
+     */
     public boolean attemptToPlacePieceOnBoard(ChessPiece piece, int x, int y) {
         if (allowedCoordinates(x, y)) {
             if (piece == null) {
@@ -40,6 +49,16 @@ public class ChessBoard {
         return false;
     }
 
+    /**
+     * method moves piece if start and end coordinates are on board. Doesn't
+     * mind if piece that is currently being moved is null.
+     *
+     * @param x x-axis
+     * @param y y-axis
+     * @param toX x-axis.
+     * @param toY y-axis.
+     * @return boolean
+     */
     public boolean attemptToMovePieceOnBoard(int x, int y, int toX, int toY) {
         if (allowedCoordinates(x, y)) {
             ChessPiece[][] boardNow = cloneBoard();
@@ -55,13 +74,20 @@ public class ChessBoard {
         return false;
     }
 
+    /**
+     * method will tell if coordinates are allowed.
+     *
+     * @param x x-axis.
+     * @param y y-axis.
+     * @return boolean.
+     */
     public boolean allowedCoordinates(int x, int y) {
         if (x > -1 && y > -1 && x < 8 && y < 8) {
             return true;
         }
         return false;
     }
-    
+
     private ChessPiece[][] cloneBoard() {
         ChessPiece[][] boardNow = new ChessPiece[8][8];
         for (int i = 0; i < board.length; i++) {

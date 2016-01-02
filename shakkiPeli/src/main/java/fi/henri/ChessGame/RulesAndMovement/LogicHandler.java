@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -15,18 +15,20 @@ import fi.henri.ChessGame.RulesAndMovement.Pieces.*;
 import java.util.HashMap;
 
 /**
- *
+ * Class that will handle game logic and tie in different classes.
  * @author Melchan
  */
-public class MoveHandler {
+public class LogicHandler {
 
     private ChessBoard board;
     private Color turn;
     private HashMap<PieceType, PieceMovement> movementLibrary;
+    private boolean checkMate;
 
-    public MoveHandler(ChessBoard board) {
+    public LogicHandler(ChessBoard board) {
         this.board = board;
         this.turn = WHITE;
+        this.checkMate = false;
         this.movementLibrary = new HashMap<PieceType, PieceMovement>();
         initializeMovementLibrary();
     }
@@ -40,6 +42,15 @@ public class MoveHandler {
         movementLibrary.put(PAWN, new PawnRules(board));
     }
 
+    /**
+     * method will move piece if it is legal for chesspiece in question and
+     * change turn.
+     *
+     * @param a starting x axis.
+     * @param b starting y axis.
+     * @param toA end point x axis.
+     * @param toB end point y axis.
+     */
     public void movePiece(int a, int b, int toA, int toB) {
         if (isPieceMove(a, b, toA, toB)) {
             ChessPiece p = board.getChessBoard()[a][b];
@@ -50,6 +61,10 @@ public class MoveHandler {
                 }
             }
         }
+    }
+
+    public boolean isCheckMate() {
+        return checkMate;
     }
 
     private boolean isPieceMove(int a, int b, int toA, int toB) {
@@ -64,7 +79,7 @@ public class MoveHandler {
         }
         return false;
     }
-    
+
     private void changeTurn() {
         if (turn == WHITE) {
             turn = BLACK;
