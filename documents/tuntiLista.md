@@ -17,4 +17,5 @@ Päivämäärä | Aika | Kuvaus
 2015-12-28 | 1h | Castling + tests added.
 2015-12-29 | 3h | vaihdoin nappuloiden käsittelijät siirtämään nappuloiden sääntöjen tietämisen lisäksi ja loin moveHandlerin + testejä.
 2016-01-02 | 2h | Tutustuin swingiin ja lissäsin alku juttuja.
-**Yhteensä** | 42.5h | 
+2016-01-03 | 6h | Tein swingillä shakkilaudan ja sen päälle shakkinappulat
+**Yhteensä** | 48.5h | 
