@@ -7,7 +7,7 @@ package fi.henri.ChessGame.Logic.Pieces;
 
 import fi.henri.ChessGame.ChessBoard.ChessBoard;
 import fi.henri.ChessGame.ChessPieces.ChessPiece;
-import static fi.henri.ChessGame.ChessPieces.Color.*;
+import static fi.henri.ChessGame.ChessPieces.ChessColor.*;
 import static fi.henri.ChessGame.ChessPieces.PieceType.PAWN;
 
 /**

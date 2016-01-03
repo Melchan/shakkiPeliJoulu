@@ -23,7 +23,7 @@ public class Game {
         this.board = new ChessBoard();
         new ChessBoardInitializer(board);
         this.handler = new LogicHandler(board);
-        this.ui = new UI();
+        this.ui = new UI(board, handler);
     }
     
     public void run() {

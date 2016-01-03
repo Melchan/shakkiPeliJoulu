@@ -6,8 +6,8 @@
 package fi.henri.ChessGame.ChessBoard;
 
 import fi.henri.ChessGame.ChessPieces.ChessPiece;
-import fi.henri.ChessGame.ChessPieces.Color;
-import static fi.henri.ChessGame.ChessPieces.Color.*;
+import fi.henri.ChessGame.ChessPieces.ChessColor;
+import static fi.henri.ChessGame.ChessPieces.ChessColor.*;
 import fi.henri.ChessGame.ChessPieces.PieceType;
 import static fi.henri.ChessGame.ChessPieces.PieceType.*;
 
@@ -18,12 +18,13 @@ import static fi.henri.ChessGame.ChessPieces.PieceType.*;
 public class ChessBoardInitializer {
 
     private ChessBoard board;
-    private final Color[] colors = {BLACK, WHITE};
+    private final ChessColor[] colors = {BLACK, WHITE};
     private final PieceType[] types = {ROOK, KNIGHT, BISHOP};
 
     public ChessBoardInitializer(ChessBoard board) {
         this.board = board;
         placeAllPieces();
+        System.out.println("minä teen minä teen");
     }
 
     private void placeAllPieces() {
@@ -37,7 +38,7 @@ public class ChessBoardInitializer {
         }
     }
 
-    private void placePawns(Color color) {
+    private void placePawns(ChessColor color) {
         int y = 1;
         if (color == BLACK) {
             y = 6;
@@ -47,24 +48,24 @@ public class ChessBoardInitializer {
         }
     }
 
-    private void placeLieutenants(Color color, PieceType type, int y, int modifier) {
+    private void placeLieutenants(ChessColor color, PieceType type, int y, int modifier) {
         placePiece(color, type, 0 + modifier, y);
         placePiece(color, type, 7 - modifier, y);
     }
 
-    private void placeKingAndQueen(Color color, int y) {
+    private void placeKingAndQueen(ChessColor color, int y) {
         int x = 3;
         placePiece(color, KING, x + 1, y);
         placePiece(color, QUEEN, x, y);
 
     }
 
-    private void placePiece(Color color, PieceType type, int x, int y) {
+    private void placePiece(ChessColor color, PieceType type, int x, int y) {
         ChessPiece piece = new ChessPiece(color, type);
         board.attemptToPlacePieceOnBoard(piece, x, y);
     }
 
-    private int giveRow(Color color) {
+    private int giveRow(ChessColor color) {
         if (color == BLACK) {
             return 7;
         }

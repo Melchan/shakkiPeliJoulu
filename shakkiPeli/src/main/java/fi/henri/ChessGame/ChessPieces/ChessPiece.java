@@ -11,17 +11,17 @@ package fi.henri.ChessGame.ChessPieces;
  */
 public class ChessPiece {
 
-    private final Color color;
+    private final ChessColor color;
     private boolean moved;
     private final PieceType type;
 
-    public ChessPiece(Color color, PieceType type) {
+    public ChessPiece(ChessColor color, PieceType type) {
         this.color = color;
         this.type = type;
         this.moved = false;
     }
 
-    public Color getColor() {
+    public ChessColor getColor() {
         return color;
     }
 

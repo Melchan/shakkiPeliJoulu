@@ -14,8 +14,8 @@ import fi.henri.ChessGame.Logic.Pieces.BishopRules;
 import fi.henri.ChessGame.Logic.Pieces.PieceMovement;
 import fi.henri.ChessGame.ChessBoard.ChessBoard;
 import fi.henri.ChessGame.ChessPieces.ChessPiece;
-import fi.henri.ChessGame.ChessPieces.Color;
-import static fi.henri.ChessGame.ChessPieces.Color.*;
+import fi.henri.ChessGame.ChessPieces.ChessColor;
+import static fi.henri.ChessGame.ChessPieces.ChessColor.*;
 import fi.henri.ChessGame.ChessPieces.PieceType;
 import static fi.henri.ChessGame.ChessPieces.PieceType.*;
 import java.util.HashMap;
@@ -27,7 +27,7 @@ import java.util.HashMap;
 public class LogicHandler {
 
     private ChessBoard board;
-    private Color turn;
+    private ChessColor turn;
     private HashMap<PieceType, PieceMovement> movementLibrary;
     private boolean checkMate;
 

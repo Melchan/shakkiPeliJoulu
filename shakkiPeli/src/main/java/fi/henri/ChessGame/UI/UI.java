@@ -5,6 +5,8 @@
  */
 package fi.henri.ChessGame.UI;
 
+import fi.henri.ChessGame.ChessBoard.ChessBoard;
+import fi.henri.ChessGame.Logic.LogicHandler;
 import java.awt.Container;
 import java.awt.Dimension;
 import javax.swing.JFrame;
@@ -14,29 +16,25 @@ import javax.swing.WindowConstants;
  *
  * @author manhenri
  */
-public class UI implements Runnable{
-    
-    public UI () {
-        
+public class UI implements Runnable {
+    ChessBoard board;
+    LogicHandler handler;
+
+    public UI(ChessBoard board, LogicHandler handler) {
+        this.board = board;
+        this.handler = handler;
     }
 
     @Override
     public void run() {
         JFrame frame = new JFrame("ChessGame");
-        
-        frame.setPreferredSize(new Dimension(900, 600));
-        frame.setResizable(false);
-       
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setResizable(false);
         
-        createComponents(frame.getContentPane());
+        Container contentPane = new ChessBoardContent(board);
+        frame.setContentPane(contentPane);
         
         frame.pack();
         frame.setVisible(true);
     }
-    
-    public void createComponents(Container container) {
-        
-    }
-    
 }

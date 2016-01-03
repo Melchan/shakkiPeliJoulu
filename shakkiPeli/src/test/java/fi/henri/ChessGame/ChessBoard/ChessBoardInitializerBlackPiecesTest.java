@@ -6,7 +6,7 @@
 package fi.henri.ChessGame.ChessBoard;
 
 import fi.henri.ChessGame.ChessPieces.ChessPiece;
-import static fi.henri.ChessGame.ChessPieces.Color.BLACK;
+import static fi.henri.ChessGame.ChessPieces.ChessColor.BLACK;
 import static fi.henri.ChessGame.ChessPieces.PieceType.BISHOP;
 import static fi.henri.ChessGame.ChessPieces.PieceType.KING;
 import static fi.henri.ChessGame.ChessPieces.PieceType.KNIGHT;

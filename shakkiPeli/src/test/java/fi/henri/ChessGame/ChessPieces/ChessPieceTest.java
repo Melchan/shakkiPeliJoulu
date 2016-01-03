@@ -12,8 +12,8 @@ package fi.henri.ChessGame.ChessPieces;
  */
 
 import fi.henri.ChessGame.ChessPieces.ChessPiece;
-import static fi.henri.ChessGame.ChessPieces.Color.BLACK;
-import static fi.henri.ChessGame.ChessPieces.Color.WHITE;
+import static fi.henri.ChessGame.ChessPieces.ChessColor.BLACK;
+import static fi.henri.ChessGame.ChessPieces.ChessColor.WHITE;
 import static fi.henri.ChessGame.ChessPieces.PieceType.PAWN;
 import static junit.framework.Assert.assertEquals;
 import org.junit.Before;

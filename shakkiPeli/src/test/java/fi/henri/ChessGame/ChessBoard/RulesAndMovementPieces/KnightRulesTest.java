@@ -7,7 +7,7 @@ package fi.henri.ChessGame.ChessBoard.RulesAndMovementPieces;
 
 import fi.henri.ChessGame.ChessBoard.ChessBoard;
 import fi.henri.ChessGame.ChessPieces.ChessPiece;
-import static fi.henri.ChessGame.ChessPieces.Color.*;
+import static fi.henri.ChessGame.ChessPieces.ChessColor.*;
 import static fi.henri.ChessGame.ChessPieces.PieceType.*;
 import fi.henri.ChessGame.Logic.Pieces.KnightRules;
 import static junit.framework.Assert.assertEquals;

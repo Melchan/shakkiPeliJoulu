@@ -11,6 +11,6 @@ package fi.henri.ChessGame.ChessPieces;
  * 
  * Enums for two sides
  */
-public enum Color {
+public enum ChessColor {
     BLACK, WHITE
 }
