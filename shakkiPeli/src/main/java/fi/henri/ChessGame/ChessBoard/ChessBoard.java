@@ -18,8 +18,7 @@ public class ChessBoard {
     private ChessPiece[][] boardBefore;
 
     public ChessBoard() {
-        this.board = new ChessPiece[8][8];
-        this.boardBefore = new ChessPiece[8][8];
+        initialize();
     }
 
     public ChessPiece[][] getChessBoard() {
@@ -28,6 +27,14 @@ public class ChessBoard {
 
     public ChessPiece[][] getPreviousChessBoard() {
         return boardBefore;
+    }
+    
+    /**
+     * Makes clean version of the board.
+     */
+    public void initialize() {
+        this.board = new ChessPiece[8][8];
+        this.boardBefore = new ChessPiece[8][8];
     }
 
     /**

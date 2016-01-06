@@ -13,6 +13,7 @@ import fi.henri.ChessGame.Logic.Pieces.PawnRules;
 import fi.henri.ChessGame.Logic.Pieces.BishopRules;
 import fi.henri.ChessGame.Logic.Pieces.PieceMovement;
 import fi.henri.ChessGame.ChessBoard.ChessBoard;
+import fi.henri.ChessGame.ChessBoard.ChessBoardInitializer;
 import fi.henri.ChessGame.ChessPieces.ChessPiece;
 import fi.henri.ChessGame.ChessPieces.ChessColor;
 import static fi.henri.ChessGame.ChessPieces.ChessColor.*;
@@ -46,6 +47,10 @@ public class LogicHandler {
         movementLibrary.put(KNIGHT, new KnightRules(board));
         movementLibrary.put(ROOK, new RookRules(board));
         movementLibrary.put(PAWN, new PawnRules(board));
+    }
+    
+    public void newGame() {
+        new ChessBoardInitializer(board);
     }
 
     /**

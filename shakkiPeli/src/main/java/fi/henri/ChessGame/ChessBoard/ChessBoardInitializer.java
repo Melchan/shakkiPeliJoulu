@@ -23,6 +23,7 @@ public class ChessBoardInitializer {
 
     public ChessBoardInitializer(ChessBoard board) {
         this.board = board;
+        board.initialize();
         placeAllPieces();
     }
 

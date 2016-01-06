@@ -1,0 +1,1316 @@
+<html>
+<head>
+<style type='text/css'>
+html, body, div, span, p, blockquote, pre {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-weight: inherit;
+	font-style: inherit;
+	font-size: 100%;
+	font-family: inherit;
+	vertical-align: baseline;
+}
+
+body{
+	line-height: 1;
+	color: black;
+	background: white;
+	margin-left: 20px;
+}
+
+.src { 
+border: 1px solid #dddddd;
+padding-top: 10px;
+padding-right: 5px;
+padding-left: 5px;
+}
+
+
+.covered {background-color: #ddffdd}
+.uncovered {background-color: #ffdddd}
+.killed {background-color: #aaffaa}
+.survived {background-color: #ffaaaa}
+.uncertain {background-color: #dde7ef}
+.run_error {background-color: #dde7ef}
+.na {background-color: #eeeeee}
+.timed_out {background-color: #dde7ef}
+.non_viable {background-color: #aaffaa}
+.memory_error {background-color: #dde7ef}
+.not_started {background-color: #dde7ef; color : red}
+.no_coverage {background-color: #ffaaaa}
+
+
+.pop {outline:none; }
+.pop strong {line-height:30px;}
+.pop {text-decoration:none;}
+.pop span { z-index:10;display:none; padding:14px 20px; margin-top:-30px; margin-left:28px; width:800px; line-height:16px; word-wrap:break-word; }
+.pop:hover span{ display:inline; position:absolute; color:#111; border:1px solid #DCA; background:#fffAF0;}
+
+.pop span { border-radius:4px; -moz-border-radius: 4px; -webkit-border-radius: 4px; -moz-box-shadow: 5px 5px 8px #CCC; -webkit-box-shadow: 5px 5px 8px #CCC; box-shadow: 5px 5px 8px #CCC; }
+</style>
+
+</head>
+<body>
+
+
+<h1>ChessBoardInitializer.java</h1>
+
+<table class="src">
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_1'/>
+1
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_1'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>/*</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_2'/>
+2
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_2'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * To change this license header, choose License Headers in Project Properties.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_3'/>
+3
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_3'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * To change this template file, choose Tools | Templates</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_4'/>
+4
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_4'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * and open the template in the editor.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_5'/>
+5
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_5'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''> */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_6'/>
+6
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_6'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>package fi.henri.ChessGame.ChessBoard;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_7'/>
+7
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_7'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_8'/>
+8
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_8'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import fi.henri.ChessGame.ChessPieces.ChessPiece;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_9'/>
+9
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_9'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import fi.henri.ChessGame.ChessPieces.ChessColor;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_10'/>
+10
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_10'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import static fi.henri.ChessGame.ChessPieces.ChessColor.*;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_11'/>
+11
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_11'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import fi.henri.ChessGame.ChessPieces.PieceType;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_12'/>
+12
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_12'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import static fi.henri.ChessGame.ChessPieces.PieceType.*;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_13'/>
+13
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_13'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_14'/>
+14
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_14'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>/**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_15'/>
+15
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_15'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * Initializes game board for starting position.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_16'/>
+16
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_16'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * @author Melchan</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_17'/>
+17
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_17'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''> */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_18'/>
+18
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_18'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>public class ChessBoardInitializer {</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_19'/>
+19
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_19'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_20'/>
+20
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_20'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private ChessBoard board;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_21'/>
+21
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_21'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    private final ChessColor[] colors = {BLACK, WHITE};</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_22'/>
+22
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_22'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    private final PieceType[] types = {ROOK, KNIGHT, BISHOP};</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_23'/>
+23
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_23'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_24'/>
+24
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_24'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    public ChessBoardInitializer(ChessBoard board) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_25'/>
+25
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_25'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        this.board = board;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_26'/>
+26
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_26'>1</a>
+<span>
+1. <init> : removed call to fi/henri/ChessGame/ChessBoard/ChessBoardInitializer::placeAllPieces &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        placeAllPieces();</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_27'/>
+27
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_27'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_28'/>
+28
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_28'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_29'/>
+29
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_29'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private void placeAllPieces() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_30'/>
+30
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_30'>3</a>
+<span>
+1. placeAllPieces : changed conditional boundary &rarr; KILLED<br/>
+2. placeAllPieces : Changed increment from 1 to -1 &rarr; KILLED<br/>
+3. placeAllPieces : negated conditional &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        for (int i = 0; i &#60; colors.length; i++) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_31'/>
+31
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_31'>1</a>
+<span>
+1. placeAllPieces : removed call to fi/henri/ChessGame/ChessBoard/ChessBoardInitializer::placePawns &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            placePawns(colors[i]);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_32'/>
+32
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_32'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>            int y = giveRow(colors[i]);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_33'/>
+33
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_33'>1</a>
+<span>
+1. placeAllPieces : removed call to fi/henri/ChessGame/ChessBoard/ChessBoardInitializer::placeKingAndQueen &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            placeKingAndQueen(colors[i], y);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_34'/>
+34
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_34'>3</a>
+<span>
+1. placeAllPieces : changed conditional boundary &rarr; KILLED<br/>
+2. placeAllPieces : Changed increment from 1 to -1 &rarr; KILLED<br/>
+3. placeAllPieces : negated conditional &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            for (int n = 0; n &#60; 3; n++) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_35'/>
+35
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_35'>1</a>
+<span>
+1. placeAllPieces : removed call to fi/henri/ChessGame/ChessBoard/ChessBoardInitializer::placeLieutenants &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>                placeLieutenants(colors[i], types[n], y, n);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_36'/>
+36
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_36'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_37'/>
+37
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_37'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_38'/>
+38
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_38'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_39'/>
+39
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_39'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_40'/>
+40
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_40'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private void placePawns(ChessColor color) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_41'/>
+41
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_41'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        int y = 1;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_42'/>
+42
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_42'>1</a>
+<span>
+1. placePawns : negated conditional &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (color == BLACK) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_43'/>
+43
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_43'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>            y = 6;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_44'/>
+44
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_44'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_45'/>
+45
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_45'>3</a>
+<span>
+1. placePawns : changed conditional boundary &rarr; SURVIVED<br/>
+2. placePawns : Changed increment from 1 to -1 &rarr; TIMED_OUT<br/>
+3. placePawns : negated conditional &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>        for (int x = 0; x &#60; 8; x++) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_46'/>
+46
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_46'>1</a>
+<span>
+1. placePawns : removed call to fi/henri/ChessGame/ChessBoard/ChessBoardInitializer::placePiece &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            placePiece(color, PAWN, x, y);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_47'/>
+47
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_47'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_48'/>
+48
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_48'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_49'/>
+49
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_49'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_50'/>
+50
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_50'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private void placeLieutenants(ChessColor color, PieceType type, int y, int modifier) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_51'/>
+51
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_51'>2</a>
+<span>
+1. placeLieutenants : Replaced integer addition with subtraction &rarr; KILLED<br/>
+2. placeLieutenants : removed call to fi/henri/ChessGame/ChessBoard/ChessBoardInitializer::placePiece &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        placePiece(color, type, 0 + modifier, y);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_52'/>
+52
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_52'>2</a>
+<span>
+1. placeLieutenants : Replaced integer subtraction with addition &rarr; KILLED<br/>
+2. placeLieutenants : removed call to fi/henri/ChessGame/ChessBoard/ChessBoardInitializer::placePiece &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        placePiece(color, type, 7 - modifier, y);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_53'/>
+53
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_53'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_54'/>
+54
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_54'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_55'/>
+55
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_55'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private void placeKingAndQueen(ChessColor color, int y) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_56'/>
+56
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_56'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        int x = 3;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_57'/>
+57
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_57'>2</a>
+<span>
+1. placeKingAndQueen : Replaced integer addition with subtraction &rarr; KILLED<br/>
+2. placeKingAndQueen : removed call to fi/henri/ChessGame/ChessBoard/ChessBoardInitializer::placePiece &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        placePiece(color, KING, x + 1, y);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_58'/>
+58
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_58'>1</a>
+<span>
+1. placeKingAndQueen : removed call to fi/henri/ChessGame/ChessBoard/ChessBoardInitializer::placePiece &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        placePiece(color, QUEEN, x, y);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_59'/>
+59
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_59'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_60'/>
+60
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_60'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_61'/>
+61
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_61'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_62'/>
+62
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_62'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private void placePiece(ChessColor color, PieceType type, int x, int y) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_63'/>
+63
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_63'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        ChessPiece piece = new ChessPiece(color, type);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_64'/>
+64
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_64'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        board.attemptToPlacePieceOnBoard(piece, x, y);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_65'/>
+65
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_65'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_66'/>
+66
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_66'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_67'/>
+67
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_67'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private int giveRow(ChessColor color) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_68'/>
+68
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_68'>1</a>
+<span>
+1. giveRow : negated conditional &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (color == BLACK) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_69'/>
+69
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_69'>1</a>
+<span>
+1. giveRow : replaced return of integer sized value with (x == 0 ? 1 : 0) &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            return 7;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_70'/>
+70
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_70'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_71'/>
+71
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_71'>1</a>
+<span>
+1. giveRow : replaced return of integer sized value with (x == 0 ? 1 : 0) &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return 0;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_72'/>
+72
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_72'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_73'/>
+73
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_73'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>}</span></pre></td></tr>
+
+
+
+<tr><td></td><td></td><td><h2>Mutations</h2></td></tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_26'>26</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_26'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b><init><br/><b>Killed by : </b>fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest.QueensInPlace(fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest)</span></span> removed call to fi/henri/ChessGame/ChessBoard/ChessBoardInitializer::placeAllPieces &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_30'>30</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_30'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>placeAllPieces<br/><b>Killed by : </b>fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest.QueensInPlace(fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest)</span></span> changed conditional boundary &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>placeAllPieces<br/><b>Killed by : </b>fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest.QueensInPlace(fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest)</span></span> Changed increment from 1 to -1 &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>placeAllPieces<br/><b>Killed by : </b>fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest.QueensInPlace(fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest)</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_31'>31</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_31'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>placeAllPieces<br/><b>Killed by : </b>fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest.pawnsInPlace(fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest)</span></span> removed call to fi/henri/ChessGame/ChessBoard/ChessBoardInitializer::placePawns &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_33'>33</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_33'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>placeAllPieces<br/><b>Killed by : </b>fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest.QueensInPlace(fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest)</span></span> removed call to fi/henri/ChessGame/ChessBoard/ChessBoardInitializer::placeKingAndQueen &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_34'>34</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_34'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>placeAllPieces<br/><b>Killed by : </b>fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest.QueensInPlace(fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest)</span></span> changed conditional boundary &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>placeAllPieces<br/><b>Killed by : </b>fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest.QueensInPlace(fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest)</span></span> Changed increment from 1 to -1 &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>placeAllPieces<br/><b>Killed by : </b>fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest.bishopLeftInPlace(fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest)</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_35'>35</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_35'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>placeAllPieces<br/><b>Killed by : </b>fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest.bishopLeftInPlace(fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest)</span></span> removed call to fi/henri/ChessGame/ChessBoard/ChessBoardInitializer::placeLieutenants &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_42'>42</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_42'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>placePawns<br/><b>Killed by : </b>fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest.pawnsInPlace(fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest)</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_45'>45</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_45'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>placePawns<br/><b>Killed by : </b>none</span></span> changed conditional boundary &rarr; SURVIVED</p> <p class='TIMED_OUT'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>placePawns<br/><b>Killed by : </b>none</span></span> Changed increment from 1 to -1 &rarr; TIMED_OUT</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>placePawns<br/><b>Killed by : </b>fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest.pawnsInPlace(fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest)</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_46'>46</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_46'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>placePawns<br/><b>Killed by : </b>fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest.pawnsInPlace(fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest)</span></span> removed call to fi/henri/ChessGame/ChessBoard/ChessBoardInitializer::placePiece &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_51'>51</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_51'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>placeLieutenants<br/><b>Killed by : </b>fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest.bishopLeftInPlace(fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest)</span></span> Replaced integer addition with subtraction &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>placeLieutenants<br/><b>Killed by : </b>fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest.bishopLeftInPlace(fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest)</span></span> removed call to fi/henri/ChessGame/ChessBoard/ChessBoardInitializer::placePiece &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_52'>52</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_52'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>placeLieutenants<br/><b>Killed by : </b>fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest.bishopRightInPlace(fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest)</span></span> Replaced integer subtraction with addition &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>placeLieutenants<br/><b>Killed by : </b>fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest.bishopRightInPlace(fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest)</span></span> removed call to fi/henri/ChessGame/ChessBoard/ChessBoardInitializer::placePiece &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_57'>57</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_57'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>placeKingAndQueen<br/><b>Killed by : </b>fi.henri.ChessGame.ChessBoard.ChessBoardInitializerWhitePiecesTest.KingsInPlace(fi.henri.ChessGame.ChessBoard.ChessBoardInitializerWhitePiecesTest)</span></span> Replaced integer addition with subtraction &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>placeKingAndQueen<br/><b>Killed by : </b>fi.henri.ChessGame.ChessBoard.ChessBoardInitializerWhitePiecesTest.KingsInPlace(fi.henri.ChessGame.ChessBoard.ChessBoardInitializerWhitePiecesTest)</span></span> removed call to fi/henri/ChessGame/ChessBoard/ChessBoardInitializer::placePiece &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_58'>58</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_58'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>placeKingAndQueen<br/><b>Killed by : </b>fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest.QueensInPlace(fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest)</span></span> removed call to fi/henri/ChessGame/ChessBoard/ChessBoardInitializer::placePiece &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_68'>68</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_68'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>giveRow<br/><b>Killed by : </b>fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest.QueensInPlace(fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest)</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_69'>69</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_69'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>giveRow<br/><b>Killed by : </b>fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest.QueensInPlace(fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest)</span></span> replaced return of integer sized value with (x == 0 ? 1 : 0) &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1e3f86d5_71'>71</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1e3f86d5_71'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>giveRow<br/><b>Killed by : </b>fi.henri.ChessGame.ChessBoard.BoardInitializerArePiecesUniqueTest.allRooksAreUnique(fi.henri.ChessGame.ChessBoard.BoardInitializerArePiecesUniqueTest)</span></span> replaced return of integer sized value with (x == 0 ? 1 : 0) &rarr; KILLED</p> 
+</td>
+</tr>
+
+</table>
+
+
+<h2>Active mutators</h2>
+<ul>
+<li class='mutator'>INCREMENTS_MUTATOR</li>
+<li class='mutator'>VOID_METHOD_CALL_MUTATOR</li>
+<li class='mutator'>RETURN_VALS_MUTATOR</li>
+<li class='mutator'>MATH_MUTATOR</li>
+<li class='mutator'>NEGATE_CONDITIONALS_MUTATOR</li>
+<li class='mutator'>INVERT_NEGS_MUTATOR</li>
+<li class='mutator'>CONDITIONALS_BOUNDARY_MUTATOR</li>
+
+</ul>
+
+<h2>Tests examined</h2>
+<ul>
+<li>fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest.bishopLeftInPlace(fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest) (0 ms)</li><li>fi.henri.ChessGame.ChessBoard.ChessBoardInitializerWhitePiecesTest.bishopRightInPlace(fi.henri.ChessGame.ChessBoard.ChessBoardInitializerWhitePiecesTest) (1 ms)</li><li>fi.henri.ChessGame.ChessBoard.ChessBoardInitializerWhitePiecesTest.knightLeftInPlace(fi.henri.ChessGame.ChessBoard.ChessBoardInitializerWhitePiecesTest) (5 ms)</li><li>fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest.bishopRightInPlace(fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest) (0 ms)</li><li>fi.henri.ChessGame.ChessBoard.ChessBoardInitializerWhitePiecesTest.pawnsInPlace(fi.henri.ChessGame.ChessBoard.ChessBoardInitializerWhitePiecesTest) (1 ms)</li><li>fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest.KingsInPlace(fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest) (10 ms)</li><li>fi.henri.ChessGame.ChessBoard.ChessBoardInitializerWhitePiecesTest.QueensInPlace(fi.henri.ChessGame.ChessBoard.ChessBoardInitializerWhitePiecesTest) (1 ms)</li><li>fi.henri.ChessGame.ChessBoard.BoardInitializerArePiecesUniqueTest.allPawnsAreUnique(fi.henri.ChessGame.ChessBoard.BoardInitializerArePiecesUniqueTest) (1 ms)</li><li>fi.henri.ChessGame.ChessBoard.ChessBoardInitializerWhitePiecesTest.KingsInPlace(fi.henri.ChessGame.ChessBoard.ChessBoardInitializerWhitePiecesTest) (5 ms)</li><li>fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest.knightLeftInPlace(fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest) (1 ms)</li><li>fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest.QueensInPlace(fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest) (0 ms)</li><li>fi.henri.ChessGame.ChessBoard.BoardInitializerArePiecesUniqueTest.allRooksAreUnique(fi.henri.ChessGame.ChessBoard.BoardInitializerArePiecesUniqueTest) (0 ms)</li><li>fi.henri.ChessGame.ChessBoard.ChessBoardInitializerWhitePiecesTest.knightRightInPlace(fi.henri.ChessGame.ChessBoard.ChessBoardInitializerWhitePiecesTest) (1 ms)</li><li>fi.henri.ChessGame.ChessBoard.ChessBoardInitializerWhitePiecesTest.bishopLeftInPlace(fi.henri.ChessGame.ChessBoard.ChessBoardInitializerWhitePiecesTest) (1 ms)</li><li>fi.henri.ChessGame.ChessBoard.BoardInitializerArePiecesUniqueTest.allKnightssAreUnique(fi.henri.ChessGame.ChessBoard.BoardInitializerArePiecesUniqueTest) (1 ms)</li><li>fi.henri.ChessGame.ChessBoard.ChessBoardInitializerWhitePiecesTest.rooksRightInPlace(fi.henri.ChessGame.ChessBoard.ChessBoardInitializerWhitePiecesTest) (5 ms)</li><li>fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest.rooksLeftInPlace(fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest) (1 ms)</li><li>fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest.rooksRightInPlace(fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest) (1 ms)</li><li>fi.henri.ChessGame.ChessBoard.ChessBoardInitializerWhitePiecesTest.rooksLeftInPlace(fi.henri.ChessGame.ChessBoard.ChessBoardInitializerWhitePiecesTest) (1 ms)</li><li>fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest.pawnsInPlace(fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest) (1 ms)</li><li>fi.henri.ChessGame.ChessBoard.BoardInitializerArePiecesUniqueTest.allBishopssAreUnique(fi.henri.ChessGame.ChessBoard.BoardInitializerArePiecesUniqueTest) (14 ms)</li><li>fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest.knightRightInPlace(fi.henri.ChessGame.ChessBoard.ChessBoardInitializerBlackPiecesTest) (1 ms)</li>
+</ul>
+
+<br/>
+
+Report generated by <a href='http://pitest.org'>PIT</a> 1.1.4
+
+</body>
+</html>

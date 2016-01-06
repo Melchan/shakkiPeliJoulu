@@ -21,8 +21,8 @@ public class Game {
     
     public Game() {
         this.board = new ChessBoard();
-        new ChessBoardInitializer(board);
         this.handler = new LogicHandler(board);
+        handler.newGame();
         this.ui = new UI(board, handler);
     }
     
