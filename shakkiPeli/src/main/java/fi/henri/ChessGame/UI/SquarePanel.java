@@ -18,11 +18,13 @@ import javax.swing.BoxLayout;
 import javax.swing.JLayeredPane;
 
 /**
+ * Invidual chess board square. Where layer where pieces rest are placed
+ * invidually.
  *
  * @author manhenri
  */
 public class SquarePanel extends JLayeredPane implements MouseListener {
-    
+
     private Color BackUpColor;
     private Color color = WHITE;
     private static boolean isBlack = false;
@@ -43,13 +45,13 @@ public class SquarePanel extends JLayeredPane implements MouseListener {
 
     @Override
     protected void paintComponent(Graphics g) {
-        super.paintComponent(g);  
+        super.paintComponent(g);
         checkForRightColor();
         g.setColor(color);
         g.fillRect(0, 0, 80, 80);
 
     }
-    
+
     private void checkForRightColor() {
         if (chessBoardContent.getFirstPane() != null) {
             if (chessBoardContent.getFirstPane() == this.panel) {

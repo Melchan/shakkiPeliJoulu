@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 /**
+ * Main component where every chess board square is placed in gridlayout.
  *
  * @author manhenri
  */

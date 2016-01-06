@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
 /**
+ * Main Class for UI components.
  *
  * @author manhenri
  */

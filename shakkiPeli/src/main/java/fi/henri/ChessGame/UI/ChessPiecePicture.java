@@ -21,6 +21,8 @@ import javax.imageio.ImageIO;
 import javax.swing.JLayeredPane;
 
 /**
+ * Top most layer where pieces are drawn. Also layer where mouse is listened
+ * from this component.
  *
  * @author manhenri
  */
@@ -46,7 +48,7 @@ public class ChessPiecePicture extends JLayeredPane implements MouseListener {
         image = null;
         setImage(paneNumber);
         super.paintComponent(g);
-        
+
         g.drawImage(image, 0, 0, null); // see javadoc for more info on the parameters      
     }
 

@@ -6,7 +6,7 @@ Päivämäärä | Aika | Kuvaus
 ---------- | ---- | ------
 2015-12-17 | 3h | Toteutin ensimmäisen deadlinen vaatimukset.
 2015-12-18 | 1h | Kikkailin määrittelykuvausta.
-2015-12-20 | 4.5h | Aloitin projetkia ja tein ensimmäisiä testejä.
+2015-12-20 | 4h | Aloitin projetkia ja tein ensimmäisiä testejä.
 2015-12-20 | 4h | Testien tekemistä Initializerille
 2015-12-22 | 8h | BasicPieceRules luokan tekeminen ja testit.
 2015-12-23 | 4h | RookRules ja testit.
@@ -18,4 +18,5 @@ Päivämäärä | Aika | Kuvaus
 2015-12-29 | 3h | vaihdoin nappuloiden käsittelijät siirtämään nappuloiden sääntöjen tietämisen lisäksi ja loin moveHandlerin + testejä.
 2016-01-02 | 2h | Tutustuin swingiin ja lissäsin alku juttuja.
 2016-01-03 | 6h | Tein swingillä shakkilaudan ja sen päälle shakkinappulat
-**Yhteensä** | 48.5h | 
+2016-01-06 | 7h | Shakkinappulat liikkuvat ja valittu ruutu syttyy.
+**Yhteensä** | 55h | 
