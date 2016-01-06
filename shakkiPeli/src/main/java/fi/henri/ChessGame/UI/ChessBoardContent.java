@@ -45,6 +45,10 @@ public class ChessBoardContent extends JPanel implements Updatetable, MouseListe
         }
     }
 
+    public Integer getFirstPane() {
+        return this.firstPaneNumber;
+    }
+
     @Override
     public void update(int paneNumber) {
         if (firstPaneNumber == null) {
@@ -54,14 +58,14 @@ public class ChessBoardContent extends JPanel implements Updatetable, MouseListe
             handleLogicAction();
             firstPaneNumber = null;
             secondPaneNumber = null;
-            refresh();
         }
+        refresh();
     }
 
     private void refresh() {
         this.revalidate();
         this.repaint();
-        
+
     }
 
     private void handleLogicAction() {

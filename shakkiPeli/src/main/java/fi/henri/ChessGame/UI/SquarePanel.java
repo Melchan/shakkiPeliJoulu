@@ -8,6 +8,7 @@ package fi.henri.ChessGame.UI;
 import fi.henri.ChessGame.ChessBoard.ChessBoard;
 import java.awt.Color;
 import static java.awt.Color.GRAY;
+import static java.awt.Color.RED;
 import static java.awt.Color.WHITE;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -21,44 +22,55 @@ import javax.swing.JLayeredPane;
  * @author manhenri
  */
 public class SquarePanel extends JLayeredPane implements MouseListener {
-
+    
+    private Color BackUpColor;
     private Color color = WHITE;
     private static boolean isBlack = false;
     private ChessPiecePicture picture;
-    private ChessBoard board;
-    private int panel;
-    private Updatetable updater;
+    private final int panel;
+    private final ChessBoardContent chessBoardContent;
 
-    public SquarePanel(ChessBoard board, int panel, Updatetable updater) {
-        this.board = board;
+    public SquarePanel(ChessBoard board, int panel, ChessBoardContent chessBoardContent) {
         this.panel = panel;
-        this.updater = updater;
+        this.chessBoardContent = chessBoardContent;
         this.setPreferredSize(new Dimension(80, 80));
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-        paneNumberToRightColor(panel);
-        this.setOpaque(true);
-        setPicture();
-        
+        picture = new ChessPiecePicture(board, panel, chessBoardContent);
+        paneNumberToRightColor();
         this.add(picture);
         this.addMouseListener(picture);
     }
 
     @Override
     protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-
+        super.paintComponent(g);  
+        checkForRightColor();
         g.setColor(color);
         g.fillRect(0, 0, 80, 80);
+
     }
     
-    private void setPicture() {
-        picture = new ChessPiecePicture(board, panel, updater);
+    private void checkForRightColor() {
+        if (chessBoardContent.getFirstPane() != null) {
+            if (chessBoardContent.getFirstPane() == this.panel) {
+                this.color = RED;
+            }
+        } else {
+            color = BackUpColor;
+        }
     }
 
-    private void paneNumberToRightColor(int n) {
-        int x = n % 8;
+    private void paneNumberToRightColor() {
+        if (chessBoardContent.getFirstPane() != null) {
+            if (chessBoardContent.getFirstPane() == this.panel) {
+                this.color = RED;
+            }
+        } else {
 
-        setRightColorForCoordinate(x);
+            int x = panel % 8;
+
+            setRightColorForCoordinate(x);
+        }
     }
 
     private void setRightColorForCoordinate(int x) {
@@ -72,6 +84,7 @@ public class SquarePanel extends JLayeredPane implements MouseListener {
         if (x == 7) {
             isBlack = !isBlack;
         }
+        this.BackUpColor = color;
     }
 
     @Override

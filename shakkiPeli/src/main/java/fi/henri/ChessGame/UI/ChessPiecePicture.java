@@ -46,7 +46,7 @@ public class ChessPiecePicture extends JLayeredPane implements MouseListener {
         image = null;
         setImage(paneNumber);
         super.paintComponent(g);
-
+        
         g.drawImage(image, 0, 0, null); // see javadoc for more info on the parameters      
     }
 
