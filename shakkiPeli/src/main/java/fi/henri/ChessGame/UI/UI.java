@@ -8,7 +8,7 @@ package fi.henri.ChessGame.UI;
 import fi.henri.ChessGame.ChessBoard.ChessBoard;
 import fi.henri.ChessGame.Logic.LogicHandler;
 import java.awt.Container;
-import java.awt.Dimension;
+import java.awt.event.MouseListener;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
@@ -17,6 +17,7 @@ import javax.swing.WindowConstants;
  * @author manhenri
  */
 public class UI implements Runnable {
+
     ChessBoard board;
     LogicHandler handler;
 
@@ -30,10 +31,11 @@ public class UI implements Runnable {
         JFrame frame = new JFrame("ChessGame");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setResizable(false);
-        
-        Container contentPane = new ChessBoardContent(board);
+
+        Container contentPane = new ChessBoardContent(board, handler);
         frame.setContentPane(contentPane);
-        
+        frame.addMouseListener((MouseListener) contentPane);
+
         frame.pack();
         frame.setVisible(true);
     }

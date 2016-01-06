@@ -5,11 +5,14 @@
  */
 package fi.henri.ChessGame.UI;
 
+import fi.henri.ChessGame.ChessBoard.ChessBoard;
 import static fi.henri.ChessGame.ChessPieces.ChessColor.*;
 import fi.henri.ChessGame.ChessPieces.ChessPiece;
 import fi.henri.ChessGame.ChessPieces.PieceType;
 import static fi.henri.ChessGame.ChessPieces.PieceType.*;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -21,29 +24,36 @@ import javax.swing.JLayeredPane;
  *
  * @author manhenri
  */
-public class ChessPiecePicture extends JLayeredPane {
+public class ChessPiecePicture extends JLayeredPane implements MouseListener {
 
     private final HashMap<PieceType, String> blackPictures;
     private final HashMap<PieceType, String> whitePictures;
     private BufferedImage image;
+    private ChessBoard board;
+    private int paneNumber;
+    private Updatetable updater;
 
-    public ChessPiecePicture(ChessPiece piece) {
+    public ChessPiecePicture(ChessBoard board, int paneNumber, Updatetable updater) {
+        this.board = board;
+        this.updater = updater;
+        this.paneNumber = paneNumber;
         this.blackPictures = new HashMap<>();
         this.whitePictures = new HashMap<>();
-        setImage(piece);
     }
 
     @Override
     protected void paintComponent(Graphics g) {
+        image = null;
+        setImage(paneNumber);
         super.paintComponent(g);
 
         g.drawImage(image, 0, 0, null); // see javadoc for more info on the parameters      
     }
 
-    private void setImage(ChessPiece piece) {
+    private void setImage(int paneNumber) {
+        ChessPiece piece = paneNumberToChessBoardSquareContent(paneNumber);
         String imagePath = findImagePath(piece);
         if (imagePath != null) {
-            System.out.println("kekek");
             try {
                 image = ImageIO.read(new File(imagePath));
             } catch (IOException ex) {
@@ -64,6 +74,14 @@ public class ChessPiecePicture extends JLayeredPane {
         }
     }
 
+    private ChessPiece paneNumberToChessBoardSquareContent(int n) {
+        ChessPiece[][] chessBoard = board.getChessBoard();
+        int y = 7 - n / 8;
+        int x = n % 8;
+
+        return chessBoard[x][y];
+    }
+
     private void initializeBlackImageLibrary() {
         blackPictures.put(KING, "src/main/resources/blackking.png");
         blackPictures.put(QUEEN, "src/main/resources/blackqueen.png");
@@ -80,5 +98,26 @@ public class ChessPiecePicture extends JLayeredPane {
         whitePictures.put(KNIGHT, "src/main/resources/whiteknight.png");
         whitePictures.put(ROOK, "src/main/resources/whiterook.png");
         whitePictures.put(PAWN, "src/main/resources/whitepawn.png");
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        updater.update(paneNumber);
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
     }
 }

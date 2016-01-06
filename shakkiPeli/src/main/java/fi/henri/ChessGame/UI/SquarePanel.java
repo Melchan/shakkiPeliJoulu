@@ -6,13 +6,13 @@
 package fi.henri.ChessGame.UI;
 
 import fi.henri.ChessGame.ChessBoard.ChessBoard;
-import fi.henri.ChessGame.ChessPieces.ChessPiece;
 import java.awt.Color;
-import static java.awt.Color.BLACK;
 import static java.awt.Color.GRAY;
 import static java.awt.Color.WHITE;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.BoxLayout;
 import javax.swing.JLayeredPane;
 
@@ -20,38 +20,45 @@ import javax.swing.JLayeredPane;
  *
  * @author manhenri
  */
-public class SquarePanel extends JLayeredPane {
+public class SquarePanel extends JLayeredPane implements MouseListener {
 
-    private ChessBoard board;
     private Color color = WHITE;
     private static boolean isBlack = false;
+    private ChessPiecePicture picture;
+    private ChessBoard board;
+    private int panel;
+    private Updatetable updater;
 
-    public SquarePanel(ChessBoard board, int panel) {
+    public SquarePanel(ChessBoard board, int panel, Updatetable updater) {
         this.board = board;
+        this.panel = panel;
+        this.updater = updater;
         this.setPreferredSize(new Dimension(80, 80));
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-
-        ChessPiece piece = paneNumberToChessBoardSquareContent(panel);
+        paneNumberToRightColor(panel);
+        this.setOpaque(true);
+        setPicture();
         
-        this.add(new ChessPiecePicture(piece), new Integer(2));
+        this.add(picture);
+        this.addMouseListener(picture);
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        
+
         g.setColor(color);
         g.fillRect(0, 0, 80, 80);
     }
+    
+    private void setPicture() {
+        picture = new ChessPiecePicture(board, panel, updater);
+    }
 
-    private ChessPiece paneNumberToChessBoardSquareContent(int n) {
-        ChessPiece[][] chessBoard = board.getChessBoard();
-        int y = n / 8;
-        int x = 7 - n % 8;
+    private void paneNumberToRightColor(int n) {
+        int x = n % 8;
 
         setRightColorForCoordinate(x);
-
-        return chessBoard[x][y];
     }
 
     private void setRightColorForCoordinate(int x) {
@@ -65,5 +72,25 @@ public class SquarePanel extends JLayeredPane {
         if (x == 7) {
             isBlack = !isBlack;
         }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
     }
 }

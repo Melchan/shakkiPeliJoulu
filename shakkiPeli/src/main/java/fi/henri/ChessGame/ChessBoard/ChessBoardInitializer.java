@@ -24,7 +24,6 @@ public class ChessBoardInitializer {
     public ChessBoardInitializer(ChessBoard board) {
         this.board = board;
         placeAllPieces();
-        System.out.println("minä teen minä teen");
     }
 
     private void placeAllPieces() {
