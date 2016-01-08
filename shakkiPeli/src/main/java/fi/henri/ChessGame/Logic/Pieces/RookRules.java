@@ -13,16 +13,17 @@ import fi.henri.ChessGame.ChessPieces.ChessPiece;
  * @author manhenri
  */
 public class RookRules extends PieceMovement {
-
+    private ChessBoard board;
     public RookRules(ChessBoard board) {
         super(board);
+        this.board = board;
     }
 
     @Override
     public boolean isMoveLegal(ChessPiece p, int a, int b, int toA, int toB) {
         if (super.isAllowedSlope(a, b, toA, toB)) {
             if (isAllowedRookMovement(a, b, toA, toB)) {
-                ChessPiece target = super.getBoard()[toA][toB];
+                ChessPiece target = board.getChessBoard()[toA][toB];
                 if (super.isThePieceEnemy(p, target)) {
                     return super.isThePathClear(a, b, toA, toB);
                 }

@@ -10,6 +10,7 @@ import static fi.henri.ChessGame.ChessPieces.ChessColor.*;
 import fi.henri.ChessGame.ChessPieces.ChessPiece;
 import fi.henri.ChessGame.ChessPieces.PieceType;
 import static fi.henri.ChessGame.ChessPieces.PieceType.*;
+import fi.henri.ChessGame.Logic.LogicHandler;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -34,9 +35,11 @@ public class ChessPiecePicture extends JLayeredPane implements MouseListener {
     private ChessBoard board;
     private int paneNumber;
     private Updatetable updater;
+    private LogicHandler handler;
 
-    public ChessPiecePicture(ChessBoard board, int paneNumber, Updatetable updater) {
-        this.board = board;
+    public ChessPiecePicture(LogicHandler handler, int paneNumber, Updatetable updater) {
+        this.board = handler.getChessBoard();
+        this.handler = handler;
         this.updater = updater;
         this.paneNumber = paneNumber;
         this.blackPictures = new HashMap<>();
@@ -45,6 +48,7 @@ public class ChessPiecePicture extends JLayeredPane implements MouseListener {
 
     @Override
     protected void paintComponent(Graphics g) {
+        this.board = handler.getChessBoard();
         image = null;
         setImage(paneNumber);
         super.paintComponent(g);

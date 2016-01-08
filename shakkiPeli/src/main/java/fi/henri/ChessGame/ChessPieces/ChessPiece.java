@@ -6,7 +6,7 @@
 package fi.henri.ChessGame.ChessPieces;
 
 /**
- * basic chess piece and it's information
+ * basic chess piece and it's information.
  * @author Melchan
  */
 public class ChessPiece {
@@ -14,11 +14,29 @@ public class ChessPiece {
     private final ChessColor color;
     private boolean moved;
     private final PieceType type;
+    private String id;
+    
+    /**
+     * Constructor for test use.
+     * @param color
+     * @param type 
+     */
 
     public ChessPiece(ChessColor color, PieceType type) {
         this.color = color;
         this.type = type;
         this.moved = false;
+    }
+    
+    /**
+     * Constructor to be used in game.
+     * @param color
+     * @param type
+     * @param id 
+     */
+    public ChessPiece(ChessColor color, PieceType type, String id) {
+        this(color, type);
+        this.id = id;
     }
 
     public ChessColor getColor() {
@@ -47,5 +65,10 @@ public class ChessPiece {
 
     public boolean hasMoved() {
         return moved;
+    }
+    
+    @Override
+    public String toString() {
+        return id;
     }
 }

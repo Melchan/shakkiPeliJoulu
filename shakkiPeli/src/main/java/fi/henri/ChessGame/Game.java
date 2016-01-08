@@ -6,7 +6,6 @@
 package fi.henri.ChessGame;
 
 import fi.henri.ChessGame.ChessBoard.ChessBoard;
-import fi.henri.ChessGame.ChessBoard.ChessBoardInitializer;
 import fi.henri.ChessGame.Logic.LogicHandler;
 import fi.henri.ChessGame.UI.UI;
 
@@ -23,7 +22,7 @@ public class Game {
         this.board = new ChessBoard();
         this.handler = new LogicHandler(board);
         handler.newGame();
-        this.ui = new UI(board, handler);
+        this.ui = new UI(handler);
     }
     
     public void run() {

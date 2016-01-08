@@ -5,52 +5,46 @@
  */
 package fi.henri.ChessGame.Logic;
 
-import fi.henri.ChessGame.Logic.Pieces.RookRules;
-import fi.henri.ChessGame.Logic.Pieces.KnightRules;
-import fi.henri.ChessGame.Logic.Pieces.QueenRules;
-import fi.henri.ChessGame.Logic.Pieces.KingRules;
-import fi.henri.ChessGame.Logic.Pieces.PawnRules;
-import fi.henri.ChessGame.Logic.Pieces.BishopRules;
-import fi.henri.ChessGame.Logic.Pieces.PieceMovement;
-import fi.henri.ChessGame.ChessBoard.ChessBoard;
-import fi.henri.ChessGame.ChessBoard.ChessBoardInitializer;
-import fi.henri.ChessGame.ChessPieces.ChessPiece;
-import fi.henri.ChessGame.ChessPieces.ChessColor;
+import fi.henri.ChessGame.Logic.Pieces.*;
+import fi.henri.ChessGame.ChessBoard.*;
+import fi.henri.ChessGame.ChessPieces.*;
 import static fi.henri.ChessGame.ChessPieces.ChessColor.*;
 import fi.henri.ChessGame.ChessPieces.PieceType;
-import static fi.henri.ChessGame.ChessPieces.PieceType.*;
+import fi.henri.ChessGame.Logic.Observers.CheckObserver;
 import java.util.HashMap;
 
 /**
- * Class that will handle game logic and tie in different classes.
+ * Class that will handle logic of the game.
+ *
  * @author Melchan
  */
 public class LogicHandler {
 
     private ChessBoard board;
     private ChessColor turn;
-    private HashMap<PieceType, PieceMovement> movementLibrary;
+    private MoveLibrary library;
     private boolean checkMate;
+    private CheckObserver check;
 
     public LogicHandler(ChessBoard board) {
         this.board = board;
         this.turn = WHITE;
         this.checkMate = false;
-        this.movementLibrary = new HashMap<PieceType, PieceMovement>();
-        initializeMovementLibrary();
+        this.library = new MoveLibrary(board);
+        this.check = new CheckObserver(board);
     }
 
-    private void initializeMovementLibrary() {
-        movementLibrary.put(KING, new KingRules(board));
-        movementLibrary.put(QUEEN, new QueenRules(board));
-        movementLibrary.put(BISHOP, new BishopRules(board));
-        movementLibrary.put(KNIGHT, new KnightRules(board));
-        movementLibrary.put(ROOK, new RookRules(board));
-        movementLibrary.put(PAWN, new PawnRules(board));
+    public ChessBoard getChessBoard() {
+        return board;
     }
-    
+
     public void newGame() {
         new ChessBoardInitializer(board);
+        this.turn = WHITE;
+    }
+
+    public void setTurn(ChessColor color) {
+        this.turn = color;
     }
 
     /**
@@ -61,17 +55,20 @@ public class LogicHandler {
      * @param b starting y axis.
      * @param toA end point x axis.
      * @param toB end point y axis.
+     * @return true if action happened.
      */
-    public void movePiece(int a, int b, int toA, int toB) {
+    public boolean movePiece(int a, int b, int toA, int toB) {
         if (isPieceMove(a, b, toA, toB)) {
             ChessPiece p = board.getChessBoard()[a][b];
             if (p.getColor() == turn) {
-                PieceMovement movement = movementLibrary.get(p.getPieceType());
-                if (movement.commitMoveIfLegal(p, a, b, toA, toB)) {
+                if (check.movePieceIfLegal(turn, a, b, toA, toB)) {
+                    System.out.println(turn);
                     changeTurn();
+                    return true;
                 }
             }
         }
+        return false;
     }
 
     public boolean isCheckMate() {

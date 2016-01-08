@@ -15,12 +15,14 @@
     public abstract class PieceMovement {
 
     private ChessBoard cB;
-    private ChessPiece[][] board;
 
     public PieceMovement(ChessBoard board) {
 
         this.cB = board;
-        this.board = board.getChessBoard();
+    }
+    
+    public void setBoard(ChessBoard newBoard) {
+        this.cB = newBoard;
     }
 
     /**
@@ -136,12 +138,8 @@
         }
     }
 
-    public ChessPiece[][] getBoard() {
-        return board;
-    }
-
     private boolean squareOccupied(int x, int y) {
-        if (board[x][y] != null) {
+        if (cB.getChessBoard()[x][y] != null) {
             return true;
         }
         return false;

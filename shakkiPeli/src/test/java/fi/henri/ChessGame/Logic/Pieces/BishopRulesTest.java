@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fi.henri.ChessGame.ChessBoard.RulesAndMovementPieces;
+package fi.henri.ChessGame.Logic.Pieces;
 
 import fi.henri.ChessGame.ChessBoard.ChessBoard;
 import fi.henri.ChessGame.ChessPieces.ChessPiece;

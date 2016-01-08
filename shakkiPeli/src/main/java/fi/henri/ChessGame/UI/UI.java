@@ -5,7 +5,6 @@
  */
 package fi.henri.ChessGame.UI;
 
-import fi.henri.ChessGame.ChessBoard.ChessBoard;
 import fi.henri.ChessGame.Logic.LogicHandler;
 import java.awt.Container;
 import java.awt.event.MouseListener;
@@ -19,11 +18,9 @@ import javax.swing.WindowConstants;
  */
 public class UI implements Runnable {
 
-    ChessBoard board;
     LogicHandler handler;
 
-    public UI(ChessBoard board, LogicHandler handler) {
-        this.board = board;
+    public UI(LogicHandler handler) {
         this.handler = handler;
     }
 
@@ -33,7 +30,7 @@ public class UI implements Runnable {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setResizable(false);
 
-        Container contentPane = new ChessBoardContent(board, handler);
+        Container contentPane = new ChessBoardContent(handler);
         frame.setContentPane(contentPane);
         frame.addMouseListener((MouseListener) contentPane);
 

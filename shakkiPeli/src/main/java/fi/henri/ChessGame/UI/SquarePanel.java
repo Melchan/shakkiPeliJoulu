@@ -5,7 +5,7 @@
  */
 package fi.henri.ChessGame.UI;
 
-import fi.henri.ChessGame.ChessBoard.ChessBoard;
+import fi.henri.ChessGame.Logic.LogicHandler;
 import java.awt.Color;
 import static java.awt.Color.GRAY;
 import static java.awt.Color.RED;
@@ -32,12 +32,12 @@ public class SquarePanel extends JLayeredPane implements MouseListener {
     private final int panel;
     private final ChessBoardContent chessBoardContent;
 
-    public SquarePanel(ChessBoard board, int panel, ChessBoardContent chessBoardContent) {
+    public SquarePanel(LogicHandler handler, int panel, ChessBoardContent chessBoardContent) {
         this.panel = panel;
         this.chessBoardContent = chessBoardContent;
         this.setPreferredSize(new Dimension(80, 80));
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-        picture = new ChessPiecePicture(board, panel, chessBoardContent);
+        picture = new ChessPiecePicture(handler, panel, chessBoardContent);
         paneNumberToRightColor();
         this.add(picture);
         this.addMouseListener(picture);

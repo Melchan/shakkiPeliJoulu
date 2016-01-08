@@ -5,7 +5,6 @@
  */
 package fi.henri.ChessGame.UI;
 
-import fi.henri.ChessGame.ChessBoard.ChessBoard;
 import fi.henri.ChessGame.Logic.LogicHandler;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -21,14 +20,12 @@ import javax.swing.JPanel;
  */
 public class ChessBoardContent extends JPanel implements Updatetable, MouseListener {
 
-    private ChessBoard board;
     private ArrayList<SquarePanel> squares;
     private Integer firstPaneNumber;
     private Integer secondPaneNumber;
     private LogicHandler handler;
 
-    public ChessBoardContent(ChessBoard board, LogicHandler handler) {
-        this.board = board;
+    public ChessBoardContent(LogicHandler handler) {
         this.handler = handler;
         this.squares = new ArrayList();
         this.setLayout(new GridLayout(8, 8));
@@ -42,7 +39,7 @@ public class ChessBoardContent extends JPanel implements Updatetable, MouseListe
 
     private void createSquaresInArrayList() {
         for (int i = 0; i < 64; i++) {
-            squares.add(new SquarePanel(board, i, this));
+            squares.add(new SquarePanel(handler, i, this));
         }
     }
 
@@ -75,7 +72,9 @@ public class ChessBoardContent extends JPanel implements Updatetable, MouseListe
         int toX = getXFromPaneNumber(secondPaneNumber);
         int toY = getYFromPaneNumber(secondPaneNumber);
 
-        handler.movePiece(x, y, toX, toY);
+        if (handler.movePiece(x, y, toX, toY)) {
+            refresh();
+        }
     }
 
     private int getXFromPaneNumber(int n) {

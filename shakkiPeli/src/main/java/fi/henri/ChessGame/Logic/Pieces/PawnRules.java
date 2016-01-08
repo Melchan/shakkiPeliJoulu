@@ -6,6 +6,7 @@
 package fi.henri.ChessGame.Logic.Pieces;
 
 import fi.henri.ChessGame.ChessBoard.ChessBoard;
+import fi.henri.ChessGame.ChessPieces.ChessColor;
 import fi.henri.ChessGame.ChessPieces.ChessPiece;
 import static fi.henri.ChessGame.ChessPieces.ChessColor.*;
 import static fi.henri.ChessGame.ChessPieces.PieceType.PAWN;
@@ -27,6 +28,8 @@ public class PawnRules extends PieceMovement {
 
     @Override
     public boolean isMoveLegal(ChessPiece p, int a, int b, int toA, int toB) {
+        whiteEnPassant = false;
+        blackEnPassant = false;
         if (board.allowedCoordinates(a, b)) {
             if (board.allowedCoordinates(toA, toB)) {
                 if (allowedMovement(p, a, b, toA, toB)) {
@@ -36,11 +39,18 @@ public class PawnRules extends PieceMovement {
         }
         return false;
     }
+    
+    public boolean isEnPassantUsedInLastMove() {
+        if (whiteEnPassant || blackEnPassant) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     @Override
     public boolean commitMoveIfLegal(ChessPiece p, int a, int b, int toA, int toB) {
-        whiteEnPassant = false;
-        blackEnPassant = false;
+
         if (isMoveLegal(p, a, b, toA, toB)) {
             board.attemptToMovePieceOnBoard(a, b, toA, toB);
             if (whiteEnPassant) {
