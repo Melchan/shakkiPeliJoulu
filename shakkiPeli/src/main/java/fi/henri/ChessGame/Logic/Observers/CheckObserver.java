@@ -59,8 +59,7 @@ public class CheckObserver {
         enPassantDone = false;
         if (checkIfMoveIsLegal(a, b, toA, toB)) {
             movePiece(a, b, toA, toB);
-            initializeVariables(color);
-            if (!isKingThreatened()) {
+            if (!isKingThreatened(color)) {
                 return true;
             }
         }
@@ -119,7 +118,8 @@ public class CheckObserver {
         }
     }
 
-    private boolean isKingThreatened() {
+    private boolean isKingThreatened(ChessColor color) {
+        initializeVariables(color);
         boolean result = false;
         threateners.clear();
         if (ownKingPosition != null) {

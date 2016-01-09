@@ -113,4 +113,11 @@ public class LogicHandlerTest {
         assertEquals(true, handler.movePiece(3, 0, 4, 1));
         assertEquals(false, handler.movePiece(7, 7, 7, 0));
     }
+    
+    @Test
+    public void canGiveRightThreateners() {
+        board.attemptToPlacePieceOnBoard(wKing, 7, 0);
+        handler.movePiece(3, 0, 3, 1);
+        assertEquals(1, handler.getKingThreateners().size());
+    }
 }

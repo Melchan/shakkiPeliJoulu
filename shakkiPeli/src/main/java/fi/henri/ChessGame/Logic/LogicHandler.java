@@ -60,13 +60,14 @@ public class LogicHandler {
             ChessPiece p = board.getChessBoard()[a][b];
             if (p.getColor() == turn) {
                 if (check.movePieceIfLegal(turn, a, b, toA, toB)) {
+                    
                     System.out.println(turn);
                     changeTurn();
                     return true;
                 }
+                kingThreateners = check.getThreateners();
             }
         }
-        check.getThreateners();
         return false;
     }
 

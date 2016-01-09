@@ -10,7 +10,6 @@ import static fi.henri.ChessGame.ChessPieces.ChessColor.*;
 import fi.henri.ChessGame.ChessPieces.ChessPiece;
 import static fi.henri.ChessGame.ChessPieces.PieceType.*;
 import fi.henri.ChessGame.Logic.Observers.CheckObserver;
-import fi.henri.ChessGame.Logic.Pieces.MoveLibrary;
 import static junit.framework.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
@@ -111,18 +110,35 @@ public class CheckObserverTest {
         assertEquals(bPawn, board.getChessBoard()[1][4]);
         assertEquals(null, board.getChessBoard()[1][5]);
     }
-    
+
     @Test
     public void whenResetingBoardSituationPiecesDontHaveStatusMoved() {
         board.attemptToPlacePieceOnBoard(bKing, 0, 4);
         board.attemptToPlacePieceOnBoard(wQueen, 0, 0);
         board.attemptToPlacePieceOnBoard(bQueen, 1, 1);
         observer.movePieceIfLegal(BLACK, 1, 1, 2, 2);
-        assertEquals(false,  board.getChessBoard()[1][1].hasMoved());
+        assertEquals(false, board.getChessBoard()[1][1].hasMoved());
+    }
+
+    @Test
+    public void recordsKingsThreatsAccordinglyWithOneEnemy() {
+        board.attemptToPlacePieceOnBoard(bKing, 4, 7);
+        board.attemptToPlacePieceOnBoard(wQueen, 4, 0);
+        assertEquals(false, observer.movePieceIfLegal(BLACK, 4, 7, 4, 6));
+
+        int[] t = board.integerToCoordinate(observer.getThreateners().get(0));
+        assertEquals(wQueen, board.getChessBoard()[t[0]][t[1]]);
+
     }
     
     @Test
-    public void recordsKingsThreatsAccordingly() {
+    public void recorsThreatsAccordinglyWithMultipleEnemies() {
+        ChessPiece wRook = new ChessPiece(WHITE, ROOK);
         
+        board.attemptToPlacePieceOnBoard(bKing, 4, 7);
+        board.attemptToPlacePieceOnBoard(wQueen, 4, 0);
+        board.attemptToPlacePieceOnBoard(wRook, 5, 6);
+        assertEquals(false, observer.movePieceIfLegal(BLACK, 4, 7, 4, 6));
+        assertEquals(2, observer.getThreateners().size()); 
     }
 }
