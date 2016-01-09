@@ -8,12 +8,14 @@ package fi.henri.ChessGame.UI;
 import fi.henri.ChessGame.Logic.LogicHandler;
 import java.awt.Color;
 import static java.awt.Color.GRAY;
+import static java.awt.Color.GREEN;
 import static java.awt.Color.RED;
 import static java.awt.Color.WHITE;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import javax.swing.JLayeredPane;
 
@@ -28,7 +30,7 @@ public class SquarePanel extends JLayeredPane implements MouseListener {
     private Color BackUpColor;
     private Color color = WHITE;
     private static boolean isBlack = false;
-    private ChessPiecePicture picture;
+    private final ChessPiecePicture picture;
     private final int panel;
     private final ChessBoardContent chessBoardContent;
 
@@ -53,26 +55,43 @@ public class SquarePanel extends JLayeredPane implements MouseListener {
     }
 
     private void checkForRightColor() {
-        if (chessBoardContent.getFirstPane() != null) {
-            if (chessBoardContent.getFirstPane() == this.panel) {
-                this.color = RED;
-            }
+        if (hasBeenChosen()) {
+            this.color = GREEN;
+
+        } else if (isThreateningKing()) {
+            this.color = RED;
+
         } else {
             color = BackUpColor;
         }
     }
 
     private void paneNumberToRightColor() {
+
+        int x = panel % 8;
+        setRightColorForCoordinate(x);
+
+    }
+
+    private boolean isThreateningKing() {
+        ArrayList<Integer> threats = chessBoardContent.getKingThreateners();
+        if (threats != null) {
+            for (int i : threats) {
+                if (i == this.panel) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean hasBeenChosen() {
         if (chessBoardContent.getFirstPane() != null) {
             if (chessBoardContent.getFirstPane() == this.panel) {
-                this.color = RED;
+                return true;
             }
-        } else {
-
-            int x = panel % 8;
-
-            setRightColorForCoordinate(x);
         }
+        return false;
     }
 
     private void setRightColorForCoordinate(int x) {

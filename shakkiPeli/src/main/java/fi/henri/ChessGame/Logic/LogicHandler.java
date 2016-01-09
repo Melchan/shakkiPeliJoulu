@@ -5,13 +5,11 @@
  */
 package fi.henri.ChessGame.Logic;
 
-import fi.henri.ChessGame.Logic.Pieces.*;
 import fi.henri.ChessGame.ChessBoard.*;
 import fi.henri.ChessGame.ChessPieces.*;
 import static fi.henri.ChessGame.ChessPieces.ChessColor.*;
-import fi.henri.ChessGame.ChessPieces.PieceType;
 import fi.henri.ChessGame.Logic.Observers.CheckObserver;
-import java.util.HashMap;
+import java.util.ArrayList;
 
 /**
  * Class that will handle logic of the game.
@@ -22,16 +20,16 @@ public class LogicHandler {
 
     private ChessBoard board;
     private ChessColor turn;
-    private MoveLibrary library;
     private boolean checkMate;
     private CheckObserver check;
+    private ArrayList<Integer> kingThreateners;
 
     public LogicHandler(ChessBoard board) {
         this.board = board;
         this.turn = WHITE;
         this.checkMate = false;
-        this.library = new MoveLibrary(board);
         this.check = new CheckObserver(board);
+        this.kingThreateners = new ArrayList<Integer>();
     }
 
     public ChessBoard getChessBoard() {
@@ -48,7 +46,7 @@ public class LogicHandler {
     }
 
     /**
-     * method will move piece if it is legal for chesspiece in question and
+     * method will move piece if it is legal for chess piece in question and
      * change turn.
      *
      * @param a starting x axis.
@@ -68,6 +66,7 @@ public class LogicHandler {
                 }
             }
         }
+        check.getThreateners();
         return false;
     }
 
@@ -94,5 +93,9 @@ public class LogicHandler {
         } else if (turn == BLACK) {
             turn = WHITE;
         }
+    }
+
+    public ArrayList<Integer> getKingThreateners() {
+        return kingThreateners;
     }
 }

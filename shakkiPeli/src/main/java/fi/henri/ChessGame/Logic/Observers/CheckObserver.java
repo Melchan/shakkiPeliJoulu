@@ -27,20 +27,23 @@ public class CheckObserver {
 
     private final MoveLibrary library;
     private HashMap<ChessPiece, Integer> enemyPieces;
-    private int ownKingPosition;
+    private Integer ownKingPosition;
     private final ChessBoard board;
     private ChessPiece target;
     private ChessPiece actor;
-    private ArrayList<ChessPiece> threateners;
+    private boolean actorMoved;
+    private boolean enPassantDone;
+    private ArrayList<Integer> threateners;
 
     public CheckObserver(ChessBoard board) {
         this.board = board;
         this.library = new MoveLibrary(board);
-        this.threateners = new ArrayList<ChessPiece>();
+        this.threateners = new ArrayList<Integer>();
     }
 
     /**
-     * Method Checks if king is in checkPosition in current board position.
+     * Method Checks if king is in checkPosition in current board position. And
+     * allows or disallowes moves. Special cases for Check EnPassant.
      *
      * @param color player whose turn it is.
      * @param a starting x-axis.
@@ -50,18 +53,41 @@ public class CheckObserver {
      * @return true if king is in check.
      */
     public boolean movePieceIfLegal(ChessColor color, int a, int b, int toA, int toB) {
-            actor = board.getChessBoard()[a][b];
-            target = board.getChessBoard()[toA][toB];
+        actor = board.getChessBoard()[a][b];
+        actorMoved = actor.hasMoved();
+        target = board.getChessBoard()[toA][toB];
+        enPassantDone = false;
         if (checkIfMoveIsLegal(a, b, toA, toB)) {
             movePiece(a, b, toA, toB);
             initializeVariables(color);
-            if (!tryToEatKing()) {
+            if (!isKingThreatened()) {
                 return true;
             }
         }
-        board.getChessBoard()[a][b] = actor;
-        board.getChessBoard()[toA][toB] = target;
+        resetMovement(a, b, toA, toB);
         return false;
+    }
+
+    private void resetMovement(int a, int b, int toA, int toB) {
+        if (actorMoved == false) {
+            actor.setMovedToFalse();
+        }
+        board.getChessBoard()[a][b] = actor;
+        if (enPassantDone) {
+            resetEnPassantMovement(toA, toB);
+        } else {
+            board.getChessBoard()[toA][toB] = target;
+        }
+    }
+
+    private void resetEnPassantMovement(int toA, int toB) {
+        board.attemptToPlacePieceOnBoard(null, toA, toB);
+        if (target.getColor() == BLACK) {
+            board.getChessBoard()[toA][toB - 1] = target;
+        } else {
+            board.getChessBoard()[toA][toB + 1] = target;
+        }
+        
     }
 
     private boolean checkIfMoveIsLegal(int a, int b, int toA, int toB) {
@@ -72,17 +98,18 @@ public class CheckObserver {
         enPassantCorrection(p, m, toA, toB);
         return result;
     }
-    
+
     private void movePiece(int a, int b, int toA, int toB) {
         ChessPiece p = board.getChessBoard()[a][b];
         PieceMovement m = library.getMovementLibrary().get(p.getPieceType());
         m.commitMoveIfLegal(p, a, b, toA, toB);
     }
-    
+
     private void enPassantCorrection(ChessPiece p, PieceMovement m, int toA, int toB) {
         if (p.getPieceType() == PAWN) {
             PawnRules pRules = (PawnRules) m;
             if (pRules.isEnPassantUsedInLastMove()) {
+                enPassantDone = true;
                 if (p.getColor() == BLACK) {
                     target = board.getChessBoard()[toA][toB + 1];
                 } else {
@@ -91,23 +118,28 @@ public class CheckObserver {
             }
         }
     }
-    
-    private boolean tryToEatKing() {
+
+    private boolean isKingThreatened() {
         boolean result = false;
         threateners.clear();
-        int[] king = board.integerToCoordinate(ownKingPosition);
-        for (int n : enemyPieces.values()) {
-            int[] enemy = board.integerToCoordinate(n);
-            ChessPiece p = board.getChessBoard()[enemy[0]][enemy[1]];
-            if (library.getMovementLibrary().get(p.getPieceType()).isMoveLegal(p, enemy[0], enemy[1], king[0], king[1])) {
-                result = true;
-                threateners.add(p);
+        if (ownKingPosition != null) {
+            int[] king = board.integerToCoordinate(ownKingPosition);
+            for (int n : enemyPieces.values()) {
+                int[] enemy = board.integerToCoordinate(n);
+                ChessPiece p = board.getChessBoard()[enemy[0]][enemy[1]];
+                if (p != null) {
+                    if (library.getMovementLibrary().get(p.getPieceType()).isMoveLegal(p, enemy[0], enemy[1], king[0], king[1])) {
+                        result = true;
+                        threateners.add(n);
+                    }
+                }
             }
+            return result;
         }
-        return result;
+        return false;
     }
-    
-    public ArrayList<ChessPiece> getThreateners() {
+
+    public ArrayList<Integer> getThreateners() {
         return this.threateners;
     }
 
@@ -116,8 +148,10 @@ public class CheckObserver {
         for (int n : ownPieces.values()) {
             int[] i = board.integerToCoordinate(n);
             ChessPiece p = board.getChessBoard()[i[0]][i[1]];
-            if (p.getPieceType() == KING) {
-                ownKingPosition = ownPieces.get(p);
+            if (p != null) {
+                if (p.getPieceType() == KING) {
+                    ownKingPosition = ownPieces.get(p);
+                }
             }
         }
     }

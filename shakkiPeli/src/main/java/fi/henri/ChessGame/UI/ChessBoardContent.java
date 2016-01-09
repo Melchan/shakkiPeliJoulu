@@ -14,13 +14,14 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 /**
- * Main component where every chess board square is placed in gridlayout.
+ * Main component where every chessboard square is placed in gridlayout.
  *
  * @author manhenri
  */
 public class ChessBoardContent extends JPanel implements Updatetable, MouseListener {
 
     private ArrayList<SquarePanel> squares;
+    private ArrayList<Integer> kingThreateners;
     private Integer firstPaneNumber;
     private Integer secondPaneNumber;
     private LogicHandler handler;
@@ -51,13 +52,23 @@ public class ChessBoardContent extends JPanel implements Updatetable, MouseListe
     public void update(int paneNumber) {
         if (firstPaneNumber == null) {
             firstPaneNumber = paneNumber;
+            this.kingThreateners = null;
         } else {
             secondPaneNumber = paneNumber;
             handleLogicAction();
             firstPaneNumber = null;
             secondPaneNumber = null;
+            updateKingThreateners();
         }
         refresh();
+    }
+    
+    private void updateKingThreateners() {
+        this.kingThreateners = handler.getKingThreateners();
+    }
+    
+    public ArrayList<Integer> getKingThreateners() {
+        return kingThreateners;
     }
 
     private void refresh() {

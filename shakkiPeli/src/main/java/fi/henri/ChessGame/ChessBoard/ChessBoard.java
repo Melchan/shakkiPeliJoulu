@@ -130,7 +130,7 @@ public class ChessBoard {
      * @return handy integer
      */
     public int coordinateToInteger(int x, int y) {
-        return x * 8 + y;
+        return -((y - 7) * 8) + x;
     }
 
     /**
@@ -141,8 +141,8 @@ public class ChessBoard {
      */
     public int[] integerToCoordinate(int n) {
         int[] coordinates = new int[2];
-        coordinates[0] = n / 8;
-        coordinates[1] = n % 8;
+        coordinates[0] = n % 8;
+        coordinates[1] = 7 - n / 8;
         return coordinates;
     }
 

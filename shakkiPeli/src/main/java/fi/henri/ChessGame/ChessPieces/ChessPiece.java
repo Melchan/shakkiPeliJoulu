@@ -54,6 +54,10 @@ public class ChessPiece {
         }
         return false;
     }
+    
+    public void setMovedToFalse() {
+        this.moved = false;
+    }
 
     public PieceType getPieceType() {
         return type;

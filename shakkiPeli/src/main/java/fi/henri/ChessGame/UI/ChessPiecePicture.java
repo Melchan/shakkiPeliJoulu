@@ -35,11 +35,9 @@ public class ChessPiecePicture extends JLayeredPane implements MouseListener {
     private ChessBoard board;
     private int paneNumber;
     private Updatetable updater;
-    private LogicHandler handler;
 
     public ChessPiecePicture(LogicHandler handler, int paneNumber, Updatetable updater) {
         this.board = handler.getChessBoard();
-        this.handler = handler;
         this.updater = updater;
         this.paneNumber = paneNumber;
         this.blackPictures = new HashMap<>();
@@ -48,12 +46,11 @@ public class ChessPiecePicture extends JLayeredPane implements MouseListener {
 
     @Override
     protected void paintComponent(Graphics g) {
-        this.board = handler.getChessBoard();
         image = null;
         setImage(paneNumber);
         super.paintComponent(g);
 
-        g.drawImage(image, 0, 0, null); // see javadoc for more info on the parameters      
+        g.drawImage(image, 0, 0, null);      
     }
 
     private void setImage(int paneNumber) {
@@ -84,7 +81,6 @@ public class ChessPiecePicture extends JLayeredPane implements MouseListener {
         ChessPiece[][] chessBoard = board.getChessBoard();
         int y = 7 - n / 8;
         int x = n % 8;
-
         return chessBoard[x][y];
     }
 

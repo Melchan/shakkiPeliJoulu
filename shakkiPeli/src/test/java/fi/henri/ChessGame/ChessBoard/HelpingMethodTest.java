@@ -30,14 +30,14 @@ public class HelpingMethodTest {
     
     @Test
     public void coordinateToIntegerWorks() {
-        assertEquals(33, board.coordinateToInteger(4, 1));
+        assertEquals(52, board.coordinateToInteger(4, 1));
     }
     
     @Test
     public void integerToCoordinateWorks() {
         int[] coordinates = {4, 1};
-        assertEquals(coordinates[0], board.integerToCoordinate(33)[0]);
-        assertEquals(coordinates[1], board.integerToCoordinate(33)[1]);
+        assertEquals(coordinates[0], board.integerToCoordinate(52)[0]);
+        assertEquals(coordinates[1], board.integerToCoordinate(52)[1]);
     }
     
     @Test
