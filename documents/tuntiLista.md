@@ -19,4 +19,7 @@ Päivämäärä | Aika | Kuvaus
 2016-01-02 | 2h | Tutustuin swingiin ja lissäsin alku juttuja.
 2016-01-03 | 6h | Tein swingillä shakkilaudan ja sen päälle shakkinappulat
 2016-01-06 | 7h | Shakkinappulat liikkuvat ja valittu ruutu syttyy.
-**Yhteensä** | 55h | 
+2016-01-07 | 4h | jotain mä tällä välillä teen lisään nytten vaikka 4h ni ei mee yli kai.
+2016-01-11 | 12h | koko päivän tein. Shakki, liikkuminen ja uhkaajat syttyvät punaiseksi.
+2016-01-12 | 12h | toinen kokopäivänen shakkimatti ja ylennys tehty(joskerkesin) ja loppu diipadaapaa.
+**Yhteensä** | 86h | 
