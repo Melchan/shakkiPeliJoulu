@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 
 /**
- *
+ * under construction after course.
  * @author manhenri
  */
 public class ClickListener implements ActionListener {

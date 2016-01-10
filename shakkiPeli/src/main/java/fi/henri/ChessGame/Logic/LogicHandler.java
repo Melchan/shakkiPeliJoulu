@@ -114,7 +114,7 @@ public class LogicHandler {
         }
     }
 
-    private void validateCheckMate() {
+    public void validateCheckMate() {
         this.checkMate = CMObserver.isKingInCheckMate(turn);
     }
 

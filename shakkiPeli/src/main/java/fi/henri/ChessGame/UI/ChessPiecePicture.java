@@ -85,21 +85,21 @@ public class ChessPiecePicture extends JLayeredPane implements MouseListener {
     }
 
     private void initializeBlackImageLibrary() {
-        blackPictures.put(KING, "src/main/resources/blackking.png");
-        blackPictures.put(QUEEN, "src/main/resources/blackqueen.png");
-        blackPictures.put(BISHOP, "src/main/resources/blackbishop.png");
-        blackPictures.put(KNIGHT, "src/main/resources/blackknight.png");
-        blackPictures.put(ROOK, "src/main/resources/blackrook.png");
-        blackPictures.put(PAWN, "src/main/resources/blackpawn.png");
+        blackPictures.put(KING, "/resources/blackking.png");
+        blackPictures.put(QUEEN, "/resources/blackqueen.png");
+        blackPictures.put(BISHOP, "/resources/blackbishop.png");
+        blackPictures.put(KNIGHT, "/resources/blackknight.png");
+        blackPictures.put(ROOK, "/resources/blackrook.png");
+        blackPictures.put(PAWN, "/resources/blackpawn.png");
     }
 
     private void initializeWhiteImageLibrary() {
-        whitePictures.put(KING, "src/main/resources/whiteking.png");
-        whitePictures.put(QUEEN, "src/main/resources/whitequeen.png");
-        whitePictures.put(BISHOP, "src/main/resources/whitebishop.png");
-        whitePictures.put(KNIGHT, "src/main/resources/whiteknight.png");
-        whitePictures.put(ROOK, "src/main/resources/whiterook.png");
-        whitePictures.put(PAWN, "src/main/resources/whitepawn.png");
+        whitePictures.put(KING, "/resources/whiteking.png");
+        whitePictures.put(QUEEN, "/resources/whitequeen.png");
+        whitePictures.put(BISHOP, "/resources/whitebishop.png");
+        whitePictures.put(KNIGHT, "/resources/whiteknight.png");
+        whitePictures.put(ROOK, "/resources/whiterook.png");
+        whitePictures.put(PAWN, "/resources/whitepawn.png");
     }
 
     @Override

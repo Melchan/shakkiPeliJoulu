@@ -16,7 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.WindowConstants;
 
 /**
- *
+ * under construction after course
  * @author manhenri
  */
 public class ChoosingWindow implements Runnable {

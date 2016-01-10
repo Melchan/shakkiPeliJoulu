@@ -7,9 +7,10 @@ package fi.henri.ChessGame;
 
 /**
  *
- * @author Melchan 
+ * @author manhenri
  */
 public class Main {
+    
     public static void main(String[] args) {
         Game game = new Game();
         game.run();

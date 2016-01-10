@@ -5,7 +5,6 @@
  */
 package fi.henri.ChessGame.UI;
 
-import fi.henri.ChessGame.ChessPieces.PieceType;
 import static fi.henri.ChessGame.ChessPieces.PieceType.QUEEN;
 import fi.henri.ChessGame.Logic.LogicHandler;
 import java.awt.Dimension;
@@ -65,6 +64,7 @@ public class ChessBoardContent extends JPanel implements Updatetable, MouseListe
             secondPaneNumber = null;
             updateKingThreateners();
             promotionHandling();
+            handler.validateCheckMate();
         }
         refresh();
     }
