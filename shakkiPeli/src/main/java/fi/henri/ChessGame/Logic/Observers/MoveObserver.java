@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package fi.henri.ChessGame.Logic.Observers;
 
 import fi.henri.ChessGame.ChessBoard.ChessBoard;
@@ -23,7 +18,7 @@ import java.util.HashMap;
  *
  * @author manhenri
  */
-public class CheckObserver {
+public class MoveObserver {
 
     private final MoveLibrary library;
     private HashMap<ChessPiece, Integer> enemyPieces;
@@ -31,11 +26,11 @@ public class CheckObserver {
     private final ChessBoard board;
     private ChessPiece target;
     private ChessPiece actor;
-    private boolean actorMoved;
+    private boolean actorHasMovedBefore;
     private boolean enPassantDone;
-    private ArrayList<Integer> threateners;
+    private final ArrayList<Integer> threateners;
 
-    public CheckObserver(ChessBoard board) {
+    public MoveObserver(ChessBoard board) {
         this.board = board;
         this.library = new MoveLibrary(board);
         this.threateners = new ArrayList<Integer>();
@@ -54,39 +49,50 @@ public class CheckObserver {
      */
     public boolean movePieceIfLegal(ChessColor color, int a, int b, int toA, int toB) {
         actor = board.getChessBoard()[a][b];
-        actorMoved = actor.hasMoved();
+        actorHasMovedBefore = actor.hasMoved();
         target = board.getChessBoard()[toA][toB];
         enPassantDone = false;
         if (checkIfMoveIsLegal(a, b, toA, toB)) {
+            if (isCastlingMove(a, toA)) {
+                if (!checkKingThreatWhenCastling(a, b, toA)) {
+                    movePiece(a, b, toA, toB); 
+                    return true;
+                }
+                return false;
+            }     
             movePiece(a, b, toA, toB);
-            if (!isKingThreatened(color)) {
+            if (!isKingThreatened(color)) {              
                 return true;
             }
+            resetMovement(a, b, toA, toB);
         }
-        resetMovement(a, b, toA, toB);
         return false;
     }
 
     private void resetMovement(int a, int b, int toA, int toB) {
-        if (actorMoved == false) {
-            actor.setMovedToFalse();
-        }
-        board.getChessBoard()[a][b] = actor;
+        resetMovedIfNecessary();
+        board.attemptToPlacePieceOnBoard(actor, a, b);
         if (enPassantDone) {
             resetEnPassantMovement(toA, toB);
         } else {
-            board.getChessBoard()[toA][toB] = target;
+            board.attemptToPlacePieceOnBoard(target, toA, toB);
         }
+    }
+    
+    private void resetMovedIfNecessary() {
+       if (actorHasMovedBefore == false) {
+            actor.setMovedToFalse();
+        } 
     }
 
     private void resetEnPassantMovement(int toA, int toB) {
         board.attemptToPlacePieceOnBoard(null, toA, toB);
         if (target.getColor() == BLACK) {
-            board.getChessBoard()[toA][toB - 1] = target;
+            board.attemptToPlacePieceOnBoard(target, toA, toB - 1);
         } else {
-            board.getChessBoard()[toA][toB + 1] = target;
+            board.attemptToPlacePieceOnBoard(target, toA, toB + 1);
         }
-        
+
     }
 
     private boolean checkIfMoveIsLegal(int a, int b, int toA, int toB) {
@@ -117,11 +123,18 @@ public class CheckObserver {
             }
         }
     }
-
-    private boolean isKingThreatened(ChessColor color) {
+    
+    private void initializeIsKingThreatened(ChessColor color) {
+        if (ownKingPosition == null) {
+            setKingPosition(color);
+        }
         initializeVariables(color);
-        boolean result = false;
         threateners.clear();
+    }
+
+    public boolean isKingThreatened(ChessColor color) {
+        initializeIsKingThreatened(color);
+        boolean result = false;
         if (ownKingPosition != null) {
             int[] king = board.integerToCoordinate(ownKingPosition);
             for (int n : enemyPieces.values()) {
@@ -134,8 +147,10 @@ public class CheckObserver {
                     }
                 }
             }
+            ownKingPosition = null;
             return result;
         }
+        ownKingPosition = null;
         return false;
     }
 
@@ -150,19 +165,46 @@ public class CheckObserver {
             ChessPiece p = board.getChessBoard()[i[0]][i[1]];
             if (p != null) {
                 if (p.getPieceType() == KING) {
-                    ownKingPosition = ownPieces.get(p);
+                    ownKingPosition = n;
                 }
             }
         }
     }
 
     private void initializeVariables(ChessColor color) {
+        this.enemyPieces = null;
         if (color == BLACK) {
-            this.enemyPieces = board.getChessPiecesByColor(WHITE);
-            setKingPosition(color);
+            this.enemyPieces = board.getChessPiecesByColor(WHITE);           
         } else {
             this.enemyPieces = board.getChessPiecesByColor(BLACK);
-            setKingPosition(color);
         }
+    }
+    
+    private boolean isCastlingMove(int a, int toA) {
+        if (actor.getPieceType() == KING && Math.abs(a - toA) > 1) {
+            return true;
+        }
+        return false;
+    }
+    
+    private boolean checkKingThreatWhenCastling(int a, int b, int toA) {
+        int c = a - toA;
+        if (c > 0) {
+            for (int i = a; i > toA - 1; i--) {
+                this.ownKingPosition = board.coordinateToInteger(i, b);
+                if (this.isKingThreatened(actor.getColor())) {
+                    
+                    return true;
+                }
+            }
+        } else {
+            for (int i = a; i < toA + 1; i++) {
+                this.ownKingPosition = board.coordinateToInteger(i, b);
+                if (this.isKingThreatened(actor.getColor())) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

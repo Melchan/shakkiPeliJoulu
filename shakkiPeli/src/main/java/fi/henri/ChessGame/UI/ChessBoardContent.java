@@ -53,6 +53,7 @@ public class ChessBoardContent extends JPanel implements Updatetable, MouseListe
         if (firstPaneNumber == null) {
             firstPaneNumber = paneNumber;
             this.kingThreateners = null;
+            this.kingThreateners = null;
         } else {
             secondPaneNumber = paneNumber;
             handleLogicAction();
@@ -83,9 +84,7 @@ public class ChessBoardContent extends JPanel implements Updatetable, MouseListe
         int toX = getXFromPaneNumber(secondPaneNumber);
         int toY = getYFromPaneNumber(secondPaneNumber);
 
-        if (handler.movePiece(x, y, toX, toY)) {
-            refresh();
-        }
+        handler.movePiece(x, y, toX, toY);
     }
 
     private int getXFromPaneNumber(int n) {

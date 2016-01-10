@@ -68,4 +68,35 @@ public class HelpingMethodTest {
         assertEquals(pawn, clone.getChessBoard()[4][4]);
     }
     
+    @Test
+    public void chessPieceMovementIsCorrecltyRecordedInHashMap() {
+        board.attemptToPlacePieceOnBoard(pawn, 2, 2);
+        board.attemptToMovePieceOnBoard(2, 2, 5, 5);
+        assertEquals(1, board.getChessPiecesByColor(WHITE).values().size());
+    }
+    
+    @Test
+    public void chessPieceMovementIsCorrectlyRecordedInHashMapWhenPieceIsEaten() {
+        board.attemptToPlacePieceOnBoard(pawn, 2, 2);
+        board.attemptToPlacePieceOnBoard(rook, 5, 5);
+        board.attemptToMovePieceOnBoard(2, 2, 5, 5);        
+        assertEquals(1, board.getChessPiecesByColor(WHITE).values().size());
+        assertEquals(0, board.getChessPiecesByColor(BLACK).values().size());
+    }
+    
+    @Test
+    public void chessPieceMovementIsCorrectlyRecordedAfterConsecutivePlacements() {
+        board.attemptToPlacePieceOnBoard(pawn, 2, 2);
+        board.attemptToPlacePieceOnBoard(rook, 5, 5);
+        board.attemptToMovePieceOnBoard(2, 2, 5, 5);      
+        board.attemptToPlacePieceOnBoard(null, 2, 2);
+        board.attemptToPlacePieceOnBoard(pawn, 7, 7);
+        board.attemptToPlacePieceOnBoard(null, 7, 7);
+        board.attemptToPlacePieceOnBoard(pawn, 3, 3);
+        board.attemptToPlacePieceOnBoard(null, 3, 3);
+        board.attemptToPlacePieceOnBoard(pawn, 2, 4);
+        board.attemptToPlacePieceOnBoard(null, 2, 4);
+        board.attemptToPlacePieceOnBoard(pawn, 1, 3);
+        assertEquals((Integer) board.coordinateToInteger(1, 3), board.getChessPiecesByColor(WHITE).get(pawn));
+    }
 }

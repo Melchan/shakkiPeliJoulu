@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package fi.henri.ChessGame.ChessBoard;
 
 import fi.henri.ChessGame.ChessPieces.ChessColor;
@@ -74,6 +69,12 @@ public class ChessBoard {
         return new ChessBoard(cloneBoard, cloneBoardBefore, cloneBlackPieces, cloneWhitePieces);
     }
 
+    /**
+     * Get all pieces from one side in hashmap.
+     *
+     * @param color
+     * @return Hashmap<ChessPiece, Integer> (black/white)ChessPieces.
+     */
     public HashMap<ChessPiece, Integer> getChessPiecesByColor(ChessColor color) {
         if (color == BLACK) {
             return this.blackChessPiecesOnBoard;
@@ -84,7 +85,8 @@ public class ChessBoard {
 
     /**
      * method places piece on board if coordinates are on board. And records
-     * it's position if it has id.
+     * it's position if it is not null. Also remove piece from record if it was
+     * earlier occupying this square.
      *
      * @param piece chess piece to be placed on board.
      * @param x x-axis for piece.
@@ -93,30 +95,26 @@ public class ChessBoard {
      */
     public boolean attemptToPlacePieceOnBoard(ChessPiece piece, int x, int y) {
         if (allowedCoordinates(x, y)) {
-            if (piece == null) {
-                return false;
-            }
-            emptyRecordAboutThatCoordinate(x, y);
-            board[x][y] = piece;
-            recordNewPiecePosition(x, y, piece);
+            
+            recordNewPiecePosition(piece, x, y);
             return true;
         }
         return false;
     }
 
-    private void emptyRecordAboutThatCoordinate(int x, int y) {
-        whiteChessPiecesOnBoard.remove(board[x][y]);
-        blackChessPiecesOnBoard.remove(board[x][y]);
-    }
+    private void recordNewPiecePosition(ChessPiece piece, int x, int y) {
+        ChessPiece target = board[x][y];
+        board[x][y] = piece;
+        Integer coordinate = coordinateToInteger(x, y);
+        if (piece != null) {
 
-    private void recordNewPiecePosition(int x, int y, ChessPiece p) {
-        if (p != null) {
-            int coordinate = coordinateToInteger(x, y);
-            if (p.getColor() == BLACK) {
-                blackChessPiecesOnBoard.put(p, coordinate);
+            if (piece.getColor() == BLACK) {
+                blackChessPiecesOnBoard.remove(target);
+                blackChessPiecesOnBoard.put(piece, coordinate);
 
             } else {
-                whiteChessPiecesOnBoard.put(p, coordinate);
+                blackChessPiecesOnBoard.remove(target);
+                whiteChessPiecesOnBoard.put(piece, coordinate);
 
             }
         }
@@ -162,10 +160,13 @@ public class ChessBoard {
         if (allowedCoordinates(x, y)) {
             ChessPiece[][] boardNow = cloneBoard(board);
             ChessPiece piece = board[x][y];
+            if (piece == null) {
+                return false;
+            }
             boolean result = attemptToPlacePieceOnBoard(piece, toX, toY);
             if (result) {
                 piece.move();
-                clearCoordinateMovedFrom(x, y);
+                clearCoordinateMovedFrom(piece, x, y);
                 boardOneMoveBack = boardNow;
             }
             return result;
@@ -173,9 +174,9 @@ public class ChessBoard {
         return false;
     }
 
-    private void clearCoordinateMovedFrom(int x, int y) {
+    private void clearCoordinateMovedFrom(ChessPiece piece, int x, int y) {
         board[x][y] = null;
-        int coordinate = coordinateToInteger(x, y);
+        
     }
 
     /**

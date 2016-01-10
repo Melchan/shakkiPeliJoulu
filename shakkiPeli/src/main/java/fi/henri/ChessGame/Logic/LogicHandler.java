@@ -8,7 +8,7 @@ package fi.henri.ChessGame.Logic;
 import fi.henri.ChessGame.ChessBoard.*;
 import fi.henri.ChessGame.ChessPieces.*;
 import static fi.henri.ChessGame.ChessPieces.ChessColor.*;
-import fi.henri.ChessGame.Logic.Observers.CheckObserver;
+import fi.henri.ChessGame.Logic.Observers.MoveObserver;
 import java.util.ArrayList;
 
 /**
@@ -21,14 +21,14 @@ public class LogicHandler {
     private ChessBoard board;
     private ChessColor turn;
     private boolean checkMate;
-    private CheckObserver check;
+    private MoveObserver check;
     private ArrayList<Integer> kingThreateners;
 
     public LogicHandler(ChessBoard board) {
         this.board = board;
         this.turn = WHITE;
         this.checkMate = false;
-        this.check = new CheckObserver(board);
+        this.check = new MoveObserver(board);
         this.kingThreateners = new ArrayList<Integer>();
     }
 

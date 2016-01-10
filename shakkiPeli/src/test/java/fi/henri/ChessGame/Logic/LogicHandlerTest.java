@@ -120,4 +120,14 @@ public class LogicHandlerTest {
         handler.movePiece(3, 0, 3, 1);
         assertEquals(1, handler.getKingThreateners().size());
     }
+    
+    @Test
+    public void canCastle() {
+        ChessPiece wRook = new ChessPiece(WHITE, ROOK);
+        board.attemptToPlacePieceOnBoard(wKing, 4, 0);
+        board.attemptToPlacePieceOnBoard(wRook, 7, 0);
+        handler.movePiece(4, 0, 6, 0);
+        assertEquals(wKing, board.getChessBoard()[6][0]);
+        assertEquals(wRook, board.getChessBoard()[5][0]);
+    }
 }

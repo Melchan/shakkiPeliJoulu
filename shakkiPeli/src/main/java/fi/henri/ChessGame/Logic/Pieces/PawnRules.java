@@ -6,7 +6,6 @@
 package fi.henri.ChessGame.Logic.Pieces;
 
 import fi.henri.ChessGame.ChessBoard.ChessBoard;
-import fi.henri.ChessGame.ChessPieces.ChessColor;
 import fi.henri.ChessGame.ChessPieces.ChessPiece;
 import static fi.henri.ChessGame.ChessPieces.ChessColor.*;
 import static fi.henri.ChessGame.ChessPieces.PieceType.PAWN;
@@ -54,9 +53,9 @@ public class PawnRules extends PieceMovement {
         if (isMoveLegal(p, a, b, toA, toB)) {
             board.attemptToMovePieceOnBoard(a, b, toA, toB);
             if (whiteEnPassant) {
-                board.getChessBoard()[toA][toB - 1] = null;
+                board.attemptToPlacePieceOnBoard(null, toA, toB - 1);
             } else if (blackEnPassant) {
-                board.getChessBoard()[toA][toB + 1] = null;
+                board.attemptToPlacePieceOnBoard(null, toA, toB + 1);
             }
             return true;
         }

@@ -32,11 +32,6 @@ public class SettingChessPiecesOnBoardTest {
     }
     
     @Test
-    public void setNullPieceToAllowedSquareBooleanTest() {
-        assertEquals(false, board.attemptToPlacePieceOnBoard(null, 3, 3));
-    }
-    
-    @Test
     public void setPieceToNegativeRowBooleanTest() {
         assertEquals(false, board.attemptToPlacePieceOnBoard(piece, 0, -1));
     }
