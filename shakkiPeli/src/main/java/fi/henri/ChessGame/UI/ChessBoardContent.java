@@ -11,6 +11,7 @@ import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -54,6 +55,7 @@ public class ChessBoardContent extends JPanel implements Updatetable, MouseListe
             firstPaneNumber = paneNumber;
             this.kingThreateners = null;
             this.kingThreateners = null;
+            handler.getKingThreateners().clear();
         } else {
             secondPaneNumber = paneNumber;
             handleLogicAction();
@@ -63,19 +65,31 @@ public class ChessBoardContent extends JPanel implements Updatetable, MouseListe
         }
         refresh();
     }
-    
+
     private void updateKingThreateners() {
         this.kingThreateners = handler.getKingThreateners();
     }
-    
+
     public ArrayList<Integer> getKingThreateners() {
         return kingThreateners;
     }
 
     private void refresh() {
+        if (handler.getIsCheckMate()) {
+            setWinningPanel();
+        }
         this.revalidate();
         this.repaint();
 
+    }
+    
+    private void setWinningPanel() {
+        this.removeAll();
+        this.setLayout(new GridLayout(1, 1));
+        this.setPreferredSize(new Dimension(100, 80));
+        JLabel label = new JLabel();
+        label.setText(label.getText()+ handler.getTurn() + " WON!");
+        this.add(label);
     }
 
     private void handleLogicAction() {

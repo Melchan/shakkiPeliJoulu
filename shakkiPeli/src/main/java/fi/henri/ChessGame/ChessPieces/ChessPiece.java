@@ -13,7 +13,7 @@ public class ChessPiece {
 
     private final ChessColor color;
     private boolean moved;
-    private final PieceType type;
+    private PieceType type;
     private String id;
     
     /**
@@ -69,6 +69,10 @@ public class ChessPiece {
 
     public boolean hasMoved() {
         return moved;
+    }
+    
+    public void setChessPieceType(PieceType type) {
+        this.type = type;
     }
     
     @Override

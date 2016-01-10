@@ -8,7 +8,8 @@ package fi.henri.ChessGame.Logic;
 import fi.henri.ChessGame.ChessBoard.*;
 import fi.henri.ChessGame.ChessPieces.*;
 import static fi.henri.ChessGame.ChessPieces.ChessColor.*;
-import fi.henri.ChessGame.Logic.Observers.MoveObserver;
+import fi.henri.ChessGame.Logic.Observers.CheckMateObserver;
+import fi.henri.ChessGame.Logic.Observers.MoveHandler;
 import java.util.ArrayList;
 
 /**
@@ -21,14 +22,16 @@ public class LogicHandler {
     private ChessBoard board;
     private ChessColor turn;
     private boolean checkMate;
-    private MoveObserver check;
+    private MoveHandler check;
+    private CheckMateObserver CMObserver;
     private ArrayList<Integer> kingThreateners;
 
     public LogicHandler(ChessBoard board) {
         this.board = board;
         this.turn = WHITE;
         this.checkMate = false;
-        this.check = new MoveObserver(board);
+        this.check = new MoveHandler(board);
+        this.CMObserver = new CheckMateObserver(board, check);
         this.kingThreateners = new ArrayList<Integer>();
     }
 
@@ -56,36 +59,27 @@ public class LogicHandler {
      * @return true if action happened.
      */
     public boolean movePiece(int a, int b, int toA, int toB) {
-        if (isPieceMove(a, b, toA, toB)) {
-            ChessPiece p = board.getChessBoard()[a][b];
-            if (p.getColor() == turn) {
-                if (check.movePieceIfLegal(turn, a, b, toA, toB)) {
-                    
-                    System.out.println(turn);
+        if (!checkMate) {
+            if (check.movePieceIfLegal(turn, a, b, toA, toB)) {
+                System.out.println(turn);
+                changeTurn();
+                validateCheckMate();
+                if (checkMate) {
                     changeTurn();
-                    return true;
                 }
-                kingThreateners = check.getThreateners();
+                return true;
             }
+            kingThreateners = check.getThreateners();
         }
         return false;
     }
+    
+    public ChessColor getTurn() {
+        return turn;
+    }
 
-    public boolean isCheckMate() {
+    public boolean getIsCheckMate() {
         return checkMate;
-    }
-
-    private boolean isPieceMove(int a, int b, int toA, int toB) {
-        if (board.allowedCoordinates(a, b)) {
-            if (board.allowedCoordinates(toA, toB)) {
-                if (board.getChessBoard()[a][b] != null) {
-                    if (a != toA || b != toB) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
     }
 
     private void changeTurn() {
@@ -94,6 +88,10 @@ public class LogicHandler {
         } else if (turn == BLACK) {
             turn = WHITE;
         }
+    }
+
+    private void validateCheckMate() {
+        this.checkMate = CMObserver.isKingInCheckMate(turn);
     }
 
     public ArrayList<Integer> getKingThreateners() {

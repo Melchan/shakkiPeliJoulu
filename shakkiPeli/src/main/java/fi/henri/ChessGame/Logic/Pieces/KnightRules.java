@@ -37,7 +37,7 @@ public class KnightRules extends PieceMovement {
     }
 
     private boolean allowedKnightMovement(int a, int b, int toA, int toB) {
-if (Math.abs(a - toA) == 2 && Math.abs(b - toB) == 1) {
+        if (Math.abs(a - toA) == 2 && Math.abs(b - toB) == 1) {
             return true;
         } else if (Math.abs(b - toB) == 2 && Math.abs(a - toA) == 1) {
             return true;

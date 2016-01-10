@@ -86,4 +86,13 @@ public class KnightRulesTest {
         knightR.commitMoveIfLegal(pawn, 4, 4, 6, 5);
         assertEquals(pawn, board.getChessBoard()[6][5]);
     }
+    
+    @Test
+    public void cantEatOwnPiece() {
+        ChessPiece bKnight = new ChessPiece(BLACK, KNIGHT);
+        ChessPiece bKing = new ChessPiece(BLACK, KNIGHT);
+        board.attemptToPlacePieceOnBoard(bKing, 3, 7);
+        board.attemptToPlacePieceOnBoard(bKnight, 2, 5);
+        assertEquals(false, knightR.isMoveLegal(bKnight, 2, 5, 3, 7));
+    }
 }

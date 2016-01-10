@@ -6,10 +6,11 @@
 package fi.henri.ChessGame.Logic.Observer;
 
 import fi.henri.ChessGame.ChessBoard.ChessBoard;
+import fi.henri.ChessGame.ChessBoard.ChessBoardInitializer;
 import static fi.henri.ChessGame.ChessPieces.ChessColor.*;
 import fi.henri.ChessGame.ChessPieces.ChessPiece;
 import static fi.henri.ChessGame.ChessPieces.PieceType.*;
-import fi.henri.ChessGame.Logic.Observers.MoveObserver;
+import fi.henri.ChessGame.Logic.Observers.MoveHandler;
 import static junit.framework.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +21,7 @@ import org.junit.Test;
  */
 public class MoveObserverTest {
 
-    private MoveObserver observer;
+    private MoveHandler observer;
     private ChessBoard board;
     private ChessPiece bKing;
     private ChessPiece wKing;
@@ -33,7 +34,7 @@ public class MoveObserverTest {
 
     public void setUp() {
         this.board = new ChessBoard();
-        this.observer = new MoveObserver(board);
+        this.observer = new MoveHandler(board);
         this.bKing = new ChessPiece(BLACK, KING);
         this.wKing = new ChessPiece(WHITE, KING);
         this.bQueen = new ChessPiece(BLACK, QUEEN);
@@ -95,8 +96,8 @@ public class MoveObserverTest {
     @Test
     public void kingCanMoveToSafetyFromThreat() {
         board.attemptToPlacePieceOnBoard(wKing, 4, 0);
-        board.attemptToPlacePieceOnBoard(bQueen, 0, 4);
-        assertEquals(true, observer.movePieceIfLegal(WHITE, 0, 4, 0, 5));
+        board.attemptToPlacePieceOnBoard(bQueen, 5, 0);
+        assertEquals(true, observer.movePieceIfLegal(WHITE, 4, 0, 3, 1));
     }
 
     @Test
@@ -260,5 +261,47 @@ public class MoveObserverTest {
         board.attemptToPlacePieceOnBoard(bKing, 4, 7);
         board.attemptToPlacePieceOnBoard(bRook, 0, 7);
         assertEquals(true, observer.movePieceIfLegal(BLACK, 4, 7, 2, 7));
+    }
+    
+    @Test
+    public void ownPiecesWontThreatenTheKing() {
+        ChessPiece bKnight = new ChessPiece(BLACK, KNIGHT);
+        ChessPiece wBishop = new ChessPiece(WHITE, BISHOP);
+        board.attemptToPlacePieceOnBoard(bKing, 4, 7);
+        board.attemptToPlacePieceOnBoard(bRook, 0, 7);
+        board.attemptToPlacePieceOnBoard(wBishop, 3, 4);
+        board.attemptToPlacePieceOnBoard(bKnight, 1, 7);
+        observer.movePieceIfLegal(WHITE, 3, 4, 2, 5);
+        observer.movePieceIfLegal(BLACK, 1, 7, 2, 5);
+        assertEquals(true, observer.movePieceIfLegal(BLACK, 4, 7, 2, 7));
+        
+    }
+    
+    @Test
+    public void movementCanBeReseted() {
+        board.attemptToPlacePieceOnBoard(bKing, 0, 4);
+        board.attemptToPlacePieceOnBoard(wQueen, 0, 0);
+        board.attemptToPlacePieceOnBoard(bQueen, 1, 1);
+        observer.movePieceIfLegal(BLACK, 1, 1, 0, 1);
+        observer.resetMovement();
+        assertEquals(bQueen, board.getChessBoard()[1][1]);
+    }
+    
+    @Test
+    public void kingCanNotMoveOutOfCheckMate() {
+        new ChessBoardInitializer(board);
+        observer.movePieceIfLegal(WHITE, 5, 1, 5, 3);
+        observer.movePieceIfLegal(BLACK, 4, 6, 4, 4);
+        observer.movePieceIfLegal(WHITE, 6, 1, 6, 3);
+        observer.movePieceIfLegal(BLACK, 3, 7, 7, 3);
+        observer.movePieceIfLegal(WHITE, 4, 0, 3, -1);
+        observer.movePieceIfLegal(WHITE, 4, 0, 3, 0);
+        observer.movePieceIfLegal(WHITE, 4, 0, 3, 1);
+        observer.movePieceIfLegal(WHITE, 4, 0, 4, -1);
+        observer.movePieceIfLegal(WHITE, 4, 0, 4, 0);
+        observer.movePieceIfLegal(WHITE, 4, 0, 4, 1);
+        observer.movePieceIfLegal(WHITE, 4, 0, 5, -1);
+        observer.movePieceIfLegal(WHITE, 4, 0, 5, 0);
+        assertEquals(false, observer.movePieceIfLegal(WHITE, 4, 0, 5, 1));
     }
 }
