@@ -9,7 +9,7 @@ import fi.henri.ChessGame.ChessBoard.ChessBoard;
 import fi.henri.ChessGame.ChessPieces.ChessPiece;
 
 /**
- *
+ * kings movement rules and castling is handled here.
  * @author melchan
  */
 public class KingRules extends PieceMovement {

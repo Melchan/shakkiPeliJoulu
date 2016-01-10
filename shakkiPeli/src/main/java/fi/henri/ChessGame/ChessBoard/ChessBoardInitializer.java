@@ -12,7 +12,8 @@ import fi.henri.ChessGame.ChessPieces.PieceType;
 import static fi.henri.ChessGame.ChessPieces.PieceType.*;
 
 /**
- * Initializes game board for starting position.
+ *
+ *
  * @author Melchan
  */
 public class ChessBoardInitializer {
@@ -21,6 +22,12 @@ public class ChessBoardInitializer {
     private final ChessColor[] colors = {BLACK, WHITE};
     private final PieceType[] types = {ROOK, KNIGHT, BISHOP};
 
+    /**
+     * creating new ChessBoardInitializer just puts every piece on their
+     * starting position.
+     *
+     * @param board
+     */
     public ChessBoardInitializer(ChessBoard board) {
         this.board = board;
         board.initialize();

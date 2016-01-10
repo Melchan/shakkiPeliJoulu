@@ -1,4 +1,4 @@
-package fi.henri.ChessGame.Logic.Observers;
+package fi.henri.ChessGame.Logic.RuleJudges;
 
 import fi.henri.ChessGame.ChessBoard.ChessBoard;
 import fi.henri.ChessGame.ChessPieces.ChessColor;
@@ -14,7 +14,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Class functions as referee to check if moves are legal.
+ * Class functions as referee to check if moves are legal. And moves pieces if they are.
+ * @see bit bloated due special rules and time restraints.
  *
  * @author manhenri
  */
@@ -33,6 +34,11 @@ public class MoveHandler {
     private int y;
     private int toX;
     private int toY;
+    
+    /**
+     * class to handle normal moves and their rules checking if king is threatened.
+     * @param board 
+     */
 
     public MoveHandler(ChessBoard board) {
         this.board = board;
@@ -42,7 +48,8 @@ public class MoveHandler {
 
     /**
      * Method Checks if king is in checkPosition in current board position. And
-     * allows or disallowes moves. Special cases for Check EnPassant.
+     * allows or disallowes moves. Special cases for Check EnPassant. And Castling.
+     * If Move is ok it is commited.
      *
      * @param color player whose turn it is.
      * @param a starting x-axis.
@@ -193,7 +200,10 @@ public class MoveHandler {
         }
         return false;
     }
-
+    /**
+     * Method will get last king threateners recorded.
+     * @return 
+     */
     public ArrayList<Integer> getThreateners() {
         return this.threateners;
     }

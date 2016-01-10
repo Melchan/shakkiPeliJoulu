@@ -10,7 +10,7 @@ import fi.henri.ChessGame.ChessBoard.ChessBoardInitializer;
 import static fi.henri.ChessGame.ChessPieces.ChessColor.*;
 import fi.henri.ChessGame.ChessPieces.ChessPiece;
 import static fi.henri.ChessGame.ChessPieces.PieceType.*;
-import fi.henri.ChessGame.Logic.Observers.MoveHandler;
+import fi.henri.ChessGame.Logic.RuleJudges.MoveHandler;
 import static junit.framework.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;

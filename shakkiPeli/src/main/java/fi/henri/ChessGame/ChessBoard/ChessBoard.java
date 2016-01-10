@@ -6,8 +6,7 @@ import fi.henri.ChessGame.ChessPieces.ChessPiece;
 import java.util.HashMap;
 
 /**
- * Houses chessboard and two previous board positions. Has Every piece on board
- * in two hashMaps with respective color.
+ *
  *
  * @author Melchan
  */
@@ -18,6 +17,11 @@ public class ChessBoard {
     private HashMap<ChessPiece, Integer> blackChessPiecesOnBoard;
     private HashMap<ChessPiece, Integer> whiteChessPiecesOnBoard;
 
+    /**
+     * Houses chessboard and one previous board positions. Has Every piece on
+     * board in two hashMaps with respective color. Has helping methods for
+     * using this class.
+     */
     public ChessBoard() {
         initialize();
     }
@@ -86,7 +90,8 @@ public class ChessBoard {
     /**
      * method places piece on board if coordinates are on board. And records
      * it's position if it is not null. Also remove piece from record if it was
-     * earlier occupying this square.
+     * earlier occupying this square. Doesn't mind if piece that is currently
+     * being placed is null.
      *
      * @param piece chess piece to be placed on board.
      * @param x x-axis for piece.
@@ -95,7 +100,7 @@ public class ChessBoard {
      */
     public boolean attemptToPlacePieceOnBoard(ChessPiece piece, int x, int y) {
         if (allowedCoordinates(x, y)) {
-            
+
             recordNewPiecePosition(piece, x, y);
             return true;
         }
@@ -121,7 +126,7 @@ public class ChessBoard {
     }
 
     /**
-     * turns 2 coordinates to handy integer
+     * turns 2 coordinates to handy integer for storing purposes
      *
      * @param x
      * @param y
@@ -145,8 +150,7 @@ public class ChessBoard {
     }
 
     /**
-     * method moves piece if start and end coordinates are on board. Doesn't
-     * mind if piece that is currently being moved is null. Also set's
+     * method moves piece if start and end coordinates are on board. Also set's
      * chesspieces moved status to true. And clears starting coordinate from
      * hasmaps.
      *
@@ -176,7 +180,7 @@ public class ChessBoard {
 
     private void clearCoordinateMovedFrom(ChessPiece piece, int x, int y) {
         board[x][y] = null;
-        
+
     }
 
     /**

@@ -5,10 +5,6 @@
  */
 package fi.henri.ChessGame.ChessPieces;
 
-/**
- * basic chess piece and it's information.
- * @author Melchan
- */
 public class ChessPiece {
 
     private final ChessColor color;
@@ -29,7 +25,7 @@ public class ChessPiece {
     }
     
     /**
-     * Constructor to be used in game.
+     * Constructor to be used in game for detecting draws in game.
      * @param color
      * @param type
      * @param id 

@@ -9,7 +9,7 @@ import fi.henri.ChessGame.ChessBoard.ChessBoard;
 import fi.henri.ChessGame.ChessPieces.ChessPiece;
 
 /**
- *
+ * bishops movement rules.
  * @author melchan
  */
 public class BishopRules extends PieceMovement {

@@ -9,7 +9,7 @@ import fi.henri.ChessGame.ChessBoard.ChessBoard;
 import fi.henri.ChessGame.ChessPieces.ChessPiece;
 
 /**
- *
+ * rules for queen movement
  * @author Melchan
  */
 public class QueenRules extends PieceMovement{

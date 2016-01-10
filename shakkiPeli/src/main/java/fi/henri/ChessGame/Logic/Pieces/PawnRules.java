@@ -11,7 +11,7 @@ import static fi.henri.ChessGame.ChessPieces.ChessColor.*;
 import static fi.henri.ChessGame.ChessPieces.PieceType.PAWN;
 
 /**
- *
+ * En Passant rule is also handled here
  * @author melchan
  */
 public class PawnRules extends PieceMovement {

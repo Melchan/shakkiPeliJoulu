@@ -9,7 +9,7 @@ import fi.henri.ChessGame.ChessBoard.ChessBoard;
 import fi.henri.ChessGame.ChessPieces.ChessPiece;
 
 /**
- *
+ * rules for rook movement
  * @author manhenri
  */
 public class RookRules extends PieceMovement {

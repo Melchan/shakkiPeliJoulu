@@ -20,6 +20,5 @@ voi seuraavalla vuorolla tulla kuin syödyksi on peli päättynyt sen puolen
 kuninkaan hyväksi mitä ei syödä. Peli lauta katoaa ja tämä ilmoitetaan 
 tekstillä joka korvaa laudan. Tämän jälkeen ei voi tehdä muuta kuin katsoa 
 voitto ikkunaa ja tuntea lämmintä hyvää oloa.
-- Kun sotilas pääsee vastakkaiseen päähän lautaan voidaan se ylentää. 
-kuningattareksi, lähetiksi, torniksi tai ratsuksi.
+- Kun sotilas pääsee vastakkaiseen päähän lautaan ylennetään se kuningattareksi automaattises tämä on myös poikkeus normaaleista säännöistä.
 - Pelin voi sammuttaa ikkunan jommassa kummassa yläkulmassa olevasta ruksista.

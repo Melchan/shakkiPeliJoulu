@@ -9,7 +9,7 @@ import fi.henri.ChessGame.ChessBoard.ChessBoard;
 import fi.henri.ChessGame.ChessPieces.ChessPiece;
 
 /**
- *
+ * knights movement rules.
  * @author melchan
  */
 public class KnightRules extends PieceMovement {

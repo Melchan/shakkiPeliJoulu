@@ -16,7 +16,7 @@ import static fi.henri.ChessGame.ChessPieces.PieceType.ROOK;
 import java.util.HashMap;
 
 /**
- * Houses HashMap with all the normal movement rules.
+ * Houses HashMap with all the normal movement rules. And creating them.
  * @author manhenri
  */
 public class MoveLibrary {
